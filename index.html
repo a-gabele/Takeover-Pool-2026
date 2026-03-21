@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Takeover Pool 2026</title>
+<style>
+:root{--bg:#0f1117;--sur:#1a1d27;--sur2:#22263a;--acc:#f97316;--acc2:#3b82f6;--gold:#fbbf24;--grn:#22c55e;--red:#ef4444;--txt:#f1f5f9;--mut:#94a3b8;--bdr:#2e3347;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--txt);font-family:'Segoe UI',sans-serif;min-height:100vh;}
+nav{background:var(--sur);border-bottom:1px solid var(--bdr);padding:0 16px;display:flex;align-items:center;flex-wrap:wrap;position:sticky;top:0;z-index:100;}
+.logo{font-weight:800;font-size:1rem;color:var(--acc);padding:14px 12px 14px 0;border-right:1px solid var(--bdr);margin-right:8px;white-space:nowrap;}
+.tab{padding:14px 12px;cursor:pointer;font-size:0.85rem;font-weight:600;color:var(--mut);border-bottom:3px solid transparent;user-select:none;white-space:nowrap;}
+.tab:hover{color:var(--txt);}
+.tab.active{color:var(--acc);border-bottom-color:var(--acc);}
+.navr{margin-left:auto;padding:8px 0;display:flex;align-items:center;gap:10px;}
+.btn{padding:7px 14px;border-radius:8px;border:none;cursor:pointer;font-weight:600;font-size:0.8rem;}
+.btng{background:transparent;border:1px solid var(--bdr);color:var(--mut);}
+.btng:hover{border-color:var(--red);color:var(--red);}
+.btnp{background:var(--acc);color:#fff;}
+.btns{background:var(--sur2);border:1px solid var(--bdr);color:var(--txt);}
+.page{display:none;padding:20px 16px;max-width:1200px;margin:0 auto;}
+.page.active{display:block;}
+h1{font-size:1.5rem;font-weight:800;margin-bottom:4px;}
+.sub{color:var(--mut);font-size:.875rem;margin-bottom:20px;}
+.card{background:var(--sur);border:1px solid var(--bdr);border-radius:12px;padding:18px;margin-bottom:16px;}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;margin-bottom:16px;}
+.pc{background:var(--sur2);border-radius:10px;padding:16px;text-align:center;border:1px solid var(--bdr);}
+.pc .amt{font-size:1.6rem;font-weight:800;color:var(--gold);}
+.pc .lbl{font-size:.8rem;color:var(--mut);margin-top:4px;}
+.potbar{background:var(--sur2);border-radius:10px;padding:16px;display:flex;align-items:center;gap:16px;margin-bottom:16px;}
+.potamt{font-size:2rem;font-weight:800;color:var(--grn);}
+.ri{display:flex;gap:10px;padding:10px 0;border-bottom:1px solid var(--bdr);font-size:.88rem;}
+.ri:last-child{border-bottom:none;}
+.rgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;}
+.plycard{background:var(--sur);border:1px solid var(--bdr);border-radius:10px;padding:14px;}
+.plyhead{display:flex;align-items:center;gap:10px;margin-bottom:12px;}
+.plynum{width:30px;height:30px;border-radius:50%;background:var(--acc);color:#fff;font-weight:800;font-size:.8rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.tslot{background:var(--sur2);border-radius:8px;padding:8px 12px;margin-bottom:6px;display:flex;align-items:center;gap:8px;}
+.tslot:last-child{margin-bottom:0;}
+.slbl{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;padding:2px 6px;border-radius:4px;flex-shrink:0;}
+.sleft{background:rgba(249,115,22,.2);color:var(--acc);}
+.sright{background:rgba(59,130,246,.2);color:var(--acc2);}
+.tsel{background:transparent;border:none;color:var(--txt);font-size:.82rem;width:100%;outline:none;cursor:pointer;}
+.tsel option{background:var(--sur2);}
+.nameinput{background:transparent;border:none;color:var(--txt);font-size:.95rem;font-weight:700;width:100%;outline:none;}
+.nameinput:focus{border-bottom:1px solid var(--acc2);}
+.vtog{display:flex;background:var(--sur2);border:1px solid var(--bdr);border-radius:8px;overflow:hidden;}
+.vtbtn{padding:7px 14px;background:transparent;border:none;color:var(--mut);font-size:.8rem;font-weight:600;cursor:pointer;}
+.vtbtn.active{background:var(--acc);color:#fff;}
+.rtabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px;}
+.rtab{padding:7px 14px;border-radius:20px;border:1px solid var(--bdr);cursor:pointer;font-size:.82rem;font-weight:600;color:var(--mut);}
+.rtab.active{background:var(--acc);border-color:var(--acc);color:#fff;}
+.glist{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:12px;}
+.gcard{background:var(--sur);border:1px solid var(--bdr);border-radius:10px;padding:14px;}
+.ghdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
+.gmatch{font-size:.75rem;color:var(--mut);font-weight:600;}
+.greg{font-size:.7rem;padding:2px 7px;border-radius:4px;background:var(--sur2);color:var(--mut);}
+.trow{display:flex;align-items:center;gap:8px;padding:8px;border-radius:8px;cursor:pointer;margin-bottom:4px;border:1px solid transparent;transition:background .15s;}
+.trow:hover{background:var(--sur2);}
+.trow.win{background:rgba(34,197,94,.12);border-color:rgba(34,197,94,.3);}
+.trow.lose{opacity:.5;}
+.sbadge{width:22px;height:22px;border-radius:5px;background:var(--sur2);color:var(--mut);font-size:.7rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.tname{flex:1;font-size:.88rem;font-weight:600;}
+.otag{font-size:.7rem;padding:2px 6px;border-radius:4px;background:var(--sur2);color:var(--mut);}
+.srow{margin-top:10px;padding-top:10px;border-top:1px solid var(--bdr);}
+.sinput{width:100%;background:var(--sur2);border:1px solid var(--bdr);border-radius:7px;padding:6px 10px;color:var(--txt);font-size:.8rem;outline:none;margin-bottom:8px;}
+.sinput:focus{border-color:var(--acc2);}
+.sinput::placeholder{color:var(--mut);}
+.slbl2{font-size:.75rem;color:var(--mut);margin-bottom:6px;}
+.sbtns{display:flex;gap:6px;margin-top:4px;}
+.sbtn{flex:1;padding:6px;border-radius:7px;border:1px solid var(--bdr);background:transparent;color:var(--mut);font-size:.75rem;font-weight:600;cursor:pointer;}
+.sbtn:hover{background:var(--sur2);}
+.glocked{font-size:.8rem;color:var(--mut);text-align:center;padding:8px;background:var(--sur2);border-radius:8px;}
+#bviz{overflow-x:auto;padding-bottom:20px;}
+.bwrap{display:flex;min-width:960px;align-items:center;}
+.bt{display:flex;align-items:center;gap:5px;background:var(--sur);border:1px solid var(--bdr);border-radius:6px;padding:4px 7px;font-size:.72rem;cursor:pointer;min-width:118px;white-space:nowrap;overflow:hidden;margin-bottom:2px;}
+.bt:hover{border-color:var(--mut);}
+.bt.win{background:rgba(34,197,94,.15);border-color:rgba(34,197,94,.5);}
+.bt.lose{opacity:.4;}
+.bt.tbd{opacity:.4;cursor:default;}
+.bseed{font-size:.65rem;color:var(--mut);font-weight:700;min-width:14px;}
+.bname{flex:1;font-weight:600;overflow:hidden;text-overflow:ellipsis;}
+.bown{font-size:.6rem;color:var(--mut);max-width:55px;overflow:hidden;text-overflow:ellipsis;}
+.spill{font-size:.65rem;padding:2px 5px;border-radius:4px;background:rgba(251,191,36,.2);color:var(--gold);margin-left:2px;}
+.stable{width:100%;border-collapse:collapse;font-size:.85rem;}
+.stable th{text-align:left;padding:10px 12px;color:var(--mut);font-size:.75rem;text-transform:uppercase;letter-spacing:.05em;border-bottom:1px solid var(--bdr);}
+.stable td{padding:12px;border-bottom:1px solid var(--bdr);}
+.stable tr:last-child td{border-bottom:none;}
+.stable tr:hover td{background:var(--sur2);}
+.rbadge{width:26px;height:26px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-weight:800;font-size:.8rem;}
+.r1{background:var(--gold);color:#000;}.r2{background:#94a3b8;color:#000;}.r3{background:#b45309;color:#fff;}.ro{background:var(--sur2);color:var(--mut);}
+.adot{width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:6px;}
+.da{background:var(--grn);}.dd{background:var(--red);}
+.pbar{height:6px;border-radius:3px;background:var(--sur2);margin-top:4px;overflow:hidden;}
+.pfill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--acc2),var(--acc));}
+.topill{font-size:.7rem;padding:2px 6px;border-radius:10px;background:rgba(249,115,22,.2);color:var(--acc);font-weight:600;}
+.rsec{margin-bottom:24px;}
+.rsec h3{font-size:1rem;font-weight:700;color:var(--acc);margin-bottom:10px;}
+.rlist{list-style:none;}
+.rlist li{padding:8px 0;border-bottom:1px solid var(--bdr);font-size:.88rem;color:var(--mut);display:flex;gap:10px;}
+.rlist li:last-child{border-bottom:none;}
+.rlist li::before{content:'→';color:var(--acc);flex-shrink:0;}
+.ptable{width:100%;border-collapse:collapse;}
+.ptable th{text-align:left;padding:10px 12px;background:var(--sur2);font-size:.8rem;text-transform:uppercase;color:var(--mut);}
+.ptable td{padding:12px;border-bottom:1px solid var(--bdr);font-size:.88rem;}
+.pamt{font-weight:800;color:var(--gold);}
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:200;align-items:center;justify-content:center;}
+.overlay.open{display:flex;}
+.modal{background:var(--sur);border:1px solid var(--bdr);border-radius:14px;padding:24px;max-width:400px;width:90%;}
+.modal h3{font-size:1.1rem;font-weight:700;margin-bottom:8px;}
+.modal p{color:var(--mut);font-size:.88rem;margin-bottom:20px;}
+.mbtns{display:flex;gap:10px;justify-content:flex-end;}
+.sbar{background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.3);border-radius:8px;padding:8px 14px;font-size:.8rem;color:var(--grn);margin:10px 16px 0;display:none;}
+.sbar.show{display:block;}
+.shdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:10px;}
+.sdot{width:8px;height:8px;border-radius:50%;background:var(--grn);display:inline-block;margin-right:4px;animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.chip{background:var(--sur2);padding:4px 10px;border-radius:20px;font-size:.78rem;color:var(--mut);}
+</style>
+</head>
+<body>
+
+<!-- LOADING SCREEN -->
+<div id="loadScreen" style="position:fixed;inset:0;background:var(--bg);z-index:999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;">
+  <div style="font-size:2.5rem;">🏀</div>
+  <div style="font-weight:800;font-size:1.1rem;">Loading Takeover Pool...</div>
+  <div id="loadMsg" style="font-size:.85rem;color:var(--mut);">Connecting...</div>
+  <div style="width:200px;height:4px;background:var(--sur2);border-radius:2px;overflow:hidden;">
+    <div id="loadBar" style="height:100%;width:0%;background:var(--acc);border-radius:2px;transition:width .4s;"></div>
+  </div>
+  <button id="btnOffline" class="btn btng" style="display:none;margin-top:6px;">Use Offline Mode</button>
+</div>
+
+<nav>
+  <div class="logo">🏀 TAKEOVER POOL</div>
+  <div class="tab active" id="t-overview">Overview</div>
+  <div class="tab" id="t-roster">Roster</div>
+  <div class="tab" id="t-bracket">Bracket</div>
+  <div class="tab" id="t-standings">Standings</div>
+  <div class="tab" id="t-rules">Rules</div>
+  <div class="navr">
+    <span id="liveBadge" style="display:none;font-size:.75rem;color:var(--mut);"><span class="sdot"></span>Live</span>
+    <span id="offBadge" style="display:none;font-size:.75rem;color:var(--red);">⚠ Offline</span>
+    <button class="btn btng" style="padding:5px 10px;font-size:.75rem;" id="btnReset">↺ Reset</button>
+  </div>
+</nav>
+<div class="sbar" id="sbar">✓ Saved</div>
+
+<!-- OVERVIEW -->
+<div class="page active" id="p-overview">
+  <h1>March Madness Takeover Pool</h1>
+  <p class="sub">2026 NCAA Tournament · 16 Players · $50 Buy-in · Starts Round of 32</p>
+  <div class="pgrid">
+    <div class="pc"><div class="amt">$350</div><div class="lbl">🏆 Champion</div></div>
+    <div class="pc"><div class="amt">$200</div><div class="lbl">🥈 Runner-Up</div></div>
+    <div class="pc"><div class="amt">$100</div><div class="lbl">🏅 Final Four ×2</div></div>
+  </div>
+  <div class="potbar">
+    <div><div class="potamt">$800</div><div style="font-size:.85rem;color:var(--mut)">Total Pool · 16 × $50</div></div>
+    <div style="margin-left:auto"><span class="chip" id="syncChip">🔴 Connecting...</span></div>
+  </div>
+  <div class="card">
+    <div style="font-weight:700;font-size:.9rem;color:var(--mut);text-transform:uppercase;letter-spacing:.05em;margin-bottom:12px;">How It Works</div>
+    <div class="ri"><span>👥</span><span>Each player owns <strong>2 teams</strong> from the Round of 32 — one Left half (South/East), one Right half (West/Midwest).</span></div>
+    <div class="ri"><span>🏀</span><span>Pool begins at the <strong>Round of 32</strong>. Bracket follows real NCAA tournament seedings.</span></div>
+    <div class="ri"><span>🔄</span><span>Each player owns one team from each side of the bracket — they can't face each other until the Final Four.</span></div>
+    <div class="ri"><span>🎯</span><span>Win AND cover the spread to keep your team. Fail to cover → opponent's owner <strong>takes over</strong> your team.</span></div>
+    <div class="ri"><span>💰</span><span>Owner at time of <strong>Final Four / Championship</strong> collects the prize.</span></div>
+  </div>
+</div>
+
+<!-- ROSTER -->
+<div class="page" id="p-roster">
+  <div class="shdr">
+    <div><h1>Roster</h1><p class="sub">Assign one Left and one Right team per player. Click a name to edit it.</p></div>
+    <button class="btn btns" id="btnHatDraw">🎩 Restore Hat Draw</button>
+  </div>
+  <div class="rgrid" id="rosterGrid"></div>
+</div>
+
+<!-- BRACKET -->
+<div class="page" id="p-bracket">
+  <div class="shdr">
+    <div><h1>Bracket</h1><p class="sub">Real 2026 R32 matchups. Log results and spreads.</p></div>
+    <div class="vtog">
+      <button class="vtbtn active" id="btnList">☰ List</button>
+      <button class="vtbtn" id="btnVisual">⬛ Visual</button>
+    </div>
+  </div>
+  <div id="listView">
+    <div class="rtabs" id="roundTabs"></div>
+    <div class="glist" id="gameList"></div>
+  </div>
+  <div id="visualView" style="display:none;">
+    <div id="bviz"></div>
+    <p style="font-size:.75rem;color:var(--mut);margin-top:10px;padding:8px 12px;background:var(--sur);border-radius:8px;border:1px solid var(--bdr);">💡 Click a team to pick the winner. Spread entry available in List view.</p>
+  </div>
+</div>
+
+<!-- STANDINGS -->
+<div class="page" id="p-standings">
+  <h1>Standings</h1><p class="sub">Live leaderboard · Takeovers · Prize odds</p>
+  <div class="card">
+    <table class="stable">
+      <thead><tr><th>#</th><th>Player</th><th>Teams</th><th>Status</th><th>Takeovers</th><th>Win %</th><th>Est. Prize</th></tr></thead>
+      <tbody id="standBody"></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- RULES -->
+<div class="page" id="p-rules">
+  <h1>Rules &amp; Payouts</h1><p class="sub">Full reference</p>
+  <div class="card rsec">
+    <h3>🏀 Pool Structure</h3>
+    <ul class="rlist">
+      <li>Each of the 16 players is assigned 2 teams from the Round of 32 field.</li>
+      <li>Left half = South/East regions. Right half = West/Midwest regions.</li>
+      <li>Each player owns one team from each side of the bracket — they can't face each other until the Final Four.</li>
+      <li>Bracket follows real NCAA tournament seedings and matchups.</li>
+    </ul>
+  </div>
+  <div class="card rsec">
+    <h3>🎯 Spread Mechanic</h3>
+    <ul class="rlist">
+      <li>Winning team covers the spread → owner retains the team.</li>
+      <li>Winning team does NOT cover → losing team's owner takes over the winner next round.</li>
+      <li>Push (tie vs spread) → no takeover, original owner retains.</li>
+    </ul>
+  </div>
+  <div class="card rsec">
+    <h3>💰 Payouts</h3>
+    <table class="ptable">
+      <thead><tr><th>Finish</th><th>Prize</th><th>Spots</th><th>Total</th></tr></thead>
+      <tbody>
+        <tr><td>🏆 Champion</td><td class="pamt">$350</td><td>1</td><td class="pamt">$350</td></tr>
+        <tr><td>🥈 Runner-Up</td><td class="pamt">$200</td><td>1</td><td class="pamt">$200</td></tr>
+        <tr><td>🏅 Final Four (loss)</td><td class="pamt">$100</td><td>2</td><td class="pamt">$200</td></tr>
+        <tr style="border-top:2px solid var(--bdr)"><td><strong>Total</strong></td><td></td><td></td><td class="pamt">$800</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- RESET MODAL -->
+<div class="overlay" id="resetOverlay">
+  <div class="modal">
+    <h3>⚠️ Reset Everything?</h3>
+    <p>Clears all results, team assignments, and standings for everyone. Cannot be undone.</p>
+    <div class="mbtns">
+      <button class="btn btng" id="btnCancelReset">Cancel</button>
+      <button class="btn btnp" id="btnConfirmReset">Yes, Reset</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+
+// ── CONSTANTS ──────────────────────────────────────────────
+const FB = 'https://takeover-pool-2026-default-rtdb.firebaseio.com';
+
+const DEFAULT_NAMES = [
+  "Travis","Maddie","Jacob K.","Joe H.","Justin L.","Phil L.",
+  "Pacheco","Kevin Y.","Andy","Jane V.","Bryan B.","Jared S.",
+  "Stephen Y.","Luke","Luke's Wife","Nancy & Tony"
+];
+
+// Hat draw assignments — index matches DEFAULT_NAMES
+const HAT_DRAW = [
+  {l:'VCU',         r:'Texas'},        // Travis
+  {l:'Iowa',        r:'Texas Tech'},   // Maddie
+  {l:'Florida',     r:'Saint Louis'},  // Jacob K.
+  {l:'Virginia',    r:'Kansas'},       // Joe H.
+  {l:'TCU',         r:'Arizona'},      // Justin L.
+  {l:"St. John's",  r:'Arkansas'},     // Phil L.
+  {l:'Illinois',    r:'Tennessee'},    // Pacheco
+  {l:'Duke',        r:'Gonzaga'},      // Kevin Y.
+  {l:'Vanderbilt',  r:'Miami FL'},     // Andy
+  {l:'Louisville',  r:'Iowa State'},   // Jane V.
+  {l:'Texas A&M',   r:'Purdue'},       // Bryan B.
+  {l:'Houston',     r:'Utah State'},   // Jared S.
+  {l:'Alabama',     r:'UConn'},        // Stephen Y.
+  {l:'Michigan St', r:'Michigan'},     // Luke
+  {l:'UCLA',        r:'High Point'},   // Luke's Wife
+  {l:'Nebraska',    r:'Kentucky'},     // Nancy & Tony
+];
+
+// Real 2026 R32 bracket
+const R32 = {
+  South: [
+    {id:'s0',t1:'Florida',    s1:1, t2:'Iowa',        s2:9},
+    {id:'s1',t1:'Nebraska',   s1:4, t2:'Vanderbilt',  s2:5},
+    {id:'s2',t1:'Illinois',   s1:3, t2:'VCU',         s2:11},
+    {id:'s3',t1:'Houston',    s1:2, t2:'Texas A&M',   s2:10},
+  ],
+  East: [
+    {id:'e0',t1:'Duke',       s1:1, t2:'TCU',         s2:9},
+    {id:'e1',t1:'Kansas',     s1:4, t2:"St. John's",  s2:5},
+    {id:'e2',t1:'Michigan St',s1:3, t2:'Louisville',  s2:6},
+    {id:'e3',t1:'UConn',      s1:2, t2:'UCLA',        s2:7},
+  ],
+  West: [
+    {id:'w0',t1:'Arizona',    s1:1, t2:'Utah State',  s2:9},
+    {id:'w1',t1:'Arkansas',   s1:4, t2:'High Point',  s2:12},
+    {id:'w2',t1:'Gonzaga',    s1:3, t2:'Texas',       s2:11},
+    {id:'w3',t1:'Purdue',     s1:2, t2:'Miami FL',    s2:7},
+  ],
+  Midwest: [
+    {id:'m0',t1:'Michigan',   s1:1, t2:'Saint Louis', s2:9},
+    {id:'m1',t1:'Alabama',    s1:4, t2:'Texas Tech',  s2:5},
+    {id:'m2',t1:'Tennessee',  s1:6, t2:'Virginia',    s2:3},
+    {id:'m3',t1:'Iowa State', s1:2, t2:'Kentucky',    s2:7},
+  ]
+};
+
+const LEFT_TEAMS = [
+  ...R32.South.flatMap(g=>[{name:g.t1,seed:g.s1,region:'South'},{name:g.t2,seed:g.s2,region:'South'}]),
+  ...R32.East.flatMap(g=>[{name:g.t1,seed:g.s1,region:'East'},{name:g.t2,seed:g.s2,region:'East'}]),
+];
+const RIGHT_TEAMS = [
+  ...R32.West.flatMap(g=>[{name:g.t1,seed:g.s1,region:'West'},{name:g.t2,seed:g.s2,region:'West'}]),
+  ...R32.Midwest.flatMap(g=>[{name:g.t1,seed:g.s1,region:'Midwest'},{name:g.t2,seed:g.s2,region:'Midwest'}]),
+];
+
+const ROUND_LABELS = ['Round of 32','Sweet 16','Elite Eight','Final Four','Championship'];
+
+// ── STATE ──────────────────────────────────────────────────
+// names: string[]          — editable player names
+// teams: {l,r}[]           — team assignments per player index
+// games: {[id]: {w, cov, sl}} — results
+// takeovers: {[team]: playerName} — current owner overrides
+let S = { names:[...DEFAULT_NAMES], teams:[], games:{}, takeovers:{} };
+let curRound = 0;
+let bView = 'list';
+let online = false;
+let syncEs = null;
+
+function freshTeams(){ return DEFAULT_NAMES.map((_,i)=>({l:HAT_DRAW[i].l, r:HAT_DRAW[i].r})); }
+function initState(){ S = { names:[...DEFAULT_NAMES], teams:freshTeams(), games:{}, takeovers:{} }; }
+
+// ── FIREBASE ───────────────────────────────────────────────
+async function fbSave(){
+  try{
+    const res = await fetch(FB+'/state.json',{
+      method:'PUT',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify(S)
+    });
+    if(!res.ok) throw new Error();
+    flashSaved();
+  } catch(e){ console.warn('Save failed',e); }
+}
+
+async function fbLoad(){
+  const res = await fetch(FB+'/state.json');
+  if(!res.ok) throw new Error('Load failed');
+  const d = await res.json();
+  if(d && typeof d === 'object'){
+    // Merge carefully so missing keys fall back to defaults
+    S.names    = Array.isArray(d.names)     ? d.names     : [...DEFAULT_NAMES];
+    S.teams    = Array.isArray(d.teams)     ? d.teams     : freshTeams();
+    S.games    = (d.games && typeof d.games==='object') ? d.games : {};
+    S.takeovers= (d.takeovers && typeof d.takeovers==='object') ? d.takeovers : {};
+  }
+}
+
+function fbSync(){
+  if(syncEs) syncEs.close();
+  syncEs = new EventSource(FB+'/state.json?accept=text/event-stream');
+  syncEs.addEventListener('put', e=>{
+    try{
+      const d = JSON.parse(e.data);
+      if(d && d.data && typeof d.data==='object'){
+        const nd = d.data;
+        S.names     = Array.isArray(nd.names)      ? nd.names     : S.names;
+        S.teams     = Array.isArray(nd.teams)       ? nd.teams     : S.teams;
+        S.games     = (nd.games && typeof nd.games==='object')      ? nd.games     : S.games;
+        S.takeovers = (nd.takeovers && typeof nd.takeovers==='object') ? nd.takeovers : S.takeovers;
+        renderRoster(); renderBracket(); renderStandings();
+      }
+    } catch(ex){ console.warn(ex); }
+  });
+  syncEs.onopen = ()=>{
+    online = true;
+    document.getElementById('liveBadge').style.display='inline';
+    document.getElementById('offBadge').style.display='none';
+    document.getElementById('syncChip').textContent='🟢 Live Sync';
+  };
+  syncEs.onerror = ()=>{
+    document.getElementById('liveBadge').style.display='none';
+    document.getElementById('offBadge').style.display='inline';
+    document.getElementById('syncChip').textContent='🔴 Offline';
+  };
+}
+
+// localStorage fallback
+function lsSave(){ try{ localStorage.setItem('tp26', JSON.stringify(S)); flashSaved(); }catch(e){} }
+function lsLoad(){ try{ const d=localStorage.getItem('tp26'); if(d){ const p=JSON.parse(d); S.names=Array.isArray(p.names)?p.names:[...DEFAULT_NAMES]; S.teams=Array.isArray(p.teams)?p.teams:freshTeams(); S.games=p.games||{}; S.takeovers=p.takeovers||{}; } }catch(e){} }
+
+function save(){ online ? fbSave() : lsSave(); }
+function flashSaved(){ const b=document.getElementById('sbar'); b.classList.add('show'); setTimeout(()=>b.classList.remove('show'),2000); }
+
+// ── GAME ENGINE ────────────────────────────────────────────
+function buildGames(){
+  const G = {};
+  ['South','East','West','Midwest'].forEach(reg=>{
+    const side = (reg==='South'||reg==='East') ? 'L' : 'R';
+    R32[reg].forEach((m,idx)=>{
+      const sv = S.games[m.id]||{};
+      G[m.id] = {id:m.id, round:0, region:reg, side, idx,
+        t1:m.t1, s1:m.s1, t2:m.t2, s2:m.s2,
+        w:sv.w||'', cov:sv.cov!==undefined?sv.cov:null, sl:sv.sl||''};
+    });
+  });
+  for(let r=1;r<=2;r++){
+    ['South','East','West','Midwest'].forEach(reg=>{
+      const side=(reg==='South'||reg==='East')?'L':'R';
+      const prev=Object.values(G).filter(g=>g.region===reg&&g.round===r-1).sort((a,b)=>a.idx-b.idx);
+      for(let i=0;i<prev.length;i+=2){
+        const id=`${reg[0].toLowerCase()}${r}_${Math.floor(i/2)}`;
+        const sv=S.games[id]||{};
+        const a=winner(prev[i]), b=winner(prev[i+1]);
+        G[id]={id, round:r, region:reg, side, idx:Math.floor(i/2),
+          t1:a.t, s1:a.s, t2:b.t, s2:b.s,
+          w:sv.w||'', cov:sv.cov!==undefined?sv.cov:null, sl:sv.sl||''};
+      }
+    });
+  }
+  // Final Four
+  const sc=regionChamp('South',G), ec=regionChamp('East',G);
+  const wc=regionChamp('West',G),  mc=regionChamp('Midwest',G);
+  G['ff0']={id:'ff0',round:3,region:'Final Four',side:'FF',idx:0, t1:sc.t,s1:sc.s,t2:ec.t,s2:ec.s, ...gameFields('ff0')};
+  G['ff1']={id:'ff1',round:3,region:'Final Four',side:'FF',idx:1, t1:wc.t,s1:wc.s,t2:mc.t,s2:mc.s, ...gameFields('ff1')};
+  // Championship
+  const ffa=winner(G['ff0']), ffb=winner(G['ff1']);
+  G['ch']={id:'ch',round:4,region:'Championship',side:'CH',idx:0, t1:ffa.t,s1:ffa.s,t2:ffb.t,s2:ffb.s, ...gameFields('ch')};
+  return G;
+}
+
+function gameFields(id){ const sv=S.games[id]||{}; return {w:sv.w||'',cov:sv.cov!==undefined?sv.cov:null,sl:sv.sl||''}; }
+function winner(g){ if(!g||!g.w) return {t:'TBD',s:'?'}; return {t:g.w, s:g.w===g.t1?g.s1:g.s2}; }
+function regionChamp(reg,G){
+  const e8=Object.values(G).find(g=>g.region===reg&&g.round===2);
+  return winner(e8);
+}
+function isElim(team,G){
+  if(!team||team==='TBD') return false;
+  return Object.values(G).some(g=>g.w&&g.w!==team&&(g.t1===team||g.t2===team));
+}
+function ownerOf(team){
+  if(!team||team==='TBD') return null;
+  if(S.takeovers[team]) return S.takeovers[team];
+  const i = S.teams.findIndex(t=>t&&(t.l===team||t.r===team));
+  return i>=0 ? S.names[i] : null;
+}
+
+function pickWinner(id,team){
+  const G=buildGames(), g=G[id];
+  if(!g||g.t1==='TBD'||g.t2==='TBD') return;
+  if(g.w&&g.cov!==null) return;
+  S.games[id]={...(S.games[id]||{}), w:team, cov:null};
+  save(); renderBracket(); renderStandings();
+}
+function setSpread(id,winner,covered){
+  S.games[id]={...(S.games[id]||{}), w:winner, cov:covered};
+  if(!covered){
+    const G=buildGames(), g=G[id];
+    const loser=winner===g.t1?g.t2:g.t1;
+    const lo=ownerOf(loser);
+    if(lo) S.takeovers[winner]=lo;
+  } else {
+    delete S.takeovers[winner];
+  }
+  save(); renderBracket(); renderStandings();
+}
+function setSpreadLine(id,val){ S.games[id]={...(S.games[id]||{}), sl:val}; save(); }
+function editGame(id){
+  const w=S.games[id]&&S.games[id].w;
+  if(w) delete S.takeovers[w];
+  delete S.games[id];
+  save(); renderBracket(); renderStandings();
+}
+
+// ── RENDER ROSTER ──────────────────────────────────────────
+function renderRoster(){
+  const grid=document.getElementById('rosterGrid'); grid.innerHTML='';
+  S.names.forEach((name,i)=>{
+    const t=S.teams[i]||{l:'',r:''};
+    const lOpts=LEFT_TEAMS.map(x=>`<option value="${x.name}"${t.l===x.name?' selected':''}>${x.seed}. ${x.name} (${x.region})</option>`).join('');
+    const rOpts=RIGHT_TEAMS.map(x=>`<option value="${x.name}"${t.r===x.name?' selected':''}>${x.seed}. ${x.name} (${x.region})</option>`).join('');
+    const card=document.createElement('div'); card.className='plycard';
+    card.innerHTML=`
+      <div class="plyhead">
+        <div class="plynum">${i+1}</div>
+        <input class="nameinput" value="${name}" data-ni="${i}" placeholder="Player name">
+      </div>
+      <div class="tslot"><span class="slbl sleft">LEFT</span>
+        <select class="tsel" data-i="${i}" data-side="l"><option value="">— Unassigned —</option>${lOpts}</select>
+      </div>
+      <div class="tslot"><span class="slbl sright">RIGHT</span>
+        <select class="tsel" data-i="${i}" data-side="r"><option value="">— Unassigned —</option>${rOpts}</select>
+      </div>`;
+    card.querySelector('.nameinput').addEventListener('change',function(){
+      const ni=+this.dataset.ni, nv=this.value.trim()||S.names[ni];
+      const old=S.names[ni]; S.names[ni]=nv;
+      Object.keys(S.takeovers).forEach(t=>{ if(S.takeovers[t]===old) S.takeovers[t]=nv; });
+      save(); renderStandings();
+    });
+    card.querySelectorAll('.tsel').forEach(sel=>{
+      sel.addEventListener('change',function(){
+        if(!S.teams[+this.dataset.i]) S.teams[+this.dataset.i]={l:'',r:''};
+        S.teams[+this.dataset.i][this.dataset.side]=this.value;
+        save(); renderStandings();
+      });
+    });
+    grid.appendChild(card);
+  });
+}
+
+// ── RENDER BRACKET (LIST) ──────────────────────────────────
+function renderBracket(){
+  // Round tabs
+  const tc=document.getElementById('roundTabs'); tc.innerHTML='';
+  ROUND_LABELS.forEach((n,i)=>{
+    const d=document.createElement('div');
+    d.className='rtab'+(i===curRound?' active':'');
+    d.textContent=n;
+    d.addEventListener('click',()=>{ curRound=i; renderBracket(); });
+    tc.appendChild(d);
+  });
+  if(bView==='visual'){ renderVisual(); return; }
+
+  const G=buildGames();
+  const games=Object.values(G).filter(g=>g.round===curRound).sort((a,b)=>a.idx-b.idx);
+  const list=document.getElementById('gameList'); list.innerHTML='';
+  if(!games.length){ list.innerHTML='<div style="color:var(--mut)">No games this round.</div>'; return; }
+
+  games.forEach(g=>{
+    const locked=g.t1==='TBD'||g.t2==='TBD';
+    const card=document.createElement('div'); card.className='gcard';
+
+    // Header
+    const hdr=document.createElement('div'); hdr.className='ghdr';
+    hdr.innerHTML=`<span class="gmatch">${g.region}</span><span class="greg">${locked?'TBD':`${g.s1} vs ${g.s2}`}</span>`;
+    card.appendChild(hdr);
+
+    if(locked){
+      const lk=document.createElement('div'); lk.className='glocked'; lk.textContent='⏳ Awaiting previous round';
+      card.appendChild(lk);
+    } else {
+      // Team rows
+      [[g.t1,g.s1],[g.t2,g.s2]].forEach(([team,seed])=>{
+        const row=document.createElement('div');
+        row.className='trow'+(g.w===team?' win':g.w?' lose':'');
+        row.innerHTML=`<div class="sbadge">${seed}</div><div class="tname">${team}</div><div class="otag">${ownerOf(team)||'—'}</div>`;
+        row.addEventListener('click',()=>pickWinner(g.id,team));
+        card.appendChild(row);
+      });
+
+      // Spread section
+      const sr=document.createElement('div'); sr.className='srow';
+      const sll=document.createElement('div'); sll.className='slbl2';
+      sll.innerHTML='Spread line <span style="font-size:.7rem;color:var(--mut)">(e.g. Duke -5.5)</span>';
+      sr.appendChild(sll);
+      const si=document.createElement('input'); si.className='sinput';
+      si.placeholder='Enter spread line'; si.value=g.sl||'';
+      si.addEventListener('change',()=>setSpreadLine(g.id,si.value.trim()));
+      sr.appendChild(si);
+
+      if(g.w&&g.cov===null){
+        const ql=document.createElement('div'); ql.className='slbl2';
+        ql.innerHTML=`Did <strong>${g.w}</strong> cover?`;
+        sr.appendChild(ql);
+        const sb=document.createElement('div'); sb.className='sbtns';
+        const by=document.createElement('button'); by.className='sbtn'; by.textContent='✅ Yes, covered';
+        by.addEventListener('click',()=>setSpread(g.id,g.w,true));
+        const bn=document.createElement('button'); bn.className='sbtn'; bn.textContent="❌ No, didn't cover";
+        bn.addEventListener('click',()=>setSpread(g.id,g.w,false));
+        sb.appendChild(by); sb.appendChild(bn); sr.appendChild(sb);
+      } else if(g.w){
+        const to=S.takeovers[g.w];
+        const info=document.createElement('div');
+        info.style.cssText='display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:.78rem;color:var(--mut);margin-top:4px;';
+        if(g.sl) info.innerHTML+=`<span style="background:var(--sur2);padding:2px 8px;border-radius:6px">📊 ${g.sl}</span>`;
+        info.innerHTML+=`<span>${g.cov?'✅ Covered':`🔄 No cover${to?' — '+to+' took over':''}`}</span>`;
+        const eb=document.createElement('button'); eb.className='sbtn';
+        eb.style.cssText='flex:0;padding:3px 10px;margin-left:auto;'; eb.textContent='Edit';
+        eb.addEventListener('click',()=>editGame(g.id));
+        info.appendChild(eb); sr.appendChild(info);
+      }
+      card.appendChild(sr);
+    }
+    list.appendChild(card);
+  });
+}
+
+// ── RENDER VISUAL BRACKET ─────────────────────────────────
+function renderVisual(){
+  const G=buildGames(), c=document.getElementById('bviz'); c.innerHTML='';
+  const wrap=document.createElement('div'); wrap.className='bwrap'; wrap.style.alignItems='center';
+  wrap.appendChild(buildSideVis(['South','East'],G,'L'));
+  wrap.appendChild(buildCenterVis(G));
+  wrap.appendChild(buildSideVis(['West','Midwest'],G,'R'));
+  c.appendChild(wrap);
+}
+function buildSideVis(regions,G,side){
+  const w=document.createElement('div'); w.style.display='flex';
+  (side==='L'?[0,1,2]:[2,1,0]).forEach(r=>{
+    const col=document.createElement('div'); col.style.cssText='display:flex;flex-direction:column;width:128px;padding:0 2px;';
+    const lbl=document.createElement('div'); lbl.style.cssText='font-size:.6rem;font-weight:700;text-transform:uppercase;color:var(--mut);text-align:center;padding:3px 0 5px;';
+    lbl.textContent=ROUND_LABELS[r]; col.appendChild(lbl);
+    const gs=Object.values(G).filter(g=>regions.includes(g.region)&&g.round===r).sort((a,b)=>regions.indexOf(a.region)-regions.indexOf(b.region)||a.idx-b.idx);
+    const sp=[3,52,180];
+    gs.forEach(g=>{
+      const gw=document.createElement('div'); gw.style.marginBottom=(r===0?3:sp[r])+'px';
+      [[g.t1,g.s1],[g.t2,g.s2]].forEach(([team,seed])=>{
+        const isTBD=team==='TBD', isW=g.w===team, isL=g.w&&!isW;
+        const el=document.createElement('div');
+        el.className='bt'+(isTBD?' tbd':'')+(isW?' win':'')+(isL?' lose':'');
+        el.innerHTML=`<span class="bseed">${isTBD?'?':seed}</span><span class="bname">${tr(team,12)}</span><span class="bown">${isTBD?'':tr(ownerOf(team)||'',8)}</span>${isW&&g.cov===null?'<span class="spill">?</span>':''}`;
+        if(!isTBD&&!isL) el.addEventListener('click',()=>{ if(!g.w) pickWinner(g.id,team); else if(isW&&g.cov===null){setBView('list');curRound=g.round;renderBracket();} });
+        gw.appendChild(el);
+      });
+      col.appendChild(gw);
+    });
+    w.appendChild(col);
+  });
+  return w;
+}
+function buildCenterVis(G){
+  const c=document.createElement('div'); c.style.cssText='display:flex;flex-direction:column;align-items:center;min-width:168px;padding:0 4px;';
+  [['FF','ff0','South vs East'],['FF','ff1','West vs Midwest'],['CH','ch','🏆 Championship']].forEach(([type,id,label],gi)=>{
+    const g=G[id];
+    const dl=document.createElement('div'); dl.style.cssText='font-size:.65rem;color:var(--gold);text-align:center;margin:'+(gi===0?'0 0 4px':'14px 0 4px')+';font-weight:700;';
+    dl.textContent=label; c.appendChild(dl);
+    [[g.t1,g.s1],[g.t2,g.s2]].forEach(([team,seed])=>{
+      const isTBD=team==='TBD', isW=g.w===team, isL=g.w&&!isW;
+      const el=document.createElement('div');
+      el.className='bt'+(isTBD?' tbd':'')+(isW?' win':'')+(isL?' lose':'');
+      el.style.cssText='min-width:155px;margin-bottom:3px;';
+      el.innerHTML=`<span class="bseed">${isTBD?'?':seed}</span><span class="bname">${tr(team,14)}</span><span class="bown">${isTBD?'':tr(ownerOf(team)||'',8)}</span>${isW&&g.cov===null?'<span class="spill">?</span>':''}`;
+      if(!isTBD&&!isL) el.addEventListener('click',()=>{ if(!g.w) pickWinner(id,team); else if(isW&&g.cov===null){setBView('list');curRound=g.round;renderBracket();} });
+      c.appendChild(el);
+    });
+  });
+  return c;
+}
+function tr(s,n){ return s&&s.length>n?s.slice(0,n)+'…':s||''; }
+
+// ── RENDER STANDINGS ───────────────────────────────────────
+function renderStandings(){
+  const G=buildGames(), tbody=document.getElementById('standBody'); tbody.innerHTML='';
+  const rows=S.names.map((name,i)=>{
+    const t=S.teams[i]||{l:'',r:''};
+    const myTeams=[t.l,t.r].filter(Boolean);
+    let alive=[],elim=[],gained=[],lost=[];
+    myTeams.forEach(tm=>{
+      const ov=S.takeovers[tm];
+      if(ov&&ov!==name) lost.push(tm);
+      else if(isElim(tm,G)) elim.push(tm);
+      else if(tm) alive.push(tm);
+    });
+    Object.entries(S.takeovers).forEach(([tm,o])=>{
+      if(o===name){ gained.push(tm); if(!isElim(tm,G)) alive.push(tm); }
+    });
+    return {name,alive,elim,gained,lost,tko:gained.length-lost.length};
+  });
+  const tot=rows.reduce((s,r)=>s+r.alive.length,0);
+  rows.forEach(r=>{ r.pct=tot>0&&r.alive.length>0?(r.alive.length/tot*100).toFixed(1):'0.0'; r.est=tot>0?Math.round(r.alive.length/tot*750):0; });
+  rows.sort((a,b)=>b.alive.length-a.alive.length||b.gained.length-a.gained.length);
+  rows.forEach((r,rank)=>{
+    const rc=['r1','r2','r3','ro'][Math.min(rank,3)];
+    const alive=r.alive.length>0;
+    const tr2=document.createElement('tr');
+    tr2.innerHTML=`<td><span class="rbadge ${rc}">${rank+1}</span></td>
+    <td><span class="adot ${alive?'da':'dd'}"></span>${r.name}</td>
+    <td style="font-size:.8rem">${r.alive.map(t=>`<span style="color:var(--grn)">${t}</span>`).join(', ')}${r.elim.length?` <span style="color:var(--mut);text-decoration:line-through">${r.elim.join(', ')}</span>`:''}${r.gained.length?` <span class="topill">+${r.gained.join(', ')}</span>`:''}</td>
+    <td>${alive?'<span style="color:var(--grn);font-weight:600">Alive</span>':'<span style="color:var(--red)">Out</span>'}</td>
+    <td>${r.tko>0?`<span class="topill">+${r.tko}</span>`:r.tko<0?`<span style="color:var(--red)">${r.tko}</span>`:'—'}</td>
+    <td><div style="font-size:.8rem;font-weight:600">${r.pct}%</div><div class="pbar"><div class="pfill" style="width:${r.pct}%"></div></div></td>
+    <td style="font-weight:700;color:var(--gold)">$${r.est}</td>`;
+    tbody.appendChild(tr2);
+  });
+}
+
+// ── UI HELPERS ─────────────────────────────────────────────
+function setBView(v){
+  bView=v;
+  document.getElementById('listView').style.display=v==='list'?'':'none';
+  document.getElementById('visualView').style.display=v==='visual'?'':'none';
+  document.getElementById('btnList').classList.toggle('active',v==='list');
+  document.getElementById('btnVisual').classList.toggle('active',v==='visual');
+  if(v==='visual') renderVisual();
+}
+function showPage(name){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('p-'+name).classList.add('active');
+  document.getElementById('t-'+name).classList.add('active');
+  if(name==='bracket') renderBracket();
+  else if(name==='roster') renderRoster();
+  else if(name==='standings') renderStandings();
+}
+
+// ── EVENT LISTENERS ────────────────────────────────────────
+document.getElementById('t-overview').addEventListener('click',()=>showPage('overview'));
+document.getElementById('t-roster').addEventListener('click',()=>showPage('roster'));
+document.getElementById('t-bracket').addEventListener('click',()=>showPage('bracket'));
+document.getElementById('t-standings').addEventListener('click',()=>showPage('standings'));
+document.getElementById('t-rules').addEventListener('click',()=>showPage('rules'));
+document.getElementById('btnList').addEventListener('click',()=>setBView('list'));
+document.getElementById('btnVisual').addEventListener('click',()=>setBView('visual'));
+document.getElementById('btnHatDraw').addEventListener('click',()=>{
+  if(!confirm('Restore all team assignments to the original hat draw?')) return;
+  S.teams = freshTeams();
+  save(); renderRoster(); renderStandings();
+});
+document.getElementById('btnReset').addEventListener('click',()=>document.getElementById('resetOverlay').classList.add('open'));
+document.getElementById('btnCancelReset').addEventListener('click',()=>document.getElementById('resetOverlay').classList.remove('open'));
+document.getElementById('btnConfirmReset').addEventListener('click',async()=>{
+  S.games={}; S.takeovers={}; S.teams=freshTeams(); S.names=[...DEFAULT_NAMES];
+  document.getElementById('resetOverlay').classList.remove('open');
+  save(); renderRoster(); renderBracket(); renderStandings();
+});
+document.getElementById('btnOffline').addEventListener('click',()=>{
+  online=false;
+  lsLoad();
+  document.getElementById('loadScreen').style.display='none';
+  document.getElementById('offBadge').style.display='inline';
+  document.getElementById('syncChip').textContent='🔴 Offline';
+  renderRoster(); renderBracket(); renderStandings();
+});
+
+// ── INIT ───────────────────────────────────────────────────
+async function init(){
+  initState();
+
+  const offlineTimer = setTimeout(()=>{
+    document.getElementById('loadMsg').textContent='Taking longer than usual...';
+    document.getElementById('loadBar').style.width='50%';
+    document.getElementById('btnOffline').style.display='inline-block';
+  }, 4000);
+
+  document.getElementById('loadMsg').textContent='Connecting to Firebase...';
+  document.getElementById('loadBar').style.width='20%';
+
+  try{
+    const r = await Promise.race([
+      fetch(FB+'/state.json'),
+      new Promise((_,rej)=>setTimeout(()=>rej(new Error('timeout')),6000))
+    ]);
+    if(!r.ok) throw new Error();
+    const d = await r.json();
+    online = true;
+    document.getElementById('loadMsg').textContent='Loading data...';
+    document.getElementById('loadBar').style.width='70%';
+    if(d && typeof d==='object'){
+      S.names     = Array.isArray(d.names)      ? d.names      : [...DEFAULT_NAMES];
+      S.teams     = Array.isArray(d.teams)       ? d.teams      : freshTeams();
+      S.games     = (d.games&&typeof d.games==='object')     ? d.games     : {};
+      S.takeovers = (d.takeovers&&typeof d.takeovers==='object') ? d.takeovers : {};
+    }
+  } catch(e){
+    online = false;
+    lsLoad();
+    document.getElementById('offBadge').style.display='inline';
+    document.getElementById('syncChip').textContent='🔴 Offline';
+  }
+
+  clearTimeout(offlineTimer);
+  document.getElementById('loadBar').style.width='100%';
+  document.getElementById('loadMsg').textContent='Ready!';
+
+  renderRoster(); renderBracket(); renderStandings();
+
+  setTimeout(()=>{ document.getElementById('loadScreen').style.display='none'; }, 400);
+
+  if(online){
+    document.getElementById('liveBadge').style.display='inline';
+    document.getElementById('syncChip').textContent='🟢 Live Sync';
+    fbSync();
+  }
+}
+
+init();
+})();
+</script>
+</body>
+</html>
