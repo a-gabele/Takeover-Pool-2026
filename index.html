@@ -217,9 +217,12 @@ h1{font-size:1.5rem;font-weight:800;margin-bottom:4px;}
 <div class="page" id="p-bracket">
   <div class="shdr">
     <div><h1>Bracket</h1><p class="sub">Real 2026 R32 matchups. Log results and spreads.</p></div>
-    <div class="vtog">
-      <button class="vtbtn active" id="btnList">☰ List</button>
-      <button class="vtbtn" id="btnVisual">⬛ Visual</button>
+    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+      <button class="btn btns" id="btnRefreshScores" style="font-size:.8rem;">⟳ Refresh Scores</button>
+      <div class="vtog">
+        <button class="vtbtn active" id="btnList">☰ List</button>
+        <button class="vtbtn" id="btnVisual">⬛ Visual</button>
+      </div>
     </div>
   </div>
   <div id="listView">
@@ -436,6 +439,68 @@ function lsLoad(){ try{ const d=localStorage.getItem('tp26'); if(d){ const p=JSO
 function save(){ online ? fbSave() : lsSave(); }
 function flashSaved(){ const b=document.getElementById('sbar'); b.classList.add('show'); setTimeout(()=>b.classList.remove('show'),2000); }
 
+// ── SCORES ─────────────────────────────────────────────────
+// Map team names to ESPN API name fragments for matching
+const TEAM_MAP = {
+  'Florida':'Florida','Iowa':'Iowa','Nebraska':'Nebraska','Vanderbilt':'Vanderbilt',
+  'Illinois':'Illinois','VCU':'VCU','Houston':'Houston','Texas A&M':'Texas A&M',
+  'Duke':'Duke','TCU':'TCU','Kansas':'Kansas',"St. John's":"St. John's",
+  'Michigan St':'Michigan State','Louisville':'Louisville','UConn':'Connecticut','UCLA':'UCLA',
+  'Arizona':'Arizona','Utah State':'Utah State','Arkansas':'Arkansas','High Point':'High Point',
+  'Gonzaga':'Gonzaga','Texas':'Texas','Purdue':'Purdue','Miami FL':'Miami',
+  'Michigan':'Michigan','Saint Louis':'Saint Louis','Alabama':'Alabama','Texas Tech':'Texas Tech',
+  'Tennessee':'Tennessee','Virginia':'Virginia','Iowa State':'Iowa State','Kentucky':'Kentucky'
+};
+
+let liveScores = {}; // {teamName: {score, opponent, opponentScore, status}}
+
+async function fetchScores(){
+  const btn=document.getElementById('btnRefreshScores');
+  btn.textContent='⟳ Loading...'; btn.disabled=true;
+  try{
+    const res = await fetch('https://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/scoreboard?groups=50&limit=100');
+    const data = await res.json();
+    liveScores = {};
+    (data.events||[]).forEach(ev=>{
+      const comp = ev.competitions&&ev.competitions[0];
+      if(!comp) return;
+      const status = ev.status&&ev.status.type&&ev.status.type.description||'';
+      const isLive = status==='In Progress';
+      const isFinal = status==='Final';
+      if(!isLive&&!isFinal) return;
+      const teams = comp.competitors||[];
+      if(teams.length<2) return;
+      const t0={name:teams[0].team.displayName, score:teams[0].score};
+      const t1={name:teams[1].team.displayName, score:teams[1].score};
+      // Match to our team names
+      Object.entries(TEAM_MAP).forEach(([ourName, espnFrag])=>{
+        if(t0.name.includes(espnFrag)){
+          liveScores[ourName]={score:+t0.score, opp:t1.name, oppScore:+t1.score, status};
+        }
+        if(t1.name.includes(espnFrag)){
+          liveScores[ourName]={score:+t1.score, opp:t0.name, oppScore:+t0.score, status};
+        }
+      });
+    });
+    btn.textContent='⟳ Refresh Scores';
+    btn.disabled=false;
+    renderBracket();
+  } catch(e){
+    btn.textContent='⟳ Retry';
+    btn.disabled=false;
+    console.warn('Score fetch failed',e);
+  }
+}
+
+function scoreTag(team){
+  const s=liveScores[team];
+  if(!s) return '';
+  const isLive=s.status==='In Progress';
+  const color=isLive?'var(--grn)':'var(--mut)';
+  const label=isLive?'🔴 LIVE':'Final';
+  return `<span style="font-size:.68rem;padding:2px 6px;border-radius:4px;background:${isLive?'rgba(34,197,94,.15)':'var(--sur2)'};color:${color};font-weight:700;margin-left:4px;">${label} ${s.score}–${s.oppScore}</span>`;
+}
+
 // ── GAME ENGINE ────────────────────────────────────────────
 function buildGames(){
   const G = {};
@@ -588,7 +653,7 @@ function renderBracket(){
       [[g.t1,g.s1],[g.t2,g.s2]].forEach(([team,seed])=>{
         const row=document.createElement('div');
         row.className='trow'+(g.w===team?' win':g.w?' lose':'');
-        row.innerHTML=`<div class="sbadge">${seed}</div><div class="tname">${team}</div><div class="otag">${ownerOf(team)||'—'}</div>`;
+        row.innerHTML=`<div class="sbadge">${seed}</div><div class="tname">${team}${scoreTag(team)}</div><div class="otag">${ownerOf(team)||'—'}</div>`;
         row.addEventListener('click',()=>pickWinner(g.id,team));
         card.appendChild(row);
       });
@@ -724,7 +789,8 @@ function setBView(v){
   bView=v;
   document.getElementById('listView').style.display=v==='list'?'':'none';
   document.getElementById('visualView').style.display=v==='visual'?'':'none';
-  document.getElementById('btnList').classList.toggle('active',v==='list');
+  document.getElementById('btnRefreshScores').addEventListener('click', fetchScores);
+document.getElementById('btnList').classList.toggle('active',v==='list');
   document.getElementById('btnVisual').classList.toggle('active',v==='visual');
   if(v==='visual') renderVisual();
 }
