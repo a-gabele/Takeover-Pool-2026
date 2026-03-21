@@ -6,6 +6,31 @@
 <title>Takeover Pool 2026</title>
 <style>
 :root{--bg:#0f1117;--sur:#1a1d27;--sur2:#22263a;--acc:#f97316;--acc2:#3b82f6;--gold:#fbbf24;--grn:#22c55e;--red:#ef4444;--txt:#f1f5f9;--mut:#94a3b8;--bdr:#2e3347;}
+body.msu{--bg:#f0f0f0;--sur:#ffffff;--sur2:#e8e8e8;--acc:#18453b;--acc2:#18453b;--gold:#18453b;--grn:#18453b;--red:#c0392b;--txt:#1a1a1a;--mut:#555;--bdr:#ccc;}
+body.msu nav{background:#18453b;border-bottom:2px solid #ffffff22;}
+body.msu .logo{color:#fff;}
+body.msu .tab{color:rgba(255,255,255,.6);}
+body.msu .tab:hover{color:#fff;}
+body.msu .tab.active{color:#fff;border-bottom-color:#fff;}
+body.msu .navr .btn{color:#fff;border-color:rgba(255,255,255,.3);}
+body.msu .navr .btn:hover{border-color:#fff;}
+body.msu #liveBadge,body.msu #offBadge{color:#fff;}
+body.msu .potamt{color:#18453b;}
+body.msu .amt{color:#18453b;}
+body.msu .pamt{color:#18453b;}
+body.msu .pfill{background:#18453b;}
+body.msu .topill{background:rgba(24,69,59,.15);color:#18453b;}
+body.msu .adot.da{background:#18453b;}
+body.msu #sbar{background:rgba(24,69,59,.1);border-color:rgba(24,69,59,.3);color:#18453b;}
+body.msu #loadScreen{background:#18453b;}
+body.msu #loadScreen div{color:#fff;}
+body.msu #loadBar{background:#fff;}
+/* Spartan helmet watermark pattern */
+body.msu::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.045;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='75' font-size='70' fill='%2318453b'%3E⚔%3C/text%3E%3C/svg%3E");background-size:120px 120px;}
+body.msu .page,body.msu nav{position:relative;z-index:1;}
+.theme-toggle{padding:5px 12px;border-radius:20px;border:1px solid rgba(255,255,255,.3);background:transparent;color:#fff;font-size:.75rem;font-weight:600;cursor:pointer;transition:all .2s;white-space:nowrap;}
+body:not(.msu) .theme-toggle{border-color:var(--bdr);color:var(--mut);}
+body:not(.msu) .theme-toggle:hover{border-color:var(--acc);color:var(--acc);}
 *{box-sizing:border-box;margin:0;padding:0;}
 body{background:var(--bg);color:var(--txt);font-family:'Segoe UI',sans-serif;min-height:100vh;}
 nav{background:var(--sur);border-bottom:1px solid var(--bdr);padding:0 16px;display:flex;align-items:center;flex-wrap:wrap;position:sticky;top:0;z-index:100;}
@@ -142,6 +167,7 @@ h1{font-size:1.5rem;font-weight:800;margin-bottom:4px;}
   <div class="navr">
     <span id="liveBadge" style="display:none;font-size:.75rem;color:var(--mut);"><span class="sdot"></span>Live</span>
     <span id="offBadge" style="display:none;font-size:.75rem;color:var(--red);">⚠ Offline</span>
+    <button class="theme-toggle" id="btnTheme">🌿 MSU Mode</button>
     <button class="btn btng" style="padding:5px 10px;font-size:.75rem;" id="btnReset">↺ Reset</button>
   </div>
 </nav>
@@ -705,6 +731,10 @@ function showPage(name){
 }
 
 // ── EVENT LISTENERS ────────────────────────────────────────
+document.getElementById('btnTheme').addEventListener('click',()=>{
+  const isMsu = document.body.classList.toggle('msu');
+  document.getElementById('btnTheme').textContent = isMsu ? '🌑 Dark Mode' : '🌿 MSU Mode';
+});
 document.getElementById('t-overview').addEventListener('click',()=>showPage('overview'));
 document.getElementById('t-roster').addEventListener('click',()=>showPage('roster'));
 document.getElementById('t-bracket').addEventListener('click',()=>showPage('bracket'));
