@@ -171,7 +171,15 @@ h1{font-size:1.5rem;font-weight:800;margin-bottom:4px;}
     <button class="btn btng" style="padding:5px 10px;font-size:.75rem;" id="btnReset">↺ Reset</button>
   </div>
 </nav>
-<div class="sbar" id="sbar">✓ Saved</div>
+<div id="msuBanner" style="display:none;background:#18453b;text-align:center;padding:10px 16px;border-bottom:3px solid #7BBD00;letter-spacing:.15em;font-weight:800;font-size:1.1rem;">
+  <span style="color:#ffffff;">GO GREEN!</span>
+  <span style="color:#7BBD00;margin:0 12px;">✦</span>
+  <span style="color:#ffffff;">GO WHITE!</span>
+  <span style="color:#7BBD00;margin:0 12px;">✦</span>
+  <span style="color:#ffffff;">GO GREEN!</span>
+  <span style="color:#7BBD00;margin:0 12px;">✦</span>
+  <span style="color:#ffffff;">GO WHITE!</span>
+</div>
 
 <!-- OVERVIEW -->
 <div class="page active" id="p-overview">
@@ -734,6 +742,7 @@ function showPage(name){
 document.getElementById('btnTheme').addEventListener('click',()=>{
   const isMsu = document.body.classList.toggle('msu');
   document.getElementById('btnTheme').textContent = isMsu ? '🌑 Dark Mode' : '🌿 MSU Mode';
+  document.getElementById('msuBanner').style.display = isMsu ? 'block' : 'none';
 });
 document.getElementById('t-overview').addEventListener('click',()=>showPage('overview'));
 document.getElementById('t-roster').addEventListener('click',()=>showPage('roster'));
