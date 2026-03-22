@@ -99,15 +99,15 @@ h1{font-size:1.5rem;font-weight:800;margin-bottom:4px;}
 .glocked{font-size:.8rem;color:var(--mut);text-align:center;padding:8px;background:var(--sur2);border-radius:8px;}
 #bviz{overflow-x:auto;padding-bottom:20px;}
 .bwrap{display:flex;min-width:960px;align-items:center;}
-.bt{display:flex;align-items:center;gap:5px;background:var(--sur);border:1px solid var(--bdr);border-radius:6px;padding:4px 7px;font-size:.72rem;cursor:pointer;min-width:118px;white-space:nowrap;overflow:hidden;margin-bottom:2px;}
+.bt{display:flex;flex-direction:column;justify-content:center;gap:2px;background:var(--sur);border:1px solid var(--bdr);border-radius:6px;padding:6px 8px;font-size:.72rem;cursor:pointer;min-width:118px;min-height:48px;overflow:hidden;margin-bottom:3px;}
 .bt:hover{border-color:var(--mut);}
 .bt.win{background:rgba(34,197,94,.15);border-color:rgba(34,197,94,.5);}
 .bt.lose{opacity:.4;}
 .bt.tbd{opacity:.4;cursor:default;}
-.bseed{font-size:.65rem;color:var(--mut);font-weight:700;min-width:14px;}
-.bname{flex:1;font-weight:600;overflow:hidden;text-overflow:ellipsis;}
-.bown{font-size:.6rem;color:var(--mut);max-width:55px;overflow:hidden;text-overflow:ellipsis;}
-.spill{font-size:.65rem;padding:2px 5px;border-radius:4px;background:rgba(251,191,36,.2);color:var(--gold);margin-left:2px;}
+.bseed{font-size:.65rem;color:var(--mut);font-weight:700;}
+.bname{font-weight:700;font-size:.78rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.bown{font-size:.68rem;color:var(--mut);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.spill{font-size:.62rem;padding:1px 5px;border-radius:4px;background:rgba(251,191,36,.2);color:var(--gold);display:inline-block;margin-top:1px;width:fit-content;}
 .stable{width:100%;border-collapse:collapse;font-size:.85rem;}
 .stable th{text-align:left;padding:10px 12px;color:var(--mut);font-size:.75rem;text-transform:uppercase;letter-spacing:.05em;border-bottom:1px solid var(--bdr);}
 .stable td{padding:12px;border-bottom:1px solid var(--bdr);}
@@ -734,7 +734,16 @@ function buildSideVis(regions,G,side){
         const el=document.createElement('div');
         el.className='bt'+(isTBD?' tbd':'')+(isW?' win':'')+(isL?' lose':'');
         const isTaken = hasTO(team);
-        el.innerHTML=`<span class="bseed">${isTBD?'?':seed}</span><span class="bname">${tr(team,12)}</span><span class="bown">${isTBD?'':tr(currentOwner(team),8)}</span>${isTaken?'<span class="spill" style="background:rgba(249,115,22,.25);color:var(--acc)">TO</span>':''}${isW&&g.cov===null?'<span class="spill">?</span>':''}`;
+        el.innerHTML=`
+          <div style="display:flex;align-items:center;gap:4px;">
+            <span class="bseed">${isTBD?'?':seed}</span>
+            <span class="bname">${tr(team,15)}</span>
+            ${isW&&g.cov===null?'<span class="spill">?</span>':''}
+          </div>
+          <div style="display:flex;align-items:center;gap:4px;">
+            <span class="bown">${isTBD?'':currentOwner(team)}</span>
+            ${isTaken?'<span class="spill" style="background:rgba(249,115,22,.25);color:var(--acc);">TO</span>':''}
+          </div>`;
         if(!isTBD&&!isL) el.addEventListener('click',()=>{ if(!g.w) pickWinner(g.id,team); else if(isW&&g.cov===null){setBView('list');curRound=g.round;renderBracket();} });
         gw.appendChild(el);
       });
@@ -756,7 +765,16 @@ function buildCenterVis(G){
       el.className='bt'+(isTBD?' tbd':'')+(isW?' win':'')+(isL?' lose':'');
       el.style.cssText='min-width:155px;margin-bottom:3px;';
       const isTaken2 = hasTO(team);
-      el.innerHTML=`<span class="bseed">${isTBD?'?':seed}</span><span class="bname">${tr(team,14)}</span><span class="bown">${isTBD?'':tr(currentOwner(team),8)}</span>${isTaken2?'<span class="spill" style="background:rgba(249,115,22,.25);color:var(--acc)">TO</span>':''}${isW&&g.cov===null?'<span class="spill">?</span>':''}`;
+      el.innerHTML=`
+        <div style="display:flex;align-items:center;gap:4px;">
+          <span class="bseed">${isTBD?'?':seed}</span>
+          <span class="bname">${tr(team,15)}</span>
+          ${isW&&g.cov===null?'<span class="spill">?</span>':''}
+        </div>
+        <div style="display:flex;align-items:center;gap:4px;">
+          <span class="bown">${isTBD?'':currentOwner(team)}</span>
+          ${isTaken2?'<span class="spill" style="background:rgba(249,115,22,.25);color:var(--acc);">TO</span>':''}
+        </div>`;
       if(!isTBD&&!isL) el.addEventListener('click',()=>{ if(!g.w) pickWinner(id,team); else if(isW&&g.cov===null){setBView('list');curRound=g.round;renderBracket();} });
       c.appendChild(el);
     });
