@@ -157,6 +157,8 @@ h1{font-size:1.5rem;font-weight:800;margin-bottom:4px;}
   <button id="btnOffline" class="btn btng" style="display:none;margin-top:6px;">Use Offline Mode</button>
 </div>
 
+<!-- IZZO BACKGROUND -->
+<div id="izzoBg"><img src="https://a-gabele.github.io/takeover-pool-2026/izzo.jpg" alt=""></div>
 <!-- IZZO INTRO -->
 <div id="izzoIntro">
   <img id="izzoImg" src="https://a-gabele.github.io/takeover-pool-2026/izzo.jpg" alt="">
@@ -922,11 +924,10 @@ document.getElementById('btnTheme').addEventListener('click',()=>{
   document.getElementById('btnTheme').textContent = isMsu ? '🌑 Dark Mode' : '🌿 MSU Mode';
   if(isMsu){
     const intro = document.getElementById('izzoIntro');
-    // Force reflow so animation restarts cleanly
     intro.style.display = 'flex';
     intro.style.opacity = '1';
     intro.style.animation = 'none';
-    intro.offsetHeight; // trigger reflow
+    intro.offsetHeight;
     intro.style.animation = '';
     intro.classList.add('show');
     setTimeout(()=>{
