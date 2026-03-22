@@ -931,8 +931,17 @@ document.getElementById('btnTheme').addEventListener('click',()=>{
   document.getElementById('msuBanner').style.display = isMsu ? 'block' : 'none';
   if(isMsu){
     const intro = document.getElementById('izzoIntro');
+    // Force reflow so animation restarts cleanly
+    intro.style.display = 'flex';
+    intro.style.opacity = '1';
+    intro.style.animation = 'none';
+    intro.offsetHeight; // trigger reflow
+    intro.style.animation = '';
     intro.classList.add('show');
-    setTimeout(()=>{ intro.classList.remove('show'); }, 3000);
+    setTimeout(()=>{
+      intro.style.opacity = '0';
+      setTimeout(()=>{ intro.style.display = 'none'; intro.classList.remove('show'); }, 400);
+    }, 3000);
   }
 });
 document.getElementById('t-overview').addEventListener('click',()=>showPage('overview'));
