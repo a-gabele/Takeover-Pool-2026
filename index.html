@@ -157,17 +157,7 @@ h1{font-size:1.5rem;font-weight:800;margin-bottom:4px;}
   <button id="btnOffline" class="btn btng" style="display:none;margin-top:6px;">Use Offline Mode</button>
 </div>
 
-<!-- IZZO BACKGROUND -->
 <div id="izzoBg"><img src="https://a-gabele.github.io/takeover-pool-2026/izzo.jpg" alt=""></div>
-<!-- IZZO INTRO -->
-<div id="izzoIntro">
-  <img id="izzoImg" src="https://a-gabele.github.io/takeover-pool-2026/izzo.jpg" alt="">
-  <div id="izzoText">
-    <span class="gg">GO GREEN!</span>
-    <span class="gw">GO WHITE!</span>
-    <span class="isub">Michigan State Spartans</span>
-  </div>
-</div>
 <!-- IZZO BACKGROUND -->
 <div id="izzoBg"><img src="https://a-gabele.github.io/takeover-pool-2026/izzo.jpg" alt=""></div>
 
@@ -922,19 +912,6 @@ function showPage(name){
 document.getElementById('btnTheme').addEventListener('click',()=>{
   const isMsu = document.body.classList.toggle('msu');
   document.getElementById('btnTheme').textContent = isMsu ? '🌑 Dark Mode' : '🌿 MSU Mode';
-  if(isMsu){
-    const intro = document.getElementById('izzoIntro');
-    intro.style.display = 'flex';
-    intro.style.opacity = '1';
-    intro.style.animation = 'none';
-    intro.offsetHeight;
-    intro.style.animation = '';
-    intro.classList.add('show');
-    setTimeout(()=>{
-      intro.style.opacity = '0';
-      setTimeout(()=>{ intro.style.display = 'none'; intro.classList.remove('show'); }, 400);
-    }, 3000);
-  }
 });
 document.getElementById('t-overview').addEventListener('click',()=>showPage('overview'));
 document.getElementById('t-roster').addEventListener('click',()=>showPage('roster'));
