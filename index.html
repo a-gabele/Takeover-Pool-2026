@@ -194,8 +194,15 @@ h1{font-size:1.5rem;font-weight:800;margin-bottom:4px;}
     <div><div class="potamt">$800</div><div style="font-size:.85rem;color:var(--mut)">Total Pool · 16 × $50</div></div>
     <div style="margin-left:auto"><span class="chip" id="syncChip">🔴 Connecting...</span></div>
   </div>
-  <div class="card">
-    <div style="font-weight:700;font-size:.9rem;color:var(--mut);text-transform:uppercase;letter-spacing:.05em;margin-bottom:12px;">How It Works</div>
+  <div class="card" id="aliveCard">
+    <div style="font-weight:700;font-size:.9rem;color:var(--mut);text-transform:uppercase;letter-spacing:.05em;margin-bottom:14px;">Still Alive</div>
+    <div id="aliveGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px;"></div>
+    <div style="margin-top:14px;display:flex;align-items:center;gap:16px;padding-top:12px;border-top:1px solid var(--bdr);">
+      <div style="display:flex;align-items:center;gap:6px;font-size:.78rem;color:var(--mut);"><span style="width:10px;height:10px;border-radius:50%;background:var(--grn);display:inline-block;"></span>Alive</div>
+      <div style="display:flex;align-items:center;gap:6px;font-size:.78rem;color:var(--mut);"><span style="width:10px;height:10px;border-radius:50%;background:var(--red);display:inline-block;"></span>Eliminated</div>
+      <div style="display:flex;align-items:center;gap:6px;font-size:.78rem;color:var(--mut);"><span style="font-size:.7rem;padding:1px 5px;border-radius:4px;background:rgba(249,115,22,.2);color:var(--acc);font-weight:700;">TO</span>Takeover</div>
+    </div>
+  </div>
     <div class="ri"><span>👥</span><span>Each player owns <strong>2 teams</strong> from the Round of 32 — one Left half (South/East), one Right half (West/Midwest).</span></div>
     <div class="ri"><span>🏀</span><span>Pool begins at the <strong>Round of 32</strong>. Bracket follows real NCAA tournament seedings.</span></div>
     <div class="ri"><span>🔄</span><span>Each player owns one team from each side of the bracket — they can't face each other until the Final Four.</span></div>
@@ -783,8 +790,74 @@ function buildCenterVis(G){
 }
 function tr(s,n){ return s&&s.length>n?s.slice(0,n)+'…':s||''; }
 
-// ── RENDER STANDINGS ───────────────────────────────────────
+// ── RENDER ALIVE CARD ──────────────────────────────────────
+function renderAlive(){
+  const G = buildGames();
+  const grid = document.getElementById('aliveGrid');
+  if(!grid) return;
+  grid.innerHTML = '';
+  let aliveCount = 0;
+
+  S.names.forEach((name,i)=>{
+    const t = S.teams[i]||{l:'',r:''};
+    const myTeams = [t.l,t.r].filter(Boolean);
+
+    // Determine alive teams & takeovers
+    let alive = [], gained = [], lost = [];
+    myTeams.forEach(tm=>{
+      const ov = S.takeovers[tm];
+      if(ov && ov!==name) lost.push(tm);
+      else if(!isElim(tm,G)) alive.push(tm);
+    });
+    Object.entries(S.takeovers).forEach(([tm,o])=>{
+      if(o===name && !isElim(tm,G)) gained.push(tm);
+    });
+
+    const totalAlive = alive.length + gained.length;
+    const isOut = totalAlive === 0;
+    if(!isOut) aliveCount++;
+
+    const card = document.createElement('div');
+    card.style.cssText = `background:var(--sur2);border:1px solid ${isOut?'var(--bdr)':'rgba(34,197,94,.25)'};border-radius:10px;padding:10px 12px;opacity:${isOut?'.45':'1'};`;
+
+    // Status dot + name
+    const header = document.createElement('div');
+    header.style.cssText = 'display:flex;align-items:center;gap:6px;margin-bottom:6px;';
+    header.innerHTML = `<span style="width:8px;height:8px;border-radius:50%;background:${isOut?'var(--red)':'var(--grn)'};flex-shrink:0;display:inline-block;"></span><span style="font-weight:700;font-size:.82rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${name}</span>`;
+    card.appendChild(header);
+
+    // Teams
+    const allAlive = [...alive, ...gained];
+    if(allAlive.length){
+      allAlive.forEach(tm=>{
+        const isTaken = gained.includes(tm);
+        const row = document.createElement('div');
+        row.style.cssText = 'display:flex;align-items:center;gap:4px;font-size:.72rem;color:var(--mut);margin-bottom:2px;';
+        row.innerHTML = `<span style="color:var(--grn);">▸</span><span style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${tm}</span>${isTaken?'<span style="font-size:.6rem;padding:1px 4px;border-radius:3px;background:rgba(249,115,22,.2);color:var(--acc);">TO</span>':''}`;
+        card.appendChild(row);
+      });
+    } else {
+      const out = document.createElement('div');
+      out.style.cssText = 'font-size:.72rem;color:var(--red);';
+      out.textContent = 'Eliminated';
+      card.appendChild(out);
+    }
+    grid.appendChild(card);
+  });
+
+  // Update summary count
+  const existing = document.getElementById('aliveSummary');
+  if(existing) existing.remove();
+  const summary = document.createElement('div');
+  summary.id = 'aliveSummary';
+  summary.style.cssText = 'font-size:.82rem;color:var(--mut);margin-bottom:10px;';
+  summary.innerHTML = `<span style="font-size:1.4rem;font-weight:800;color:var(--grn);">${aliveCount}</span> of ${S.names.length} players still alive`;
+  grid.parentElement.insertBefore(summary, grid);
+}
+
+
 function renderStandings(){
+  renderAlive();
   const G=buildGames(), tbody=document.getElementById('standBody'); tbody.innerHTML='';
   const rows=S.names.map((name,i)=>{
     const t=S.teams[i]||{l:'',r:''};
