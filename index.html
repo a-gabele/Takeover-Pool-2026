@@ -548,21 +548,26 @@ function isElim(team,G){
   if(!team||team==='TBD') return false;
   return Object.values(G).some(g=>g.w&&g.w!==team&&(g.t1===team||g.t2===team));
 }
-function ownerOf(team){
-  if(!team||team==='TBD') return null;
-  if(S.takeovers[team]) return S.takeovers[team];
-  const i = S.teams.findIndex(t=>t&&(t.l===team||t.r===team));
-  return i>=0 ? S.names[i] : null;
-}
 function ownerTag(team){
   if(!team||team==='TBD') return '—';
   const i = S.teams.findIndex(t=>t&&(t.l===team||t.r===team));
   const original = i>=0 ? S.names[i] : null;
   if(!original) return '—';
-  if(S.takeovers[team] && S.takeovers[team]!==original){
-    return `<span style="text-decoration:line-through;color:var(--mut);font-size:.65rem">${original}</span>&nbsp;<span style="color:var(--acc);font-weight:700;font-size:.72rem">⟳ ${S.takeovers[team]}</span>`;
+  const takenOver = !!S.takeovers[team];
+  const current = takenOver ? S.takeovers[team] : original;
+  if(takenOver){
+    return `<span style="text-decoration:line-through;color:var(--mut);font-size:.65rem">${original}</span>&nbsp;<span style="color:var(--acc);font-weight:700;font-size:.72rem">⟳ ${current}</span>`;
   }
   return original;
+}
+function hasTO(team){
+  return !!(team && S.takeovers[team]);
+}
+function currentOwner(team){
+  if(!team||team==='TBD') return '';
+  if(S.takeovers[team]) return S.takeovers[team];
+  const i=S.teams.findIndex(t=>t&&(t.l===team||t.r===team));
+  return i>=0?S.names[i]:'';
 }
 
 function pickWinner(id,team){
@@ -663,7 +668,7 @@ function renderBracket(){
       [[g.t1,g.s1],[g.t2,g.s2]].forEach(([team,seed])=>{
         const row=document.createElement('div');
         row.className='trow'+(g.w===team?' win':g.w?' lose':'');
-        row.innerHTML=`<div class="sbadge">${seed}</div><div class="tname">${team}${scoreTag(team)}</div><div class="otag">${ownerOf(team)||'—'}</div>`;
+        row.innerHTML=`<div class="sbadge">${seed}</div><div class="tname">${team}${scoreTag(team)}</div><div class="otag" style="max-width:140px;text-align:right;">${ownerTag(team)}</div>`;
         row.addEventListener('click',()=>pickWinner(g.id,team));
         card.appendChild(row);
       });
@@ -728,7 +733,8 @@ function buildSideVis(regions,G,side){
         const isTBD=team==='TBD', isW=g.w===team, isL=g.w&&!isW;
         const el=document.createElement('div');
         el.className='bt'+(isTBD?' tbd':'')+(isW?' win':'')+(isL?' lose':'');
-        el.innerHTML=`<span class="bseed">${isTBD?'?':seed}</span><span class="bname">${tr(team,12)}</span><span class="bown">${isTBD?'':tr(ownerOf(team)||'',8)}</span>${isW&&g.cov===null?'<span class="spill">?</span>':''}`;
+        const isTaken = hasTO(team);
+        el.innerHTML=`<span class="bseed">${isTBD?'?':seed}</span><span class="bname">${tr(team,12)}</span><span class="bown">${isTBD?'':tr(currentOwner(team),8)}</span>${isTaken?'<span class="spill" style="background:rgba(249,115,22,.25);color:var(--acc)">TO</span>':''}${isW&&g.cov===null?'<span class="spill">?</span>':''}`;
         if(!isTBD&&!isL) el.addEventListener('click',()=>{ if(!g.w) pickWinner(g.id,team); else if(isW&&g.cov===null){setBView('list');curRound=g.round;renderBracket();} });
         gw.appendChild(el);
       });
@@ -749,7 +755,8 @@ function buildCenterVis(G){
       const el=document.createElement('div');
       el.className='bt'+(isTBD?' tbd':'')+(isW?' win':'')+(isL?' lose':'');
       el.style.cssText='min-width:155px;margin-bottom:3px;';
-      el.innerHTML=`<span class="bseed">${isTBD?'?':seed}</span><span class="bname">${tr(team,14)}</span><span class="bown">${isTBD?'':tr(ownerOf(team)||'',8)}</span>${isW&&g.cov===null?'<span class="spill">?</span>':''}`;
+      const isTaken2 = hasTO(team);
+      el.innerHTML=`<span class="bseed">${isTBD?'?':seed}</span><span class="bname">${tr(team,14)}</span><span class="bown">${isTBD?'':tr(currentOwner(team),8)}</span>${isTaken2?'<span class="spill" style="background:rgba(249,115,22,.25);color:var(--acc)">TO</span>':''}${isW&&g.cov===null?'<span class="spill">?</span>':''}`;
       if(!isTBD&&!isL) el.addEventListener('click',()=>{ if(!g.w) pickWinner(id,team); else if(isW&&g.cov===null){setBView('list');curRound=g.round;renderBracket();} });
       c.appendChild(el);
     });
