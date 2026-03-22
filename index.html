@@ -554,6 +554,16 @@ function ownerOf(team){
   const i = S.teams.findIndex(t=>t&&(t.l===team||t.r===team));
   return i>=0 ? S.names[i] : null;
 }
+function ownerTag(team){
+  if(!team||team==='TBD') return '—';
+  const i = S.teams.findIndex(t=>t&&(t.l===team||t.r===team));
+  const original = i>=0 ? S.names[i] : null;
+  if(!original) return '—';
+  if(S.takeovers[team] && S.takeovers[team]!==original){
+    return `<span style="text-decoration:line-through;color:var(--mut);font-size:.65rem">${original}</span>&nbsp;<span style="color:var(--acc);font-weight:700;font-size:.72rem">⟳ ${S.takeovers[team]}</span>`;
+  }
+  return original;
+}
 
 function pickWinner(id,team){
   const G=buildGames(), g=G[id];
