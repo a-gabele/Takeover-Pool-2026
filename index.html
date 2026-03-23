@@ -803,24 +803,20 @@ function showPage(name){
 document.getElementById('btnForceFix').addEventListener('click', async ()=>{
   const btn = document.getElementById('btnForceFix');
   btn.textContent = '⏳ Fixing...'; btn.disabled = true;
-  // Directly patch Firebase
   try {
-    await fetch(FB+'/state/games/e1.json', {
-      method:'PUT',
-      headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({w:"St. John's", cov:false, sl:"St. John's -3.5"})
-    });
-    await fetch(FB+'/state/takeovers.json', {
-      method:'PATCH',
-      headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({"St. John's":"Joe H."})
-    });
-    // Also update local state
+    // Fix local state
     S.games['e1'] = {w:"St. John's", cov:false, sl:"St. John's -3.5"};
     S.takeovers["St. John's"] = "Joe H.";
+    // Write entire state to Firebase so it sticks permanently
+    const res = await fetch(FB+'/state.json', {
+      method:'PUT',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify(S)
+    });
+    if(!res.ok) throw new Error('Firebase write failed');
     btn.textContent = '✅ Fixed!';
     renderBracket(); renderStandings();
-    setTimeout(()=>{ btn.style.display='none'; }, 2000);
+    setTimeout(()=>{ btn.style.display='none'; }, 3000);
   } catch(e) {
     btn.textContent = '❌ Failed — try again';
     btn.disabled = false;
@@ -886,12 +882,7 @@ async function init(){
     document.getElementById('syncChip').textContent='🔴 Offline';
   }
 
-  // Force St. John's R32 result — won, did NOT cover, Joe H. takes over
-  S.games['e1'] = {w:"St. John's", cov:false, sl:"St. John's -3.5"};
-  const joeIdx = S.teams.findIndex(t=>t&&t.l==='Kansas');
-  if(joeIdx>=0) S.takeovers["St. John's"] = S.names[joeIdx];
-  else S.takeovers["St. John's"] = "Joe H.";
-  save();
+
 
   clearTimeout(offlineTimer);
   document.getElementById('loadBar').style.width='100%';
