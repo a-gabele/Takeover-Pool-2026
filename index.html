@@ -858,6 +858,17 @@ async function init(){
     document.getElementById('offBadge').style.display='inline';
     document.getElementById('syncChip').textContent='🔴 Offline';
   }
+
+  // Hardcode St. John's R32 result: won, did NOT cover
+  // Game id is 'e1' (East, Kansas vs St. John's)
+  if(!S.games['e1'] || !S.games['e1'].w){
+    S.games['e1'] = {w:"St. John's", cov:false, sl: S.games['e1']?.sl||''};
+    // St. John's didn't cover — Kansas owner (Joe H.) takes over St. John's
+    const kansasOwnerIdx = S.teams.findIndex(t=>t&&t.l==='Kansas');
+    if(kansasOwnerIdx>=0) S.takeovers["St. John's"] = S.names[kansasOwnerIdx];
+    save();
+  }
+
   clearTimeout(offlineTimer);
   document.getElementById('loadBar').style.width='100%';
   document.getElementById('loadMsg').textContent='Ready!';
