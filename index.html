@@ -465,7 +465,7 @@ function buildGames(){
     const side=(reg==='South'||reg==='East')?'L':'R';
     R32[reg].forEach((m,idx)=>{
       const sv=S.games[m.id]||{};
-      G[m.id]={id:m.id,round:0,region:reg,side,idx,t1:m.t1,s1:m.s1,t2:m.t2,s2:m.s2,w:sv.w||'',cov:sv.cov!==undefined?sv.cov:null,sl:sv.sl||''};
+      G[m.id]={id:m.id,round:0,region:reg,side,idx,t1:m.t1,s1:m.s1,t2:m.t2,s2:m.s2,w:sv.w||'',cov:(sv.cov===true||sv.cov===false)?sv.cov:null,sl:sv.sl||''};
     });
   });
   for(let r=1;r<=2;r++){
@@ -480,7 +480,7 @@ function buildGames(){
     });
   }
   const sc=regChamp('South',G),ec=regChamp('East',G),wc=regChamp('West',G),mc=regChamp('Midwest',G);
-  const gf=id=>{const sv=S.games[id]||{};return{w:sv.w||'',cov:sv.cov!==undefined?sv.cov:null,sl:sv.sl||''};};
+  const gf=id=>{const sv=S.games[id]||{};return{w:sv.w||'',cov:(sv.cov===true||sv.cov===false)?sv.cov:null,sl:sv.sl||''}};
   G['ff0']={id:'ff0',round:3,region:'Final Four',side:'FF',idx:0,t1:sc.t,s1:sc.s,t2:ec.t,s2:ec.s,...gf('ff0')};
   G['ff1']={id:'ff1',round:3,region:'Final Four',side:'FF',idx:1,t1:wc.t,s1:wc.s,t2:mc.t,s2:mc.s,...gf('ff1')};
   const fa=adv(G['ff0']),fb=adv(G['ff1']);
@@ -525,14 +525,15 @@ function pickWinner(id,team){
 
 function setSpread(id,win,covered){
   if(!S.games[id]) S.games[id]={};
-  S.games[id].w=win;
-  S.games[id].cov=covered;
+  S.games[id].w = win;
+  S.games[id].cov = covered === true ? true : false;
+  S.games[id].sl = S.games[id].sl || '';
   if(!covered){
-    const G=buildGames(),g=G[id];
+    const G=buildGames(), g=G[id];
     if(g){
-      const loser=win===g.t1?g.t2:g.t1;
-      const lo=ownerOf(loser);
-      if(lo) S.takeovers[win]=lo;
+      const loser = win===g.t1 ? g.t2 : g.t1;
+      const lo = ownerOf(loser);
+      if(lo) S.takeovers[win] = lo;
     }
   } else {
     delete S.takeovers[win];
