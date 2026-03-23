@@ -25,7 +25,6 @@ body.msu #sbar{background:rgba(24,69,59,.1);border-color:rgba(24,69,59,.3);color
 body.msu #loadScreen{background:#18453b;}
 body.msu #loadScreen div{color:#fff;}
 body.msu #loadBar{background:#fff;}
-/* MSU Spartan helmet watermark pattern */
 body.msu::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.08;background-image:url("https://a-gabele.github.io/takeover-pool-2026/spartan.png");background-size:160px 160px;background-repeat:repeat;}
 body.msu .page,body.msu nav{position:relative;z-index:1;}
 .theme-toggle{padding:5px 12px;border-radius:20px;border:1px solid rgba(255,255,255,.3);background:transparent;color:#fff;font-size:.75rem;font-weight:600;cursor:pointer;transition:all .2s;white-space:nowrap;}
@@ -146,7 +145,6 @@ h1{font-size:1.5rem;font-weight:800;margin-bottom:4px;}
 </head>
 <body>
 
-<!-- LOADING SCREEN -->
 <div id="loadScreen" style="position:fixed;inset:0;background:var(--bg);z-index:999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;">
   <div style="font-size:2.5rem;">🏀</div>
   <div style="font-weight:800;font-size:1.1rem;">Loading Takeover Pool...</div>
@@ -171,17 +169,8 @@ h1{font-size:1.5rem;font-weight:800;margin-bottom:4px;}
     <button class="btn btng" style="padding:5px 10px;font-size:.75rem;" id="btnReset">↺ Reset</button>
   </div>
 </nav>
-<div id="msuBanner" style="display:none;background:#18453b;text-align:center;padding:10px 16px;border-bottom:3px solid #7BBD00;letter-spacing:.15em;font-weight:800;font-size:1.1rem;">
-  <span style="color:#ffffff;">GO GREEN!</span>
-  <span style="color:#7BBD00;margin:0 12px;">✦</span>
-  <span style="color:#ffffff;">GO WHITE!</span>
-  <span style="color:#7BBD00;margin:0 12px;">✦</span>
-  <span style="color:#ffffff;">GO GREEN!</span>
-  <span style="color:#7BBD00;margin:0 12px;">✦</span>
-  <span style="color:#ffffff;">GO WHITE!</span>
-</div>
+<div class="sbar" id="sbar">✓ Saved</div>
 
-<!-- OVERVIEW -->
 <div class="page active" id="p-overview">
   <h1>March Madness Takeover Pool</h1>
   <p class="sub">2026 NCAA Tournament · 16 Players · $50 Buy-in · Starts Round of 32</p>
@@ -203,6 +192,8 @@ h1{font-size:1.5rem;font-weight:800;margin-bottom:4px;}
       <div style="display:flex;align-items:center;gap:6px;font-size:.78rem;color:var(--mut);"><span style="font-size:.7rem;padding:1px 5px;border-radius:4px;background:rgba(249,115,22,.2);color:var(--acc);font-weight:700;">TO</span>Takeover</div>
     </div>
   </div>
+  <div class="card">
+    <div style="font-weight:700;font-size:.9rem;color:var(--mut);text-transform:uppercase;letter-spacing:.05em;margin-bottom:12px;">How It Works</div>
     <div class="ri"><span>👥</span><span>Each player owns <strong>2 teams</strong> from the Round of 32 — one Left half (South/East), one Right half (West/Midwest).</span></div>
     <div class="ri"><span>🏀</span><span>Pool begins at the <strong>Round of 32</strong>. Bracket follows real NCAA tournament seedings.</span></div>
     <div class="ri"><span>🔄</span><span>Each player owns one team from each side of the bracket — they can't face each other until the Final Four.</span></div>
@@ -211,7 +202,6 @@ h1{font-size:1.5rem;font-weight:800;margin-bottom:4px;}
   </div>
 </div>
 
-<!-- ROSTER -->
 <div class="page" id="p-roster">
   <div class="shdr">
     <div><h1>Roster</h1><p class="sub">Assign one Left and one Right team per player. Click a name to edit it.</p></div>
@@ -220,7 +210,6 @@ h1{font-size:1.5rem;font-weight:800;margin-bottom:4px;}
   <div class="rgrid" id="rosterGrid"></div>
 </div>
 
-<!-- BRACKET -->
 <div class="page" id="p-bracket">
   <div class="shdr">
     <div><h1>Bracket</h1><p class="sub">Real 2026 R32 matchups. Log results and spreads.</p></div>
@@ -242,7 +231,6 @@ h1{font-size:1.5rem;font-weight:800;margin-bottom:4px;}
   </div>
 </div>
 
-<!-- STANDINGS -->
 <div class="page" id="p-standings">
   <h1>Standings</h1><p class="sub">Live leaderboard · Takeovers · Prize odds</p>
   <div class="card">
@@ -253,7 +241,6 @@ h1{font-size:1.5rem;font-weight:800;margin-bottom:4px;}
   </div>
 </div>
 
-<!-- RULES -->
 <div class="page" id="p-rules">
   <h1>Rules &amp; Payouts</h1><p class="sub">Full reference</p>
   <div class="card rsec">
@@ -287,7 +274,6 @@ h1{font-size:1.5rem;font-weight:800;margin-bottom:4px;}
   </div>
 </div>
 
-<!-- RESET MODAL -->
 <div class="overlay" id="resetOverlay">
   <div class="modal">
     <h3>⚠️ Reset Everything?</h3>
@@ -302,7 +288,6 @@ h1{font-size:1.5rem;font-weight:800;margin-bottom:4px;}
 <script>
 (function(){
 
-// ── CONSTANTS ──────────────────────────────────────────────
 const FB = 'https://takeover-pool-2026-default-rtdb.firebaseio.com';
 
 const DEFAULT_NAMES = [
@@ -311,27 +296,25 @@ const DEFAULT_NAMES = [
   "Stephen Y.","Luke","Luke's Wife","Nancy & Tony"
 ];
 
-// Hat draw assignments — index matches DEFAULT_NAMES
 const HAT_DRAW = [
-  {l:'VCU',         r:'Texas'},        // Travis
-  {l:'Iowa',        r:'Texas Tech'},   // Maddie
-  {l:'Florida',     r:'Saint Louis'},  // Jacob K.
-  {l:'Virginia',    r:'Kansas'},       // Joe H.
-  {l:'TCU',         r:'Arizona'},      // Justin L.
-  {l:"St. John's",  r:'Arkansas'},     // Phil L.
-  {l:'Illinois',    r:'Tennessee'},    // Pacheco
-  {l:'Duke',        r:'Gonzaga'},      // Kevin Y.
-  {l:'Vanderbilt',  r:'Miami FL'},     // Andy
-  {l:'Louisville',  r:'Iowa State'},   // Jane V.
-  {l:'Texas A&M',   r:'Purdue'},       // Bryan B.
-  {l:'Houston',     r:'Utah State'},   // Jared S.
-  {l:'Alabama',     r:'UConn'},        // Stephen Y.
-  {l:'Michigan St', r:'Michigan'},     // Luke
-  {l:'UCLA',        r:'High Point'},   // Luke's Wife
-  {l:'Nebraska',    r:'Kentucky'},     // Nancy & Tony
+  {l:'VCU',         r:'Texas'},
+  {l:'Iowa',        r:'Texas Tech'},
+  {l:'Florida',     r:'Saint Louis'},
+  {l:'Virginia',    r:'Kansas'},
+  {l:'TCU',         r:'Arizona'},
+  {l:"St. John's",  r:'Arkansas'},
+  {l:'Illinois',    r:'Tennessee'},
+  {l:'Duke',        r:'Gonzaga'},
+  {l:'Vanderbilt',  r:'Miami FL'},
+  {l:'Louisville',  r:'Iowa State'},
+  {l:'Texas A&M',   r:'Purdue'},
+  {l:'Houston',     r:'Utah State'},
+  {l:'Alabama',     r:'UConn'},
+  {l:'Michigan St', r:'Michigan'},
+  {l:'UCLA',        r:'High Point'},
+  {l:'Nebraska',    r:'Kentucky'},
 ];
 
-// Real 2026 R32 bracket
 const R32 = {
   South: [
     {id:'s0',t1:'Florida',    s1:1, t2:'Iowa',        s2:9},
@@ -370,11 +353,6 @@ const RIGHT_TEAMS = [
 
 const ROUND_LABELS = ['Round of 32','Sweet 16','Elite Eight','Final Four','Championship'];
 
-// ── STATE ──────────────────────────────────────────────────
-// names: string[]          — editable player names
-// teams: {l,r}[]           — team assignments per player index
-// games: {[id]: {w, cov, sl}} — results
-// takeovers: {[team]: playerName} — current owner overrides
 let S = { names:[...DEFAULT_NAMES], teams:[], games:{}, takeovers:{} };
 let curRound = 0;
 let bView = 'list';
@@ -384,14 +362,9 @@ let syncEs = null;
 function freshTeams(){ return DEFAULT_NAMES.map((_,i)=>({l:HAT_DRAW[i].l, r:HAT_DRAW[i].r})); }
 function initState(){ S = { names:[...DEFAULT_NAMES], teams:freshTeams(), games:{}, takeovers:{} }; }
 
-// ── FIREBASE ───────────────────────────────────────────────
 async function fbSave(){
   try{
-    const res = await fetch(FB+'/state.json',{
-      method:'PUT',
-      headers:{'Content-Type':'application/json'},
-      body: JSON.stringify(S)
-    });
+    const res = await fetch(FB+'/state.json',{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(S)});
     if(!res.ok) throw new Error();
     flashSaved();
   } catch(e){ console.warn('Save failed',e); }
@@ -402,11 +375,10 @@ async function fbLoad(){
   if(!res.ok) throw new Error('Load failed');
   const d = await res.json();
   if(d && typeof d === 'object'){
-    // Merge carefully so missing keys fall back to defaults
-    S.names    = Array.isArray(d.names)     ? d.names     : [...DEFAULT_NAMES];
-    S.teams    = Array.isArray(d.teams)     ? d.teams     : freshTeams();
-    S.games    = (d.games && typeof d.games==='object') ? d.games : {};
-    S.takeovers= (d.takeovers && typeof d.takeovers==='object') ? d.takeovers : {};
+    S.names     = Array.isArray(d.names)     ? d.names     : [...DEFAULT_NAMES];
+    S.teams     = Array.isArray(d.teams)     ? d.teams     : freshTeams();
+    S.games     = (d.games && typeof d.games==='object')         ? d.games     : {};
+    S.takeovers = (d.takeovers && typeof d.takeovers==='object') ? d.takeovers : {};
   }
 }
 
@@ -418,9 +390,9 @@ function fbSync(){
       const d = JSON.parse(e.data);
       if(d && d.data && typeof d.data==='object'){
         const nd = d.data;
-        S.names     = Array.isArray(nd.names)      ? nd.names     : S.names;
-        S.teams     = Array.isArray(nd.teams)       ? nd.teams     : S.teams;
-        S.games     = (nd.games && typeof nd.games==='object')      ? nd.games     : S.games;
+        S.names     = Array.isArray(nd.names)                          ? nd.names     : S.names;
+        S.teams     = Array.isArray(nd.teams)                          ? nd.teams     : S.teams;
+        S.games     = (nd.games && typeof nd.games==='object')         ? nd.games     : S.games;
         S.takeovers = (nd.takeovers && typeof nd.takeovers==='object') ? nd.takeovers : S.takeovers;
         renderRoster(); renderBracket(); renderStandings();
       }
@@ -439,15 +411,11 @@ function fbSync(){
   };
 }
 
-// localStorage fallback
 function lsSave(){ try{ localStorage.setItem('tp26', JSON.stringify(S)); flashSaved(); }catch(e){} }
 function lsLoad(){ try{ const d=localStorage.getItem('tp26'); if(d){ const p=JSON.parse(d); S.names=Array.isArray(p.names)?p.names:[...DEFAULT_NAMES]; S.teams=Array.isArray(p.teams)?p.teams:freshTeams(); S.games=p.games||{}; S.takeovers=p.takeovers||{}; } }catch(e){} }
-
 function save(){ online ? fbSave() : lsSave(); }
 function flashSaved(){ const b=document.getElementById('sbar'); b.classList.add('show'); setTimeout(()=>b.classList.remove('show'),2000); }
 
-// ── SCORES ─────────────────────────────────────────────────
-// Map team names to ESPN API name fragments for matching
 const TEAM_MAP = {
   'Florida':'Florida','Iowa':'Iowa','Nebraska':'Nebraska','Vanderbilt':'Vanderbilt',
   'Illinois':'Illinois','VCU':'VCU','Houston':'Houston','Texas A&M':'Texas A&M',
@@ -458,8 +426,7 @@ const TEAM_MAP = {
   'Michigan':'Michigan','Saint Louis':'Saint Louis','Alabama':'Alabama','Texas Tech':'Texas Tech',
   'Tennessee':'Tennessee','Virginia':'Virginia','Iowa State':'Iowa State','Kentucky':'Kentucky'
 };
-
-let liveScores = {}; // {teamName: {score, opponent, opponentScore, status}}
+let liveScores = {};
 
 async function fetchScores(){
   const btn=document.getElementById('btnRefreshScores');
@@ -469,55 +436,36 @@ async function fetchScores(){
     const data = await res.json();
     liveScores = {};
     (data.events||[]).forEach(ev=>{
-      const comp = ev.competitions&&ev.competitions[0];
-      if(!comp) return;
-      const status = ev.status&&ev.status.type&&ev.status.type.description||'';
-      const isLive = status==='In Progress';
-      const isFinal = status==='Final';
+      const comp=ev.competitions&&ev.competitions[0]; if(!comp) return;
+      const status=ev.status&&ev.status.type&&ev.status.type.description||'';
+      const isLive=status==='In Progress', isFinal=status==='Final';
       if(!isLive&&!isFinal) return;
-      const teams = comp.competitors||[];
-      if(teams.length<2) return;
-      const t0={name:teams[0].team.displayName, score:teams[0].score};
-      const t1={name:teams[1].team.displayName, score:teams[1].score};
-      // Match to our team names
-      Object.entries(TEAM_MAP).forEach(([ourName, espnFrag])=>{
-        if(t0.name.includes(espnFrag)){
-          liveScores[ourName]={score:+t0.score, opp:t1.name, oppScore:+t1.score, status};
-        }
-        if(t1.name.includes(espnFrag)){
-          liveScores[ourName]={score:+t1.score, opp:t0.name, oppScore:+t0.score, status};
-        }
+      const teams=comp.competitors||[]; if(teams.length<2) return;
+      const t0={name:teams[0].team.displayName,score:teams[0].score};
+      const t1={name:teams[1].team.displayName,score:teams[1].score};
+      Object.entries(TEAM_MAP).forEach(([ourName,espnFrag])=>{
+        if(t0.name.includes(espnFrag)) liveScores[ourName]={score:+t0.score,opp:t1.name,oppScore:+t1.score,status};
+        if(t1.name.includes(espnFrag)) liveScores[ourName]={score:+t1.score,opp:t0.name,oppScore:+t0.score,status};
       });
     });
-    btn.textContent='⟳ Refresh Scores';
-    btn.disabled=false;
+    btn.textContent='⟳ Refresh Scores'; btn.disabled=false;
     renderBracket();
-  } catch(e){
-    btn.textContent='⟳ Retry';
-    btn.disabled=false;
-    console.warn('Score fetch failed',e);
-  }
+  } catch(e){ btn.textContent='⟳ Retry'; btn.disabled=false; }
 }
 
 function scoreTag(team){
-  const s=liveScores[team];
-  if(!s) return '';
+  const s=liveScores[team]; if(!s) return '';
   const isLive=s.status==='In Progress';
-  const color=isLive?'var(--grn)':'var(--mut)';
-  const label=isLive?'🔴 LIVE':'Final';
-  return `<span style="font-size:.68rem;padding:2px 6px;border-radius:4px;background:${isLive?'rgba(34,197,94,.15)':'var(--sur2)'};color:${color};font-weight:700;margin-left:4px;">${label} ${s.score}–${s.oppScore}</span>`;
+  return `<span style="font-size:.68rem;padding:2px 6px;border-radius:4px;background:${isLive?'rgba(34,197,94,.15)':'var(--sur2)'};color:${isLive?'var(--grn)':'var(--mut)'};font-weight:700;margin-left:4px;">${isLive?'🔴 LIVE':'Final'} ${s.score}–${s.oppScore}</span>`;
 }
 
-// ── GAME ENGINE ────────────────────────────────────────────
 function buildGames(){
-  const G = {};
+  const G={};
   ['South','East','West','Midwest'].forEach(reg=>{
-    const side = (reg==='South'||reg==='East') ? 'L' : 'R';
+    const side=(reg==='South'||reg==='East')?'L':'R';
     R32[reg].forEach((m,idx)=>{
-      const sv = S.games[m.id]||{};
-      G[m.id] = {id:m.id, round:0, region:reg, side, idx,
-        t1:m.t1, s1:m.s1, t2:m.t2, s2:m.s2,
-        w:sv.w||'', cov:sv.cov!==undefined?sv.cov:null, sl:sv.sl||''};
+      const sv=S.games[m.id]||{};
+      G[m.id]={id:m.id,round:0,region:reg,side,idx,t1:m.t1,s1:m.s1,t2:m.t2,s2:m.s2,w:sv.w||'',cov:sv.cov!==undefined?sv.cov:null,sl:sv.sl||''};
     });
   });
   for(let r=1;r<=2;r++){
@@ -525,51 +473,41 @@ function buildGames(){
       const side=(reg==='South'||reg==='East')?'L':'R';
       const prev=Object.values(G).filter(g=>g.region===reg&&g.round===r-1).sort((a,b)=>a.idx-b.idx);
       for(let i=0;i<prev.length;i+=2){
-        const id=`${reg[0].toLowerCase()}${r}_${Math.floor(i/2)}`;
-        const sv=S.games[id]||{};
-        const a=winner(prev[i]), b=winner(prev[i+1]);
-        G[id]={id, round:r, region:reg, side, idx:Math.floor(i/2),
-          t1:a.t, s1:a.s, t2:b.t, s2:b.s,
-          w:sv.w||'', cov:sv.cov!==undefined?sv.cov:null, sl:sv.sl||''};
+        const id=`${reg[0].toLowerCase()}${r}_${Math.floor(i/2)}`, sv=S.games[id]||{};
+        const a=adv(prev[i]), b=adv(prev[i+1]);
+        G[id]={id,round:r,region:reg,side,idx:Math.floor(i/2),t1:a.t,s1:a.s,t2:b.t,s2:b.s,w:sv.w||'',cov:sv.cov!==undefined?sv.cov:null,sl:sv.sl||''};
       }
     });
   }
-  // Final Four
-  const sc=regionChamp('South',G), ec=regionChamp('East',G);
-  const wc=regionChamp('West',G),  mc=regionChamp('Midwest',G);
-  G['ff0']={id:'ff0',round:3,region:'Final Four',side:'FF',idx:0, t1:sc.t,s1:sc.s,t2:ec.t,s2:ec.s, ...gameFields('ff0')};
-  G['ff1']={id:'ff1',round:3,region:'Final Four',side:'FF',idx:1, t1:wc.t,s1:wc.s,t2:mc.t,s2:mc.s, ...gameFields('ff1')};
-  // Championship
-  const ffa=winner(G['ff0']), ffb=winner(G['ff1']);
-  G['ch']={id:'ch',round:4,region:'Championship',side:'CH',idx:0, t1:ffa.t,s1:ffa.s,t2:ffb.t,s2:ffb.s, ...gameFields('ch')};
+  const sc=regChamp('South',G),ec=regChamp('East',G),wc=regChamp('West',G),mc=regChamp('Midwest',G);
+  const gf=id=>{const sv=S.games[id]||{};return{w:sv.w||'',cov:sv.cov!==undefined?sv.cov:null,sl:sv.sl||''};};
+  G['ff0']={id:'ff0',round:3,region:'Final Four',side:'FF',idx:0,t1:sc.t,s1:sc.s,t2:ec.t,s2:ec.s,...gf('ff0')};
+  G['ff1']={id:'ff1',round:3,region:'Final Four',side:'FF',idx:1,t1:wc.t,s1:wc.s,t2:mc.t,s2:mc.s,...gf('ff1')};
+  const fa=adv(G['ff0']),fb=adv(G['ff1']);
+  G['ch']={id:'ch',round:4,region:'Championship',side:'CH',idx:0,t1:fa.t,s1:fa.s,t2:fb.t,s2:fb.s,...gf('ch')};
   return G;
 }
+function adv(g){ if(!g||!g.w) return {t:'TBD',s:'?'}; return {t:g.w,s:g.w===g.t1?g.s1:g.s2}; }
+function regChamp(reg,G){ const g=Object.values(G).find(g=>g.region===reg&&g.round===2); return adv(g); }
+function isElim(team,G){ if(!team||team==='TBD') return false; return Object.values(G).some(g=>g.w&&g.w!==team&&(g.t1===team||g.t2===team)); }
 
-function gameFields(id){ const sv=S.games[id]||{}; return {w:sv.w||'',cov:sv.cov!==undefined?sv.cov:null,sl:sv.sl||''}; }
-function winner(g){ if(!g||!g.w) return {t:'TBD',s:'?'}; return {t:g.w, s:g.w===g.t1?g.s1:g.s2}; }
-function regionChamp(reg,G){
-  const e8=Object.values(G).find(g=>g.region===reg&&g.round===2);
-  return winner(e8);
-}
-function isElim(team,G){
-  if(!team||team==='TBD') return false;
-  return Object.values(G).some(g=>g.w&&g.w!==team&&(g.t1===team||g.t2===team));
+function ownerOf(team){
+  if(!team||team==='TBD') return null;
+  if(S.takeovers[team]) return S.takeovers[team];
+  const i=S.teams.findIndex(t=>t&&(t.l===team||t.r===team));
+  return i>=0?S.names[i]:null;
 }
 function ownerTag(team){
   if(!team||team==='TBD') return '—';
-  const i = S.teams.findIndex(t=>t&&(t.l===team||t.r===team));
-  const original = i>=0 ? S.names[i] : null;
+  const i=S.teams.findIndex(t=>t&&(t.l===team||t.r===team));
+  const original=i>=0?S.names[i]:null;
   if(!original) return '—';
-  const takenOver = !!S.takeovers[team];
-  const current = takenOver ? S.takeovers[team] : original;
-  if(takenOver){
-    return `<span style="text-decoration:line-through;color:var(--mut);font-size:.65rem">${original}</span>&nbsp;<span style="color:var(--acc);font-weight:700;font-size:.72rem">⟳ ${current}</span>`;
+  if(S.takeovers[team]){
+    return `<span style="text-decoration:line-through;color:var(--mut);font-size:.65rem">${original}</span>&nbsp;<span style="color:var(--acc);font-weight:700;font-size:.72rem">⟳ ${S.takeovers[team]}</span>`;
   }
   return original;
 }
-function hasTO(team){
-  return !!(team && S.takeovers[team]);
-}
+function hasTO(team){ return !!(team&&S.takeovers[team]); }
 function currentOwner(team){
   if(!team||team==='TBD') return '';
   if(S.takeovers[team]) return S.takeovers[team];
@@ -578,25 +516,32 @@ function currentOwner(team){
 }
 
 function pickWinner(id,team){
-  const G=buildGames(), g=G[id];
+  const G=buildGames(),g=G[id];
   if(!g||g.t1==='TBD'||g.t2==='TBD') return;
   if(g.w&&g.cov!==null) return;
-  S.games[id]={...(S.games[id]||{}), w:team, cov:null};
+  S.games[id]={...(S.games[id]||{}),w:team,cov:null};
   save(); renderBracket(); renderStandings();
 }
-function setSpread(id,winner,covered){
-  S.games[id]={...(S.games[id]||{}), w:winner, cov:covered};
+
+function setSpread(id,win,covered){
+  if(!S.games[id]) S.games[id]={};
+  S.games[id].w=win;
+  S.games[id].cov=covered;
   if(!covered){
-    const G=buildGames(), g=G[id];
-    const loser=winner===g.t1?g.t2:g.t1;
-    const lo=ownerOf(loser);
-    if(lo) S.takeovers[winner]=lo;
+    const G=buildGames(),g=G[id];
+    if(g){
+      const loser=win===g.t1?g.t2:g.t1;
+      const lo=ownerOf(loser);
+      if(lo) S.takeovers[win]=lo;
+    }
   } else {
-    delete S.takeovers[winner];
+    delete S.takeovers[win];
   }
   save(); renderBracket(); renderStandings();
 }
-function setSpreadLine(id,val){ S.games[id]={...(S.games[id]||{}), sl:val}; save(); }
+
+function setSpreadLine(id,val){ S.games[id]={...(S.games[id]||{}),sl:val}; save(); }
+
 function editGame(id){
   const w=S.games[id]&&S.games[id].w;
   if(w) delete S.takeovers[w];
@@ -604,7 +549,6 @@ function editGame(id){
   save(); renderBracket(); renderStandings();
 }
 
-// ── RENDER ROSTER ──────────────────────────────────────────
 function renderRoster(){
   const grid=document.getElementById('rosterGrid'); grid.innerHTML='';
   S.names.forEach((name,i)=>{
@@ -624,9 +568,9 @@ function renderRoster(){
         <select class="tsel" data-i="${i}" data-side="r"><option value="">— Unassigned —</option>${rOpts}</select>
       </div>`;
     card.querySelector('.nameinput').addEventListener('change',function(){
-      const ni=+this.dataset.ni, nv=this.value.trim()||S.names[ni];
-      const old=S.names[ni]; S.names[ni]=nv;
-      Object.keys(S.takeovers).forEach(t=>{ if(S.takeovers[t]===old) S.takeovers[t]=nv; });
+      const ni=+this.dataset.ni,nv=this.value.trim()||S.names[ni],old=S.names[ni];
+      S.names[ni]=nv;
+      Object.keys(S.takeovers).forEach(t=>{if(S.takeovers[t]===old)S.takeovers[t]=nv;});
       save(); renderStandings();
     });
     card.querySelectorAll('.tsel').forEach(sel=>{
@@ -640,75 +584,67 @@ function renderRoster(){
   });
 }
 
-// ── RENDER BRACKET (LIST) ──────────────────────────────────
 function renderBracket(){
-  // Round tabs
   const tc=document.getElementById('roundTabs'); tc.innerHTML='';
   ROUND_LABELS.forEach((n,i)=>{
     const d=document.createElement('div');
     d.className='rtab'+(i===curRound?' active':'');
     d.textContent=n;
-    d.addEventListener('click',()=>{ curRound=i; renderBracket(); });
+    d.addEventListener('click',()=>{curRound=i;renderBracket();});
     tc.appendChild(d);
   });
-  if(bView==='visual'){ renderVisual(); return; }
-
+  if(bView==='visual'){renderVisual();return;}
   const G=buildGames();
   const games=Object.values(G).filter(g=>g.round===curRound).sort((a,b)=>a.idx-b.idx);
   const list=document.getElementById('gameList'); list.innerHTML='';
-  if(!games.length){ list.innerHTML='<div style="color:var(--mut)">No games this round.</div>'; return; }
-
+  if(!games.length){list.innerHTML='<div style="color:var(--mut)">No games this round.</div>';return;}
   games.forEach(g=>{
+    const gameId=g.id;
     const locked=g.t1==='TBD'||g.t2==='TBD';
     const card=document.createElement('div'); card.className='gcard';
-
-    // Header
     const hdr=document.createElement('div'); hdr.className='ghdr';
     hdr.innerHTML=`<span class="gmatch">${g.region}</span><span class="greg">${locked?'TBD':`${g.s1} vs ${g.s2}`}</span>`;
     card.appendChild(hdr);
-
     if(locked){
       const lk=document.createElement('div'); lk.className='glocked'; lk.textContent='⏳ Awaiting previous round';
       card.appendChild(lk);
     } else {
-      // Team rows
-      [[g.t1,g.s1],[g.t2,g.s2]].forEach(([team,seed])=>{
+      [['t1','s1'],['t2','s2']].forEach(([tk,sk])=>{
+        const team=g[tk],seed=g[sk];
         const row=document.createElement('div');
         row.className='trow'+(g.w===team?' win':g.w?' lose':'');
         row.innerHTML=`<div class="sbadge">${seed}</div><div class="tname">${team}${scoreTag(team)}</div><div class="otag" style="max-width:140px;text-align:right;">${ownerTag(team)}</div>`;
-        row.addEventListener('click',()=>pickWinner(g.id,team));
+        row.addEventListener('click',()=>{if(!g.w||g.cov===null) pickWinner(gameId,team);});
         card.appendChild(row);
       });
-
-      // Spread section
       const sr=document.createElement('div'); sr.className='srow';
       const sll=document.createElement('div'); sll.className='slbl2';
       sll.innerHTML='Spread line <span style="font-size:.7rem;color:var(--mut)">(e.g. Duke -5.5)</span>';
       sr.appendChild(sll);
       const si=document.createElement('input'); si.className='sinput';
       si.placeholder='Enter spread line'; si.value=g.sl||'';
-      si.addEventListener('change',()=>setSpreadLine(g.id,si.value.trim()));
+      si.addEventListener('change',()=>setSpreadLine(gameId,si.value.trim()));
       sr.appendChild(si);
-
       if(g.w&&g.cov===null){
+        const winner=g.w;
         const ql=document.createElement('div'); ql.className='slbl2';
-        ql.innerHTML=`Did <strong>${g.w}</strong> cover?`;
+        ql.innerHTML=`Did <strong>${winner}</strong> cover?`;
         sr.appendChild(ql);
         const sb=document.createElement('div'); sb.className='sbtns';
-        const by=document.createElement('button'); by.className='sbtn'; by.textContent='✅ Yes, covered';
-        by.addEventListener('click',()=>setSpread(g.id,g.w,true));
-        const bn=document.createElement('button'); bn.className='sbtn'; bn.textContent="❌ No, didn't cover";
-        bn.addEventListener('click',()=>setSpread(g.id,g.w,false));
-        sb.appendChild(by); sb.appendChild(bn); sr.appendChild(sb);
+        const bY=document.createElement('button'); bY.className='sbtn'; bY.type='button'; bY.textContent='✅ Covered';
+        bY.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();setSpread(gameId,winner,true);});
+        const bN=document.createElement('button'); bN.className='sbtn'; bN.type='button'; bN.textContent="❌ Didn't cover";
+        bN.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();setSpread(gameId,winner,false);});
+        sb.appendChild(bY); sb.appendChild(bN); sr.appendChild(sb);
       } else if(g.w){
         const to=S.takeovers[g.w];
         const info=document.createElement('div');
         info.style.cssText='display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:.78rem;color:var(--mut);margin-top:4px;';
         if(g.sl) info.innerHTML+=`<span style="background:var(--sur2);padding:2px 8px;border-radius:6px">📊 ${g.sl}</span>`;
-        info.innerHTML+=`<span>${g.cov?'✅ Covered':`🔄 No cover${to?' — '+to+' took over':''}`}</span>`;
-        const eb=document.createElement('button'); eb.className='sbtn';
+        info.innerHTML+=`<span>${g.cov?'✅ Covered':`🔄 Didn't cover${to?' — '+to+' took over':''}`}</span>`;
+        const eb=document.createElement('button'); eb.className='sbtn'; eb.type='button';
         eb.style.cssText='flex:0;padding:3px 10px;margin-left:auto;'; eb.textContent='Edit';
-        eb.addEventListener('click',()=>editGame(g.id));
+        eb.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();editGame(gameId);});
         info.appendChild(eb); sr.appendChild(info);
       }
       card.appendChild(sr);
@@ -717,9 +653,8 @@ function renderBracket(){
   });
 }
 
-// ── RENDER VISUAL BRACKET ─────────────────────────────────
 function renderVisual(){
-  const G=buildGames(), c=document.getElementById('bviz'); c.innerHTML='';
+  const G=buildGames(),c=document.getElementById('bviz'); c.innerHTML='';
   const wrap=document.createElement('div'); wrap.className='bwrap'; wrap.style.alignItems='center';
   wrap.appendChild(buildSideVis(['South','East'],G,'L'));
   wrap.appendChild(buildCenterVis(G));
@@ -737,21 +672,11 @@ function buildSideVis(regions,G,side){
     gs.forEach(g=>{
       const gw=document.createElement('div'); gw.style.marginBottom=(r===0?3:sp[r])+'px';
       [[g.t1,g.s1],[g.t2,g.s2]].forEach(([team,seed])=>{
-        const isTBD=team==='TBD', isW=g.w===team, isL=g.w&&!isW;
+        const isTBD=team==='TBD',isW=g.w===team,isL=g.w&&!isW,isTaken=hasTO(team);
         const el=document.createElement('div');
         el.className='bt'+(isTBD?' tbd':'')+(isW?' win':'')+(isL?' lose':'');
-        const isTaken = hasTO(team);
-        el.innerHTML=`
-          <div style="display:flex;align-items:center;gap:4px;">
-            <span class="bseed">${isTBD?'?':seed}</span>
-            <span class="bname">${tr(team,15)}</span>
-            ${isW&&g.cov===null?'<span class="spill">?</span>':''}
-          </div>
-          <div style="display:flex;align-items:center;gap:4px;">
-            <span class="bown">${isTBD?'':currentOwner(team)}</span>
-            ${isTaken?'<span class="spill" style="background:rgba(249,115,22,.25);color:var(--acc);">TO</span>':''}
-          </div>`;
-        if(!isTBD&&!isL) el.addEventListener('click',()=>{ if(!g.w) pickWinner(g.id,team); else if(isW&&g.cov===null){setBView('list');curRound=g.round;renderBracket();} });
+        el.innerHTML=`<div style="display:flex;align-items:center;gap:4px;"><span class="bseed">${isTBD?'?':seed}</span><span class="bname">${tr(team,15)}</span>${isW&&g.cov===null?'<span class="spill">?</span>':''}</div><div style="display:flex;align-items:center;gap:4px;"><span class="bown">${isTBD?'':currentOwner(team)}</span>${isTaken?'<span class="spill" style="background:rgba(249,115,22,.25);color:var(--acc);">TO</span>':''}</div>`;
+        if(!isTBD&&!isL) el.addEventListener('click',()=>{if(!g.w)pickWinner(g.id,team);else if(isW&&g.cov===null){setBView('list');curRound=g.round;renderBracket();}});
         gw.appendChild(el);
       });
       col.appendChild(gw);
@@ -762,27 +687,17 @@ function buildSideVis(regions,G,side){
 }
 function buildCenterVis(G){
   const c=document.createElement('div'); c.style.cssText='display:flex;flex-direction:column;align-items:center;min-width:168px;padding:0 4px;';
-  [['FF','ff0','South vs East'],['FF','ff1','West vs Midwest'],['CH','ch','🏆 Championship']].forEach(([type,id,label],gi)=>{
+  [['ff0','South vs East'],['ff1','West vs Midwest'],['ch','🏆 Championship']].forEach(([id,label],gi)=>{
     const g=G[id];
     const dl=document.createElement('div'); dl.style.cssText='font-size:.65rem;color:var(--gold);text-align:center;margin:'+(gi===0?'0 0 4px':'14px 0 4px')+';font-weight:700;';
     dl.textContent=label; c.appendChild(dl);
     [[g.t1,g.s1],[g.t2,g.s2]].forEach(([team,seed])=>{
-      const isTBD=team==='TBD', isW=g.w===team, isL=g.w&&!isW;
+      const isTBD=team==='TBD',isW=g.w===team,isL=g.w&&!isW,isTaken=hasTO(team);
       const el=document.createElement('div');
       el.className='bt'+(isTBD?' tbd':'')+(isW?' win':'')+(isL?' lose':'');
       el.style.cssText='min-width:155px;margin-bottom:3px;';
-      const isTaken2 = hasTO(team);
-      el.innerHTML=`
-        <div style="display:flex;align-items:center;gap:4px;">
-          <span class="bseed">${isTBD?'?':seed}</span>
-          <span class="bname">${tr(team,15)}</span>
-          ${isW&&g.cov===null?'<span class="spill">?</span>':''}
-        </div>
-        <div style="display:flex;align-items:center;gap:4px;">
-          <span class="bown">${isTBD?'':currentOwner(team)}</span>
-          ${isTaken2?'<span class="spill" style="background:rgba(249,115,22,.25);color:var(--acc);">TO</span>':''}
-        </div>`;
-      if(!isTBD&&!isL) el.addEventListener('click',()=>{ if(!g.w) pickWinner(id,team); else if(isW&&g.cov===null){setBView('list');curRound=g.round;renderBracket();} });
+      el.innerHTML=`<div style="display:flex;align-items:center;gap:4px;"><span class="bseed">${isTBD?'?':seed}</span><span class="bname">${tr(team,15)}</span>${isW&&g.cov===null?'<span class="spill">?</span>':''}</div><div style="display:flex;align-items:center;gap:4px;"><span class="bown">${isTBD?'':currentOwner(team)}</span>${isTaken?'<span class="spill" style="background:rgba(249,115,22,.25);color:var(--acc);">TO</span>':''}</div>`;
+      if(!isTBD&&!isL) el.addEventListener('click',()=>{if(!g.w)pickWinner(id,team);else if(isW&&g.cov===null){setBView('list');curRound=g.round;renderBracket();}});
       c.appendChild(el);
     });
   });
@@ -790,75 +705,52 @@ function buildCenterVis(G){
 }
 function tr(s,n){ return s&&s.length>n?s.slice(0,n)+'…':s||''; }
 
-// ── RENDER ALIVE CARD ──────────────────────────────────────
 function renderAlive(){
-  const G = buildGames();
-  const grid = document.getElementById('aliveGrid');
-  if(!grid) return;
-  grid.innerHTML = '';
-  let aliveCount = 0;
-
+  const G=buildGames();
+  const grid=document.getElementById('aliveGrid'); if(!grid) return;
+  grid.innerHTML=''; let aliveCount=0;
   S.names.forEach((name,i)=>{
-    const t = S.teams[i]||{l:'',r:''};
-    const myTeams = [t.l,t.r].filter(Boolean);
-
-    // Determine alive teams & takeovers
-    let alive = [], gained = [], lost = [];
+    const t=S.teams[i]||{l:'',r:''};
+    const myTeams=[t.l,t.r].filter(Boolean);
+    let alive=[],gained=[],lost=[];
     myTeams.forEach(tm=>{
-      const ov = S.takeovers[tm];
-      if(ov && ov!==name) lost.push(tm);
+      const ov=S.takeovers[tm];
+      if(ov&&ov!==name) lost.push(tm);
       else if(!isElim(tm,G)) alive.push(tm);
     });
-    Object.entries(S.takeovers).forEach(([tm,o])=>{
-      if(o===name && !isElim(tm,G)) gained.push(tm);
-    });
-
-    const totalAlive = alive.length + gained.length;
-    const isOut = totalAlive === 0;
+    Object.entries(S.takeovers).forEach(([tm,o])=>{if(o===name&&!isElim(tm,G))gained.push(tm);});
+    const totalAlive=alive.length+gained.length, isOut=totalAlive===0;
     if(!isOut) aliveCount++;
-
-    const card = document.createElement('div');
-    card.style.cssText = `background:var(--sur2);border:1px solid ${isOut?'var(--bdr)':'rgba(34,197,94,.25)'};border-radius:10px;padding:10px 12px;opacity:${isOut?'.45':'1'};`;
-
-    // Status dot + name
-    const header = document.createElement('div');
-    header.style.cssText = 'display:flex;align-items:center;gap:6px;margin-bottom:6px;';
-    header.innerHTML = `<span style="width:8px;height:8px;border-radius:50%;background:${isOut?'var(--red)':'var(--grn)'};flex-shrink:0;display:inline-block;"></span><span style="font-weight:700;font-size:.82rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${name}</span>`;
+    const card=document.createElement('div');
+    card.style.cssText=`background:var(--sur2);border:1px solid ${isOut?'var(--bdr)':'rgba(34,197,94,.25)'};border-radius:10px;padding:10px 12px;opacity:${isOut?'.45':'1'};`;
+    const header=document.createElement('div'); header.style.cssText='display:flex;align-items:center;gap:6px;margin-bottom:6px;';
+    header.innerHTML=`<span style="width:8px;height:8px;border-radius:50%;background:${isOut?'var(--red)':'var(--grn)'};flex-shrink:0;display:inline-block;"></span><span style="font-weight:700;font-size:.82rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${name}</span>`;
     card.appendChild(header);
-
-    // Teams
-    const allAlive = [...alive, ...gained];
+    const allAlive=[...alive,...gained];
     if(allAlive.length){
       allAlive.forEach(tm=>{
-        const isTaken = gained.includes(tm);
-        const row = document.createElement('div');
-        row.style.cssText = 'display:flex;align-items:center;gap:4px;font-size:.72rem;color:var(--mut);margin-bottom:2px;';
-        row.innerHTML = `<span style="color:var(--grn);">▸</span><span style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${tm}</span>${isTaken?'<span style="font-size:.6rem;padding:1px 4px;border-radius:3px;background:rgba(249,115,22,.2);color:var(--acc);">TO</span>':''}`;
+        const isTaken=gained.includes(tm);
+        const row=document.createElement('div');
+        row.style.cssText='display:flex;align-items:center;gap:4px;font-size:.72rem;color:var(--mut);margin-bottom:2px;';
+        row.innerHTML=`<span style="color:var(--grn);">▸</span><span style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${tm}</span>${isTaken?'<span style="font-size:.6rem;padding:1px 4px;border-radius:3px;background:rgba(249,115,22,.2);color:var(--acc);">TO</span>':''}`;
         card.appendChild(row);
       });
     } else {
-      const out = document.createElement('div');
-      out.style.cssText = 'font-size:.72rem;color:var(--red);';
-      out.textContent = 'Eliminated';
+      const out=document.createElement('div'); out.style.cssText='font-size:.72rem;color:var(--red);'; out.textContent='Eliminated';
       card.appendChild(out);
     }
     grid.appendChild(card);
   });
-
-  // Update summary count
-  const existing = document.getElementById('aliveSummary');
-  if(existing) existing.remove();
-  const summary = document.createElement('div');
-  summary.id = 'aliveSummary';
-  summary.style.cssText = 'font-size:.82rem;color:var(--mut);margin-bottom:10px;';
-  summary.innerHTML = `<span style="font-size:1.4rem;font-weight:800;color:var(--grn);">${aliveCount}</span> of ${S.names.length} players still alive`;
-  grid.parentElement.insertBefore(summary, grid);
+  const existing=document.getElementById('aliveSummary'); if(existing) existing.remove();
+  const summary=document.createElement('div'); summary.id='aliveSummary';
+  summary.style.cssText='font-size:.82rem;color:var(--mut);margin-bottom:10px;';
+  summary.innerHTML=`<span style="font-size:1.4rem;font-weight:800;color:var(--grn);">${aliveCount}</span> of ${S.names.length} players still alive`;
+  grid.parentElement.insertBefore(summary,grid);
 }
-
 
 function renderStandings(){
   renderAlive();
-  const G=buildGames(), tbody=document.getElementById('standBody'); tbody.innerHTML='';
+  const G=buildGames(),tbody=document.getElementById('standBody'); tbody.innerHTML='';
   const rows=S.names.map((name,i)=>{
     const t=S.teams[i]||{l:'',r:''};
     const myTeams=[t.l,t.r].filter(Boolean);
@@ -869,17 +761,14 @@ function renderStandings(){
       else if(isElim(tm,G)) elim.push(tm);
       else if(tm) alive.push(tm);
     });
-    Object.entries(S.takeovers).forEach(([tm,o])=>{
-      if(o===name){ gained.push(tm); if(!isElim(tm,G)) alive.push(tm); }
-    });
-    return {name,alive,elim,gained,lost,tko:gained.length-lost.length};
+    Object.entries(S.takeovers).forEach(([tm,o])=>{if(o===name){gained.push(tm);if(!isElim(tm,G))alive.push(tm);}});
+    return{name,alive,elim,gained,lost,tko:gained.length-lost.length};
   });
   const tot=rows.reduce((s,r)=>s+r.alive.length,0);
-  rows.forEach(r=>{ r.pct=tot>0&&r.alive.length>0?(r.alive.length/tot*100).toFixed(1):'0.0'; r.est=tot>0?Math.round(r.alive.length/tot*750):0; });
+  rows.forEach(r=>{r.pct=tot>0&&r.alive.length>0?(r.alive.length/tot*100).toFixed(1):'0.0';r.est=tot>0?Math.round(r.alive.length/tot*750):0;});
   rows.sort((a,b)=>b.alive.length-a.alive.length||b.gained.length-a.gained.length);
   rows.forEach((r,rank)=>{
-    const rc=['r1','r2','r3','ro'][Math.min(rank,3)];
-    const alive=r.alive.length>0;
+    const rc=['r1','r2','r3','ro'][Math.min(rank,3)],alive=r.alive.length>0;
     const tr2=document.createElement('tr');
     tr2.innerHTML=`<td><span class="rbadge ${rc}">${rank+1}</span></td>
     <td><span class="adot ${alive?'da':'dd'}"></span>${r.name}</td>
@@ -892,13 +781,11 @@ function renderStandings(){
   });
 }
 
-// ── UI HELPERS ─────────────────────────────────────────────
 function setBView(v){
   bView=v;
   document.getElementById('listView').style.display=v==='list'?'':'none';
   document.getElementById('visualView').style.display=v==='visual'?'':'none';
-  document.getElementById('btnRefreshScores').addEventListener('click', fetchScores);
-document.getElementById('btnList').classList.toggle('active',v==='list');
+  document.getElementById('btnList').classList.toggle('active',v==='list');
   document.getElementById('btnVisual').classList.toggle('active',v==='visual');
   if(v==='visual') renderVisual();
 }
@@ -912,11 +799,9 @@ function showPage(name){
   else if(name==='standings') renderStandings();
 }
 
-// ── EVENT LISTENERS ────────────────────────────────────────
 document.getElementById('btnTheme').addEventListener('click',()=>{
-  const isMsu = document.body.classList.toggle('msu');
-  document.getElementById('btnTheme').textContent = isMsu ? '🌑 Dark Mode' : '🌿 MSU Mode';
-  document.getElementById('msuBanner').style.display = isMsu ? 'block' : 'none';
+  const isMsu=document.body.classList.toggle('msu');
+  document.getElementById('btnTheme').textContent=isMsu?'🌑 Dark Mode':'🌿 MSU Mode';
 });
 document.getElementById('t-overview').addEventListener('click',()=>showPage('overview'));
 document.getElementById('t-roster').addEventListener('click',()=>showPage('roster'));
@@ -925,10 +810,10 @@ document.getElementById('t-standings').addEventListener('click',()=>showPage('st
 document.getElementById('t-rules').addEventListener('click',()=>showPage('rules'));
 document.getElementById('btnList').addEventListener('click',()=>setBView('list'));
 document.getElementById('btnVisual').addEventListener('click',()=>setBView('visual'));
+document.getElementById('btnRefreshScores').addEventListener('click',fetchScores);
 document.getElementById('btnHatDraw').addEventListener('click',()=>{
   if(!confirm('Restore all team assignments to the original hat draw?')) return;
-  S.teams = freshTeams();
-  save(); renderRoster(); renderStandings();
+  S.teams=freshTeams(); save(); renderRoster(); renderStandings();
 });
 document.getElementById('btnReset').addEventListener('click',()=>document.getElementById('resetOverlay').classList.add('open'));
 document.getElementById('btnCancelReset').addEventListener('click',()=>document.getElementById('resetOverlay').classList.remove('open'));
@@ -938,58 +823,45 @@ document.getElementById('btnConfirmReset').addEventListener('click',async()=>{
   save(); renderRoster(); renderBracket(); renderStandings();
 });
 document.getElementById('btnOffline').addEventListener('click',()=>{
-  online=false;
-  lsLoad();
+  online=false; lsLoad();
   document.getElementById('loadScreen').style.display='none';
   document.getElementById('offBadge').style.display='inline';
   document.getElementById('syncChip').textContent='🔴 Offline';
   renderRoster(); renderBracket(); renderStandings();
 });
 
-// ── INIT ───────────────────────────────────────────────────
 async function init(){
   initState();
-
-  const offlineTimer = setTimeout(()=>{
+  const offlineTimer=setTimeout(()=>{
     document.getElementById('loadMsg').textContent='Taking longer than usual...';
     document.getElementById('loadBar').style.width='50%';
     document.getElementById('btnOffline').style.display='inline-block';
-  }, 4000);
-
+  },4000);
   document.getElementById('loadMsg').textContent='Connecting to Firebase...';
   document.getElementById('loadBar').style.width='20%';
-
   try{
-    const r = await Promise.race([
-      fetch(FB+'/state.json'),
-      new Promise((_,rej)=>setTimeout(()=>rej(new Error('timeout')),6000))
-    ]);
+    const r=await Promise.race([fetch(FB+'/state.json'),new Promise((_,rej)=>setTimeout(()=>rej(new Error('timeout')),6000))]);
     if(!r.ok) throw new Error();
-    const d = await r.json();
-    online = true;
+    const d=await r.json();
+    online=true;
     document.getElementById('loadMsg').textContent='Loading data...';
     document.getElementById('loadBar').style.width='70%';
-    if(d && typeof d==='object'){
-      S.names     = Array.isArray(d.names)      ? d.names      : [...DEFAULT_NAMES];
-      S.teams     = Array.isArray(d.teams)       ? d.teams      : freshTeams();
-      S.games     = (d.games&&typeof d.games==='object')     ? d.games     : {};
-      S.takeovers = (d.takeovers&&typeof d.takeovers==='object') ? d.takeovers : {};
+    if(d&&typeof d==='object'){
+      S.names     = Array.isArray(d.names)                          ? d.names     : [...DEFAULT_NAMES];
+      S.teams     = Array.isArray(d.teams)                          ? d.teams     : freshTeams();
+      S.games     = (d.games&&typeof d.games==='object')            ? d.games     : {};
+      S.takeovers = (d.takeovers&&typeof d.takeovers==='object')    ? d.takeovers : {};
     }
   } catch(e){
-    online = false;
-    lsLoad();
+    online=false; lsLoad();
     document.getElementById('offBadge').style.display='inline';
     document.getElementById('syncChip').textContent='🔴 Offline';
   }
-
   clearTimeout(offlineTimer);
   document.getElementById('loadBar').style.width='100%';
   document.getElementById('loadMsg').textContent='Ready!';
-
   renderRoster(); renderBracket(); renderStandings();
-
-  setTimeout(()=>{ document.getElementById('loadScreen').style.display='none'; }, 400);
-
+  setTimeout(()=>{document.getElementById('loadScreen').style.display='none';},400);
   if(online){
     document.getElementById('liveBadge').style.display='inline';
     document.getElementById('syncChip').textContent='🟢 Live Sync';
