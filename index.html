@@ -693,7 +693,7 @@ function renderBracket(){
         const sb=document.createElement('div'); sb.className='sbtns';
         const by=document.createElement('button'); by.className='sbtn'; by.textContent='✅ Yes, covered';
         by.addEventListener('click',()=>setSpread(g.id,g.w,true));
-        const bn=document.createElement('button'); bn.className='sbtn'; bn.textContent="❌ No, didn't cover";
+        const bn=document.createElement('button'); bn.className='sbtn';         bn.textContent="❌ Didn't cover";
         bn.addEventListener('click',()=>setSpread(g.id,g.w,false));
         sb.appendChild(by); sb.appendChild(bn); sr.appendChild(sb);
       } else if(g.w){
