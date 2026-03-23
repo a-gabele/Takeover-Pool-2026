@@ -6,43 +6,73 @@
 <title>Takeover Pool 2026</title>
 <style>
 :root{--bg:#0f1117;--sur:#1a1d27;--sur2:#22263a;--acc:#f97316;--acc2:#3b82f6;--gold:#fbbf24;--grn:#22c55e;--red:#ef4444;--txt:#f1f5f9;--mut:#94a3b8;--bdr:#2e3347;}
-body.msu{--bg:#f0f0f0;--sur:#ffffff;--sur2:#e8e8e8;--acc:#18453b;--acc2:#18453b;--gold:#18453b;--grn:#18453b;--red:#c0392b;--txt:#1a1a1a;--mut:#555;--bdr:#ccc;}
-body.msu nav{background:#18453b;border-bottom:2px solid #ffffff22;}
-body.msu .logo{color:#fff;}
-body.msu .tab{color:rgba(255,255,255,.6);}
+body.msu{--bg:#0a1a0f;--sur:#0f2614;--sur2:#1a3a1f;--acc:#7BBD00;--acc2:#7BBD00;--gold:#fbbf24;--grn:#7BBD00;--red:#ef4444;--txt:#ffffff;--mut:#9dbf9e;--bdr:#2a5a2f;}
+body.msu nav{background:#060f08;border-bottom:2px solid #7BBD00;}
+body.msu .logo{color:#7BBD00;}
+body.msu .tab{color:rgba(255,255,255,.5);}
 body.msu .tab:hover{color:#fff;}
-body.msu .tab.active{color:#fff;border-bottom-color:#fff;}
-body.msu .navr .btn{color:#fff;border-color:rgba(255,255,255,.3);}
-body.msu .navr .btn:hover{border-color:#fff;}
-body.msu #liveBadge,body.msu #offBadge{color:#fff;}
-body.msu .potamt{color:#18453b;}
-body.msu .amt{color:#18453b;}
-body.msu .pamt{color:#18453b;}
-body.msu .pfill{background:#18453b;}
-body.msu .topill{background:rgba(24,69,59,.15);color:#18453b;}
-body.msu .adot.da{background:#18453b;}
-body.msu #sbar{background:rgba(24,69,59,.1);border-color:rgba(24,69,59,.3);color:#18453b;}
-body.msu #loadScreen{background:#18453b;}
-body.msu #loadScreen div{color:#fff;}
-body.msu #loadBar{background:#fff;}
-body.msu::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.08;background-image:url("https://a-gabele.github.io/takeover-pool-2026/spartan.png");background-size:160px 160px;background-repeat:repeat;}
-body.msu .page,body.msu nav{position:relative;z-index:1;}
-.theme-toggle{padding:5px 12px;border-radius:20px;border:1px solid rgba(255,255,255,.3);background:transparent;color:#fff;font-size:.75rem;font-weight:600;cursor:pointer;transition:all .2s;white-space:nowrap;}
-body:not(.msu) .theme-toggle{border-color:var(--bdr);color:var(--mut);}
-body:not(.msu) .theme-toggle:hover{border-color:var(--acc);color:var(--acc);}
+body.msu .tab.active{color:#7BBD00;border-bottom-color:#7BBD00;}
+body.msu .navr .btn{color:rgba(255,255,255,.6);border-color:#2a5a2f;}
+body.msu .navr .btn:hover{border-color:#7BBD00;color:#7BBD00;}
+body.msu .theme-toggle{border-color:#2a5a2f;color:rgba(255,255,255,.6);}
+body.msu .theme-toggle:hover{border-color:#7BBD00;color:#7BBD00;}
+body.msu #liveBadge{color:#7BBD00;}body.msu #offBadge{color:#ef4444;}
+body.msu .sdot{background:#7BBD00;}
+body.msu .card{background:#0f2614;border-color:#2a5a2f;}
+body.msu .pc{background:#1a3a1f;border-color:#2a5a2f;}
+body.msu .pc .amt{color:#7BBD00;}body.msu .pc .lbl{color:#9dbf9e;}
+body.msu .potbar{background:#1a3a1f;}body.msu .potamt{color:#7BBD00;}body.msu .pamt{color:#7BBD00;}
+body.msu .pfill{background:linear-gradient(90deg,#18453b,#7BBD00);}
+body.msu .topill{background:rgba(123,189,0,.2);color:#7BBD00;}
+body.msu .adot.da{background:#7BBD00;}body.msu .adot.dd{background:#ef4444;}
+body.msu .rtab{border-color:#2a5a2f;color:#9dbf9e;}
+body.msu .rtab.active{background:#7BBD00;border-color:#7BBD00;color:#060f08;}
+body.msu .vtog{background:#1a3a1f;border-color:#2a5a2f;}
+body.msu .vtbtn{color:#9dbf9e;}body.msu .vtbtn.active{background:#7BBD00;color:#060f08;}
+body.msu .gcard{background:#0f2614;border-color:#2a5a2f;}
+body.msu .trow:hover{background:#1a3a1f;}
+body.msu .trow.win{background:rgba(123,189,0,.15);border-color:rgba(123,189,0,.4);}
+body.msu .sbadge{background:#1a3a1f;color:#9dbf9e;}body.msu .otag{background:#1a3a1f;color:#9dbf9e;}
+body.msu .sinput{background:#1a3a1f;border-color:#2a5a2f;color:#fff;}
+body.msu .sbtn{border-color:#2a5a2f;color:#9dbf9e;}body.msu .sbtn:hover{background:#1a3a1f;}
+body.msu .plycard{background:#0f2614;border-color:#2a5a2f;}
+body.msu .plynum{background:#7BBD00;color:#060f08;}body.msu .tslot{background:#1a3a1f;}
+body.msu .tsel{color:#fff;}body.msu .nameinput{color:#fff;}
+body.msu .sleft{background:rgba(123,189,0,.2);color:#7BBD00;}
+body.msu .sright{background:rgba(251,191,36,.15);color:#fbbf24;}
+body.msu .r1{background:#7BBD00;color:#060f08;}body.msu .r2{background:#18453b;color:#7BBD00;}
+body.msu .r3{background:#0B9A6D;color:#fff;}body.msu .ro{background:#1a3a1f;color:#9dbf9e;}
+body.msu .stable th{color:#9dbf9e;border-color:#2a5a2f;}body.msu .stable td{border-color:#2a5a2f;}
+body.msu .stable tr:hover td{background:#1a3a1f;}body.msu .pbar{background:#1a3a1f;}
+body.msu #sbar{background:rgba(123,189,0,.1);border-color:rgba(123,189,0,.3);color:#7BBD00;}
+body.msu .chip{background:#1a3a1f;color:#9dbf9e;}body.msu #syncChip{background:#1a3a1f;color:#9dbf9e;}
+body.msu .rsec h3{color:#7BBD00;}body.msu .rlist li::before{color:#7BBD00;}body.msu .rlist li{border-color:#2a5a2f;}
+body.msu .ptable th{background:#1a3a1f;color:#9dbf9e;}body.msu .ptable td{border-color:#2a5a2f;}
+body.msu .btnp{background:#7BBD00;color:#060f08;}body.msu .btns{background:#1a3a1f;border-color:#2a5a2f;color:#fff;}
+body.msu .btng{border-color:#2a5a2f;color:#9dbf9e;}body.msu .modal{background:#0f2614;border-color:#2a5a2f;}
+body.msu .glocked{background:#1a3a1f;color:#9dbf9e;}body.msu .ri{border-color:#2a5a2f;}
+body.msu #loadScreen{background:#060f08;}body.msu #loadBar{background:#7BBD00;}
+body.msu::before{display:none;}
+#izzoBg{display:none;position:fixed;inset:0;z-index:0;pointer-events:none;}
+#izzoBg img{width:100%;height:100%;object-fit:cover;object-position:center top;}
+#izzoBg::after{content:'';position:absolute;inset:0;background:rgba(6,15,8,.88);}
+body.msu #izzoBg{display:block;}
+body.msu nav,body.msu .page,body.msu .sbar{position:relative;z-index:1;}
+.theme-toggle{padding:5px 12px;border-radius:20px;border:1px solid var(--bdr);background:transparent;color:var(--mut);font-size:.75rem;font-weight:600;cursor:pointer;transition:all .2s;white-space:nowrap;}
+.theme-toggle:hover{border-color:var(--acc);color:var(--acc);}
+body.msu .theme-toggle{border-color:#2a5a2f;color:rgba(255,255,255,.6);}
+body.msu .theme-toggle:hover{border-color:#7BBD00;color:#7BBD00;}
 *{box-sizing:border-box;margin:0;padding:0;}
 body{background:var(--bg);color:var(--txt);font-family:'Segoe UI',sans-serif;min-height:100vh;}
 nav{background:var(--sur);border-bottom:1px solid var(--bdr);padding:0 16px;display:flex;align-items:center;flex-wrap:wrap;position:sticky;top:0;z-index:100;}
 .logo{font-weight:800;font-size:1rem;color:var(--acc);padding:14px 12px 14px 0;border-right:1px solid var(--bdr);margin-right:8px;white-space:nowrap;}
 .tab{padding:14px 12px;cursor:pointer;font-size:0.85rem;font-weight:600;color:var(--mut);border-bottom:3px solid transparent;user-select:none;white-space:nowrap;}
-.tab:hover{color:var(--txt);}
-.tab.active{color:var(--acc);border-bottom-color:var(--acc);}
+.tab:hover{color:var(--txt);}.tab.active{color:var(--acc);border-bottom-color:var(--acc);}
 .navr{margin-left:auto;padding:8px 0;display:flex;align-items:center;gap:10px;}
 .btn{padding:7px 14px;border-radius:8px;border:none;cursor:pointer;font-weight:600;font-size:0.8rem;}
 .btng{background:transparent;border:1px solid var(--bdr);color:var(--mut);}
 .btng:hover{border-color:var(--red);color:var(--red);}
-.btnp{background:var(--acc);color:#fff;}
-.btns{background:var(--sur2);border:1px solid var(--bdr);color:var(--txt);}
+.btnp{background:var(--acc);color:#fff;}.btns{background:var(--sur2);border:1px solid var(--bdr);color:var(--txt);}
 .page{display:none;padding:20px 16px;max-width:1200px;margin:0 auto;}
 .page.active{display:block;}
 h1{font-size:1.5rem;font-weight:800;margin-bottom:4px;}
@@ -85,12 +115,10 @@ h1{font-size:1.5rem;font-weight:800;margin-bottom:4px;}
 .trow.win{background:rgba(34,197,94,.12);border-color:rgba(34,197,94,.3);}
 .trow.lose{opacity:.5;}
 .sbadge{width:22px;height:22px;border-radius:5px;background:var(--sur2);color:var(--mut);font-size:.7rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.tname{flex:1;font-size:.88rem;font-weight:600;}
-.otag{font-size:.7rem;padding:2px 6px;border-radius:4px;background:var(--sur2);color:var(--mut);}
+.tname{flex:1;font-size:.88rem;font-weight:600;}.otag{font-size:.7rem;padding:2px 6px;border-radius:4px;background:var(--sur2);color:var(--mut);}
 .srow{margin-top:10px;padding-top:10px;border-top:1px solid var(--bdr);}
 .sinput{width:100%;background:var(--sur2);border:1px solid var(--bdr);border-radius:7px;padding:6px 10px;color:var(--txt);font-size:.8rem;outline:none;margin-bottom:8px;}
-.sinput:focus{border-color:var(--acc2);}
-.sinput::placeholder{color:var(--mut);}
+.sinput:focus{border-color:var(--acc2);}.sinput::placeholder{color:var(--mut);}
 .slbl2{font-size:.75rem;color:var(--mut);margin-bottom:6px;}
 .sbtns{display:flex;gap:6px;margin-top:4px;}
 .sbtn{flex:1;padding:6px;border-radius:7px;border:1px solid var(--bdr);background:transparent;color:var(--mut);font-size:.75rem;font-weight:600;cursor:pointer;}
@@ -101,8 +129,7 @@ h1{font-size:1.5rem;font-weight:800;margin-bottom:4px;}
 .bt{display:flex;flex-direction:column;justify-content:center;gap:2px;background:var(--sur);border:1px solid var(--bdr);border-radius:6px;padding:6px 8px;font-size:.72rem;cursor:pointer;min-width:118px;min-height:48px;overflow:hidden;margin-bottom:3px;}
 .bt:hover{border-color:var(--mut);}
 .bt.win{background:rgba(34,197,94,.15);border-color:rgba(34,197,94,.5);}
-.bt.lose{opacity:.4;}
-.bt.tbd{opacity:.4;cursor:default;}
+.bt.lose{opacity:.4;}.bt.tbd{opacity:.4;cursor:default;}
 .bseed{font-size:.65rem;color:var(--mut);font-weight:700;}
 .bname{font-weight:700;font-size:.78rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 .bown{font-size:.68rem;color:var(--mut);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
@@ -110,8 +137,7 @@ h1{font-size:1.5rem;font-weight:800;margin-bottom:4px;}
 .stable{width:100%;border-collapse:collapse;font-size:.85rem;}
 .stable th{text-align:left;padding:10px 12px;color:var(--mut);font-size:.75rem;text-transform:uppercase;letter-spacing:.05em;border-bottom:1px solid var(--bdr);}
 .stable td{padding:12px;border-bottom:1px solid var(--bdr);}
-.stable tr:last-child td{border-bottom:none;}
-.stable tr:hover td{background:var(--sur2);}
+.stable tr:last-child td{border-bottom:none;}.stable tr:hover td{background:var(--sur2);}
 .rbadge{width:26px;height:26px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-weight:800;font-size:.8rem;}
 .r1{background:var(--gold);color:#000;}.r2{background:#94a3b8;color:#000;}.r3{background:#b45309;color:#fff;}.ro{background:var(--sur2);color:var(--mut);}
 .adot{width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:6px;}
@@ -119,12 +145,10 @@ h1{font-size:1.5rem;font-weight:800;margin-bottom:4px;}
 .pbar{height:6px;border-radius:3px;background:var(--sur2);margin-top:4px;overflow:hidden;}
 .pfill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--acc2),var(--acc));}
 .topill{font-size:.7rem;padding:2px 6px;border-radius:10px;background:rgba(249,115,22,.2);color:var(--acc);font-weight:600;}
-.rsec{margin-bottom:24px;}
-.rsec h3{font-size:1rem;font-weight:700;color:var(--acc);margin-bottom:10px;}
+.rsec{margin-bottom:24px;}.rsec h3{font-size:1rem;font-weight:700;color:var(--acc);margin-bottom:10px;}
 .rlist{list-style:none;}
 .rlist li{padding:8px 0;border-bottom:1px solid var(--bdr);font-size:.88rem;color:var(--mut);display:flex;gap:10px;}
-.rlist li:last-child{border-bottom:none;}
-.rlist li::before{content:'→';color:var(--acc);flex-shrink:0;}
+.rlist li:last-child{border-bottom:none;}.rlist li::before{content:'→';color:var(--acc);flex-shrink:0;}
 .ptable{width:100%;border-collapse:collapse;}
 .ptable th{text-align:left;padding:10px 12px;background:var(--sur2);font-size:.8rem;text-transform:uppercase;color:var(--mut);}
 .ptable td{padding:12px;border-bottom:1px solid var(--bdr);font-size:.88rem;}
@@ -144,6 +168,8 @@ h1{font-size:1.5rem;font-weight:800;margin-bottom:4px;}
 </style>
 </head>
 <body>
+
+<div id="izzoBg"><img src="https://a-gabele.github.io/takeover-pool-2026/izzo.jpg" alt=""></div>
 
 <div id="loadScreen" style="position:fixed;inset:0;background:var(--bg);z-index:999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;">
   <div style="font-size:2.5rem;">🏀</div>
@@ -169,7 +195,7 @@ h1{font-size:1.5rem;font-weight:800;margin-bottom:4px;}
     <button class="btn btng" style="padding:5px 10px;font-size:.75rem;" id="btnReset">↺ Reset</button>
   </div>
 </nav>
-  <button id="btnForceFix" class="btn" style="background:#ef4444;color:#fff;padding:10px 20px;font-size:.9rem;margin:12px 16px 0;display:block;">🔧 Fix St. John's Result</button>
+<div class="sbar" id="sbar">✓ Saved</div>
 
 <div class="page active" id="p-overview">
   <h1>March Madness Takeover Pool</h1>
@@ -290,182 +316,167 @@ h1{font-size:1.5rem;font-weight:800;margin-bottom:4px;}
 
 const FB = 'https://takeover-pool-2026-default-rtdb.firebaseio.com';
 
-const DEFAULT_NAMES = [
-  "Travis","Maddie","Jacob K.","Joe H.","Justin L.","Phil L.",
-  "Pacheco","Kevin Y.","Andy","Jane V.","Bryan B.","Jared S.",
-  "Stephen Y.","Luke","Luke's Wife","Nancy & Tony"
-];
+const DEFAULT_NAMES = ["Travis","Maddie","Jacob K.","Joe H.","Justin L.","Phil L.","Pacheco","Kevin Y.","Andy","Jane V.","Bryan B.","Jared S.","Stephen Y.","Luke","Luke's Wife","Nancy & Tony"];
 
 const HAT_DRAW = [
-  {l:'VCU',         r:'Texas'},
-  {l:'Iowa',        r:'Texas Tech'},
-  {l:'Florida',     r:'Saint Louis'},
-  {l:'Virginia',    r:'Kansas'},
-  {l:'TCU',         r:'Arizona'},
-  {l:"St. John's",  r:'Arkansas'},
-  {l:'Illinois',    r:'Tennessee'},
-  {l:'Duke',        r:'Gonzaga'},
-  {l:'Vanderbilt',  r:'Miami FL'},
-  {l:'Louisville',  r:'Iowa State'},
-  {l:'Texas A&M',   r:'Purdue'},
-  {l:'Houston',     r:'Utah State'},
-  {l:'Alabama',     r:'UConn'},
-  {l:'Michigan St', r:'Michigan'},
-  {l:'UCLA',        r:'High Point'},
-  {l:'Nebraska',    r:'Kentucky'},
+  {l:'VCU',r:'Texas'},{l:'Iowa',r:'Texas Tech'},{l:'Florida',r:'Saint Louis'},
+  {l:'Virginia',r:'Kansas'},{l:'TCU',r:'Arizona'},{l:'St Johns',r:'Arkansas'},
+  {l:'Illinois',r:'Tennessee'},{l:'Duke',r:'Gonzaga'},{l:'Vanderbilt',r:'Miami FL'},
+  {l:'Louisville',r:'Iowa State'},{l:'Texas AM',r:'Purdue'},{l:'Houston',r:'Utah State'},
+  {l:'Alabama',r:'UConn'},{l:'Michigan St',r:'Michigan'},{l:'UCLA',r:'High Point'},
+  {l:'Nebraska',r:'Kentucky'}
 ];
 
+// NOTE: All team names use NO apostrophes/special chars to avoid Firebase key issues
 const R32 = {
-  South: [
-    {id:'s0',t1:'Florida',    s1:1, t2:'Iowa',        s2:9},
-    {id:'s1',t1:'Nebraska',   s1:4, t2:'Vanderbilt',  s2:5},
-    {id:'s2',t1:'Illinois',   s1:3, t2:'VCU',         s2:11},
-    {id:'s3',t1:'Houston',    s1:2, t2:'Texas A&M',   s2:10},
+  South:[
+    {id:'s0',t1:'Florida',s1:1,t2:'Iowa',s2:9},
+    {id:'s1',t1:'Nebraska',s1:4,t2:'Vanderbilt',s2:5},
+    {id:'s2',t1:'Illinois',s1:3,t2:'VCU',s2:11},
+    {id:'s3',t1:'Houston',s1:2,t2:'Texas AM',s2:10},
   ],
-  East: [
-    {id:'e0',t1:'Duke',       s1:1, t2:'TCU',         s2:9},
-    {id:'e1',t1:'Kansas',     s1:4, t2:"St. John's",  s2:5},
-    {id:'e2',t1:'Michigan St',s1:3, t2:'Louisville',  s2:6},
-    {id:'e3',t1:'UConn',      s1:2, t2:'UCLA',        s2:7},
+  East:[
+    {id:'e0',t1:'Duke',s1:1,t2:'TCU',s2:9},
+    {id:'e1',t1:'Kansas',s1:4,t2:'St Johns',s2:5},
+    {id:'e2',t1:'Michigan St',s1:3,t2:'Louisville',s2:6},
+    {id:'e3',t1:'UConn',s1:2,t2:'UCLA',s2:7},
   ],
-  West: [
-    {id:'w0',t1:'Arizona',    s1:1, t2:'Utah State',  s2:9},
-    {id:'w1',t1:'Arkansas',   s1:4, t2:'High Point',  s2:12},
-    {id:'w2',t1:'Gonzaga',    s1:3, t2:'Texas',       s2:11},
-    {id:'w3',t1:'Purdue',     s1:2, t2:'Miami FL',    s2:7},
+  West:[
+    {id:'w0',t1:'Arizona',s1:1,t2:'Utah State',s2:9},
+    {id:'w1',t1:'Arkansas',s1:4,t2:'High Point',s2:12},
+    {id:'w2',t1:'Gonzaga',s1:3,t2:'Texas',s2:11},
+    {id:'w3',t1:'Purdue',s1:2,t2:'Miami FL',s2:7},
   ],
-  Midwest: [
-    {id:'m0',t1:'Michigan',   s1:1, t2:'Saint Louis', s2:9},
-    {id:'m1',t1:'Alabama',    s1:4, t2:'Texas Tech',  s2:5},
-    {id:'m2',t1:'Tennessee',  s1:6, t2:'Virginia',    s2:3},
-    {id:'m3',t1:'Iowa State', s1:2, t2:'Kentucky',    s2:7},
+  Midwest:[
+    {id:'m0',t1:'Michigan',s1:1,t2:'Saint Louis',s2:9},
+    {id:'m1',t1:'Alabama',s1:4,t2:'Texas Tech',s2:5},
+    {id:'m2',t1:'Tennessee',s1:6,t2:'Virginia',s2:3},
+    {id:'m3',t1:'Iowa State',s1:2,t2:'Kentucky',s2:7},
   ]
 };
 
-const LEFT_TEAMS = [
+// Display names (shown in UI) — maps internal key → pretty name
+const DISPLAY = {
+  'St Johns':"St. John's",
+  'Texas AM':'Texas A&M',
+  'Saint Louis':'Saint Louis',
+};
+function dn(t){ return DISPLAY[t]||t; }
+
+const LEFT_TEAMS=[
   ...R32.South.flatMap(g=>[{name:g.t1,seed:g.s1,region:'South'},{name:g.t2,seed:g.s2,region:'South'}]),
   ...R32.East.flatMap(g=>[{name:g.t1,seed:g.s1,region:'East'},{name:g.t2,seed:g.s2,region:'East'}]),
 ];
-const RIGHT_TEAMS = [
+const RIGHT_TEAMS=[
   ...R32.West.flatMap(g=>[{name:g.t1,seed:g.s1,region:'West'},{name:g.t2,seed:g.s2,region:'West'}]),
   ...R32.Midwest.flatMap(g=>[{name:g.t1,seed:g.s1,region:'Midwest'},{name:g.t2,seed:g.s2,region:'Midwest'}]),
 ];
 
-const ROUND_LABELS = ['Round of 32','Sweet 16','Elite Eight','Final Four','Championship'];
+const ROUND_LABELS=['Round of 32','Sweet 16','Elite Eight','Final Four','Championship'];
 
-let S = { names:[...DEFAULT_NAMES], teams:[], games:{}, takeovers:{} };
-let curRound = 0;
-let bView = 'list';
-let online = false;
-let syncEs = null;
+let S={names:[...DEFAULT_NAMES],teams:[],games:{},takeovers:{}};
+let curRound=0,bView='list',online=false,syncEs=null;
 
-function freshTeams(){ return DEFAULT_NAMES.map((_,i)=>({l:HAT_DRAW[i].l, r:HAT_DRAW[i].r})); }
-function initState(){ S = { names:[...DEFAULT_NAMES], teams:freshTeams(), games:{}, takeovers:{} }; }
+function freshTeams(){ return DEFAULT_NAMES.map((_,i)=>({l:HAT_DRAW[i].l,r:HAT_DRAW[i].r})); }
+function initState(){ S={names:[...DEFAULT_NAMES],teams:freshTeams(),games:{},takeovers:{}}; }
 
 async function fbSave(){
   try{
-    const res = await fetch(FB+'/state.json',{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(S)});
+    const res=await fetch(FB+'/state.json',{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(S)});
     if(!res.ok) throw new Error();
     flashSaved();
-  } catch(e){ console.warn('Save failed',e); }
+  }catch(e){console.warn('Save failed',e);}
 }
-
 async function fbLoad(){
-  const res = await fetch(FB+'/state.json');
-  if(!res.ok) throw new Error('Load failed');
-  const d = await res.json();
-  if(d && typeof d === 'object'){
-    S.names     = Array.isArray(d.names)     ? d.names     : [...DEFAULT_NAMES];
-    S.teams     = Array.isArray(d.teams)     ? d.teams     : freshTeams();
-    S.games     = (d.games && typeof d.games==='object')         ? d.games     : {};
-    S.takeovers = (d.takeovers && typeof d.takeovers==='object') ? d.takeovers : {};
+  const res=await fetch(FB+'/state.json');
+  if(!res.ok) throw new Error();
+  const d=await res.json();
+  if(d&&typeof d==='object'){
+    S.names    =Array.isArray(d.names)?d.names:[...DEFAULT_NAMES];
+    S.teams    =Array.isArray(d.teams)?d.teams:freshTeams();
+    S.games    =(d.games&&typeof d.games==='object')?d.games:{};
+    S.takeovers=(d.takeovers&&typeof d.takeovers==='object')?d.takeovers:{};
   }
 }
-
 function fbSync(){
   if(syncEs) syncEs.close();
-  syncEs = new EventSource(FB+'/state.json?accept=text/event-stream');
-  syncEs.addEventListener('put', e=>{
+  syncEs=new EventSource(FB+'/state.json?accept=text/event-stream');
+  syncEs.addEventListener('put',e=>{
     try{
-      const d = JSON.parse(e.data);
-      if(d && d.data && typeof d.data==='object'){
-        const nd = d.data;
-        S.names     = Array.isArray(nd.names)                          ? nd.names     : S.names;
-        S.teams     = Array.isArray(nd.teams)                          ? nd.teams     : S.teams;
-        S.games     = (nd.games && typeof nd.games==='object')         ? nd.games     : S.games;
-        S.takeovers = (nd.takeovers && typeof nd.takeovers==='object') ? nd.takeovers : S.takeovers;
-        renderRoster(); renderBracket(); renderStandings();
+      const d=JSON.parse(e.data);
+      if(d&&d.data&&typeof d.data==='object'){
+        const nd=d.data;
+        S.names    =Array.isArray(nd.names)?nd.names:S.names;
+        S.teams    =Array.isArray(nd.teams)?nd.teams:S.teams;
+        S.games    =(nd.games&&typeof nd.games==='object')?nd.games:S.games;
+        S.takeovers=(nd.takeovers&&typeof nd.takeovers==='object')?nd.takeovers:S.takeovers;
+        renderRoster();renderBracket();renderStandings();
       }
-    } catch(ex){ console.warn(ex); }
+    }catch(ex){console.warn(ex);}
   });
-  syncEs.onopen = ()=>{
-    online = true;
+  syncEs.onopen=()=>{
+    online=true;
     document.getElementById('liveBadge').style.display='inline';
     document.getElementById('offBadge').style.display='none';
     document.getElementById('syncChip').textContent='🟢 Live Sync';
   };
-  syncEs.onerror = ()=>{
+  syncEs.onerror=()=>{
     document.getElementById('liveBadge').style.display='none';
     document.getElementById('offBadge').style.display='inline';
     document.getElementById('syncChip').textContent='🔴 Offline';
   };
 }
+function lsSave(){try{localStorage.setItem('tp26',JSON.stringify(S));flashSaved();}catch(e){}}
+function lsLoad(){try{const d=localStorage.getItem('tp26');if(d){const p=JSON.parse(d);S.names=Array.isArray(p.names)?p.names:[...DEFAULT_NAMES];S.teams=Array.isArray(p.teams)?p.teams:freshTeams();S.games=p.games||{};S.takeovers=p.takeovers||{};}}catch(e){}}
+function save(){online?fbSave():lsSave();}
+function flashSaved(){const b=document.getElementById('sbar');b.classList.add('show');setTimeout(()=>b.classList.remove('show'),2000);}
 
-function lsSave(){ try{ localStorage.setItem('tp26', JSON.stringify(S)); flashSaved(); }catch(e){} }
-function lsLoad(){ try{ const d=localStorage.getItem('tp26'); if(d){ const p=JSON.parse(d); S.names=Array.isArray(p.names)?p.names:[...DEFAULT_NAMES]; S.teams=Array.isArray(p.teams)?p.teams:freshTeams(); S.games=p.games||{}; S.takeovers=p.takeovers||{}; } }catch(e){} }
-function save(){ online ? fbSave() : lsSave(); }
-function flashSaved(){ const b=document.getElementById('sbar'); b.classList.add('show'); setTimeout(()=>b.classList.remove('show'),2000); }
-
-const TEAM_MAP = {
-  'Florida':'Florida','Iowa':'Iowa','Nebraska':'Nebraska','Vanderbilt':'Vanderbilt',
-  'Illinois':'Illinois','VCU':'VCU','Houston':'Houston','Texas A&M':'Texas A&M',
-  'Duke':'Duke','TCU':'TCU','Kansas':'Kansas',"St. John's":"St. John's",
-  'Michigan St':'Michigan State','Louisville':'Louisville','UConn':'Connecticut','UCLA':'UCLA',
-  'Arizona':'Arizona','Utah State':'Utah State','Arkansas':'Arkansas','High Point':'High Point',
-  'Gonzaga':'Gonzaga','Texas':'Texas','Purdue':'Purdue','Miami FL':'Miami',
-  'Michigan':'Michigan','Saint Louis':'Saint Louis','Alabama':'Alabama','Texas Tech':'Texas Tech',
-  'Tennessee':'Tennessee','Virginia':'Virginia','Iowa State':'Iowa State','Kentucky':'Kentucky'
-};
-let liveScores = {};
-
+// SCORES
+const TEAM_MAP={'Florida':'Florida','Iowa':'Iowa','Nebraska':'Nebraska','Vanderbilt':'Vanderbilt','Illinois':'Illinois','VCU':'VCU','Houston':'Houston','Texas AM':'Texas A&M','Duke':'Duke','TCU':'TCU','Kansas':'Kansas','St Johns':"St. John's",'Michigan St':'Michigan State','Louisville':'Louisville','UConn':'Connecticut','UCLA':'UCLA','Arizona':'Arizona','Utah State':'Utah State','Arkansas':'Arkansas','High Point':'High Point','Gonzaga':'Gonzaga','Texas':'Texas','Purdue':'Purdue','Miami FL':'Miami','Michigan':'Michigan','Saint Louis':'Saint Louis','Alabama':'Alabama','Texas Tech':'Texas Tech','Tennessee':'Tennessee','Virginia':'Virginia','Iowa State':'Iowa State','Kentucky':'Kentucky'};
+let liveScores={};
 async function fetchScores(){
   const btn=document.getElementById('btnRefreshScores');
-  btn.textContent='⟳ Loading...'; btn.disabled=true;
+  btn.textContent='⟳ Loading...';btn.disabled=true;
   try{
-    const res = await fetch('https://corsproxy.io/?url=https://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/scoreboard?groups=50&limit=100');
-    const data = await res.json();
-    liveScores = {};
+    const res=await fetch('https://corsproxy.io/?url=https://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/scoreboard?groups=50&limit=100');
+    const data=await res.json();
+    liveScores={};
     (data.events||[]).forEach(ev=>{
-      const comp=ev.competitions&&ev.competitions[0]; if(!comp) return;
+      const comp=ev.competitions&&ev.competitions[0];if(!comp)return;
       const status=ev.status&&ev.status.type&&ev.status.type.description||'';
-      const isLive=status==='In Progress', isFinal=status==='Final';
-      if(!isLive&&!isFinal) return;
-      const teams=comp.competitors||[]; if(teams.length<2) return;
+      const isLive=status==='In Progress',isFinal=status==='Final';
+      if(!isLive&&!isFinal)return;
+      const teams=comp.competitors||[];if(teams.length<2)return;
       const t0={name:teams[0].team.displayName,score:teams[0].score};
       const t1={name:teams[1].team.displayName,score:teams[1].score};
-      Object.entries(TEAM_MAP).forEach(([ourName,espnFrag])=>{
-        if(t0.name.includes(espnFrag)) liveScores[ourName]={score:+t0.score,opp:t1.name,oppScore:+t1.score,status};
-        if(t1.name.includes(espnFrag)) liveScores[ourName]={score:+t1.score,opp:t0.name,oppScore:+t0.score,status};
+      Object.entries(TEAM_MAP).forEach(([key,espn])=>{
+        if(t0.name.includes(espn)) liveScores[key]={score:+t0.score,oppScore:+t1.score,status};
+        if(t1.name.includes(espn)) liveScores[key]={score:+t1.score,oppScore:+t0.score,status};
       });
     });
-    btn.textContent='⟳ Refresh Scores'; btn.disabled=false;
+    btn.textContent='⟳ Refresh Scores';btn.disabled=false;
     renderBracket();
-  } catch(e){ btn.textContent='⟳ Retry'; btn.disabled=false; }
+  }catch(e){btn.textContent='⟳ Retry';btn.disabled=false;}
 }
-
 function scoreTag(team){
-  const s=liveScores[team]; if(!s) return '';
+  const s=liveScores[team];if(!s)return'';
   const isLive=s.status==='In Progress';
-  return `<span style="font-size:.68rem;padding:2px 6px;border-radius:4px;background:${isLive?'rgba(34,197,94,.15)':'var(--sur2)'};color:${isLive?'var(--grn)':'var(--mut)'};font-weight:700;margin-left:4px;">${isLive?'🔴 LIVE':'Final'} ${s.score}–${s.oppScore}</span>`;
+  return`<span style="font-size:.68rem;padding:2px 6px;border-radius:4px;background:${isLive?'rgba(34,197,94,.15)':'var(--sur2)'};color:${isLive?'var(--grn)':'var(--mut)'};font-weight:700;margin-left:4px;">${isLive?'🔴 LIVE':'Final'} ${s.score}–${s.oppScore}</span>`;
 }
 
+// GAME ENGINE
+function getCov(sv){
+  if(sv.cov===true||sv.cov===1) return true;
+  if(sv.cov===false||sv.cov===0) return false;
+  return null;
+}
 function buildGames(){
   const G={};
   ['South','East','West','Midwest'].forEach(reg=>{
     const side=(reg==='South'||reg==='East')?'L':'R';
     R32[reg].forEach((m,idx)=>{
       const sv=S.games[m.id]||{};
-      G[m.id]={id:m.id,round:0,region:reg,side,idx,t1:m.t1,s1:m.s1,t2:m.t2,s2:m.s2,w:sv.w||'',cov:(sv.cov===true||sv.cov===false)?sv.cov:null,sl:sv.sl||''};
+      G[m.id]={id:m.id,round:0,region:reg,side,idx,t1:m.t1,s1:m.s1,t2:m.t2,s2:m.s2,w:sv.w||'',cov:getCov(sv),sl:sv.sl||''};
     });
   });
   for(let r=1;r<=2;r++){
@@ -473,180 +484,151 @@ function buildGames(){
       const side=(reg==='South'||reg==='East')?'L':'R';
       const prev=Object.values(G).filter(g=>g.region===reg&&g.round===r-1).sort((a,b)=>a.idx-b.idx);
       for(let i=0;i<prev.length;i+=2){
-        const id=`${reg[0].toLowerCase()}${r}_${Math.floor(i/2)}`, sv=S.games[id]||{};
-        const a=adv(prev[i]), b=adv(prev[i+1]);
-        G[id]={id,round:r,region:reg,side,idx:Math.floor(i/2),t1:a.t,s1:a.s,t2:b.t,s2:b.s,w:sv.w||'',cov:sv.cov!==undefined?sv.cov:null,sl:sv.sl||''};
+        const id=`${reg[0].toLowerCase()}${r}_${Math.floor(i/2)}`,sv=S.games[id]||{};
+        const a=adv(prev[i]),b=adv(prev[i+1]);
+        G[id]={id,round:r,region:reg,side,idx:Math.floor(i/2),t1:a.t,s1:a.s,t2:b.t,s2:b.s,w:sv.w||'',cov:getCov(sv),sl:sv.sl||''};
       }
     });
   }
   const sc=regChamp('South',G),ec=regChamp('East',G),wc=regChamp('West',G),mc=regChamp('Midwest',G);
-  const gf=id=>{const sv=S.games[id]||{};return{w:sv.w||'',cov:(sv.cov===true||sv.cov===false)?sv.cov:null,sl:sv.sl||''}};
+  const gf=id=>{const sv=S.games[id]||{};return{w:sv.w||'',cov:getCov(sv),sl:sv.sl||''};};
   G['ff0']={id:'ff0',round:3,region:'Final Four',side:'FF',idx:0,t1:sc.t,s1:sc.s,t2:ec.t,s2:ec.s,...gf('ff0')};
   G['ff1']={id:'ff1',round:3,region:'Final Four',side:'FF',idx:1,t1:wc.t,s1:wc.s,t2:mc.t,s2:mc.s,...gf('ff1')};
   const fa=adv(G['ff0']),fb=adv(G['ff1']);
   G['ch']={id:'ch',round:4,region:'Championship',side:'CH',idx:0,t1:fa.t,s1:fa.s,t2:fb.t,s2:fb.s,...gf('ch')};
   return G;
 }
-function adv(g){ if(!g||!g.w) return {t:'TBD',s:'?'}; return {t:g.w,s:g.w===g.t1?g.s1:g.s2}; }
-function regChamp(reg,G){ const g=Object.values(G).find(g=>g.region===reg&&g.round===2); return adv(g); }
-function isElim(team,G){ if(!team||team==='TBD') return false; return Object.values(G).some(g=>g.w&&g.w!==team&&(g.t1===team||g.t2===team)); }
-
+function adv(g){if(!g||!g.w)return{t:'TBD',s:'?'};return{t:g.w,s:g.w===g.t1?g.s1:g.s2};}
+function regChamp(reg,G){const g=Object.values(G).find(g=>g.region===reg&&g.round===2);return adv(g);}
+function isElim(team,G){if(!team||team==='TBD')return false;return Object.values(G).some(g=>g.w&&g.w!==team&&(g.t1===team||g.t2===team));}
 function ownerOf(team){
-  if(!team||team==='TBD') return null;
-  if(S.takeovers[team]) return S.takeovers[team];
+  if(!team||team==='TBD')return null;
+  if(S.takeovers[team])return S.takeovers[team];
   const i=S.teams.findIndex(t=>t&&(t.l===team||t.r===team));
   return i>=0?S.names[i]:null;
 }
 function ownerTag(team){
-  if(!team||team==='TBD') return '—';
+  if(!team||team==='TBD')return'—';
   const i=S.teams.findIndex(t=>t&&(t.l===team||t.r===team));
   const original=i>=0?S.names[i]:null;
-  if(!original) return '—';
-  if(S.takeovers[team]){
-    return `<span style="text-decoration:line-through;color:var(--mut);font-size:.65rem">${original}</span>&nbsp;<span style="color:var(--acc);font-weight:700;font-size:.72rem">⟳ ${S.takeovers[team]}</span>`;
-  }
+  if(!original)return'—';
+  if(S.takeovers[team])return`<span style="text-decoration:line-through;color:var(--mut);font-size:.65rem">${original}</span>&nbsp;<span style="color:var(--acc);font-weight:700;font-size:.72rem">⟳ ${S.takeovers[team]}</span>`;
   return original;
 }
-function hasTO(team){ return !!(team&&S.takeovers[team]); }
+function hasTO(team){return!!(team&&S.takeovers[team]);}
 function currentOwner(team){
-  if(!team||team==='TBD') return '';
-  if(S.takeovers[team]) return S.takeovers[team];
+  if(!team||team==='TBD')return'';
+  if(S.takeovers[team])return S.takeovers[team];
   const i=S.teams.findIndex(t=>t&&(t.l===team||t.r===team));
   return i>=0?S.names[i]:'';
 }
-
 function pickWinner(id,team){
   const G=buildGames(),g=G[id];
-  if(!g||g.t1==='TBD'||g.t2==='TBD') return;
-  if(g.w&&g.cov!==null) return;
-  S.games[id]={...(S.games[id]||{}),w:team,cov:null};
-  save(); renderBracket(); renderStandings();
+  if(!g||g.t1==='TBD'||g.t2==='TBD')return;
+  if(g.w&&g.cov!==null)return;
+  S.games[id]={w:team,cov:null,sl:S.games[id]?.sl||''};
+  save();renderBracket();renderStandings();
 }
-
 function setSpread(id,win,covered){
-  if(!S.games[id]) S.games[id]={};
-  S.games[id].w = win;
-  S.games[id].cov = covered === true ? true : false;
-  S.games[id].sl = S.games[id].sl || '';
+  const sl=S.games[id]?.sl||'';
+  S.games[id]={w:win,cov:covered===true?1:0,sl};
   if(!covered){
-    const G=buildGames(), g=G[id];
-    if(g){
-      const loser = win===g.t1 ? g.t2 : g.t1;
-      const lo = ownerOf(loser);
-      if(lo) S.takeovers[win] = lo;
-    }
+    const G=buildGames(),g=G[id];
+    if(g){const loser=win===g.t1?g.t2:g.t1;const lo=ownerOf(loser);if(lo)S.takeovers[win]=lo;}
   } else {
     delete S.takeovers[win];
   }
-  save(); renderBracket(); renderStandings();
+  save();renderBracket();renderStandings();
 }
-
-function setSpreadLine(id,val){ S.games[id]={...(S.games[id]||{}),sl:val}; save(); }
-
+function setSpreadLine(id,val){S.games[id]={...(S.games[id]||{}),sl:val};save();}
 function editGame(id){
-  const w=S.games[id]&&S.games[id].w;
-  if(w) delete S.takeovers[w];
-  delete S.games[id];
-  save(); renderBracket(); renderStandings();
+  const w=S.games[id]&&S.games[id].w;if(w)delete S.takeovers[w];
+  delete S.games[id];save();renderBracket();renderStandings();
 }
 
+// ROSTER
 function renderRoster(){
-  const grid=document.getElementById('rosterGrid'); grid.innerHTML='';
+  const grid=document.getElementById('rosterGrid');grid.innerHTML='';
   S.names.forEach((name,i)=>{
     const t=S.teams[i]||{l:'',r:''};
-    const lOpts=LEFT_TEAMS.map(x=>`<option value="${x.name}"${t.l===x.name?' selected':''}>${x.seed}. ${x.name} (${x.region})</option>`).join('');
-    const rOpts=RIGHT_TEAMS.map(x=>`<option value="${x.name}"${t.r===x.name?' selected':''}>${x.seed}. ${x.name} (${x.region})</option>`).join('');
-    const card=document.createElement('div'); card.className='plycard';
-    card.innerHTML=`
-      <div class="plyhead">
-        <div class="plynum">${i+1}</div>
-        <input class="nameinput" value="${name}" data-ni="${i}" placeholder="Player name">
-      </div>
-      <div class="tslot"><span class="slbl sleft">LEFT</span>
-        <select class="tsel" data-i="${i}" data-side="l"><option value="">— Unassigned —</option>${lOpts}</select>
-      </div>
-      <div class="tslot"><span class="slbl sright">RIGHT</span>
-        <select class="tsel" data-i="${i}" data-side="r"><option value="">— Unassigned —</option>${rOpts}</select>
-      </div>`;
+    const lOpts=LEFT_TEAMS.map(x=>`<option value="${x.name}"${t.l===x.name?' selected':''}>${x.seed}. ${dn(x.name)} (${x.region})</option>`).join('');
+    const rOpts=RIGHT_TEAMS.map(x=>`<option value="${x.name}"${t.r===x.name?' selected':''}>${x.seed}. ${dn(x.name)} (${x.region})</option>`).join('');
+    const card=document.createElement('div');card.className='plycard';
+    card.innerHTML=`<div class="plyhead"><div class="plynum">${i+1}</div><input class="nameinput" value="${name}" data-ni="${i}" placeholder="Player name"></div>
+    <div class="tslot"><span class="slbl sleft">LEFT</span><select class="tsel" data-i="${i}" data-side="l"><option value="">— Unassigned —</option>${lOpts}</select></div>
+    <div class="tslot"><span class="slbl sright">RIGHT</span><select class="tsel" data-i="${i}" data-side="r"><option value="">— Unassigned —</option>${rOpts}</select></div>`;
     card.querySelector('.nameinput').addEventListener('change',function(){
       const ni=+this.dataset.ni,nv=this.value.trim()||S.names[ni],old=S.names[ni];
       S.names[ni]=nv;
       Object.keys(S.takeovers).forEach(t=>{if(S.takeovers[t]===old)S.takeovers[t]=nv;});
-      save(); renderStandings();
+      save();renderStandings();
     });
     card.querySelectorAll('.tsel').forEach(sel=>{
       sel.addEventListener('change',function(){
-        if(!S.teams[+this.dataset.i]) S.teams[+this.dataset.i]={l:'',r:''};
+        if(!S.teams[+this.dataset.i])S.teams[+this.dataset.i]={l:'',r:''};
         S.teams[+this.dataset.i][this.dataset.side]=this.value;
-        save(); renderStandings();
+        save();renderStandings();
       });
     });
     grid.appendChild(card);
   });
 }
 
+// BRACKET
 function renderBracket(){
-  const tc=document.getElementById('roundTabs'); tc.innerHTML='';
+  const tc=document.getElementById('roundTabs');tc.innerHTML='';
   ROUND_LABELS.forEach((n,i)=>{
-    const d=document.createElement('div');
-    d.className='rtab'+(i===curRound?' active':'');
-    d.textContent=n;
-    d.addEventListener('click',()=>{curRound=i;renderBracket();});
-    tc.appendChild(d);
+    const d=document.createElement('div');d.className='rtab'+(i===curRound?' active':'');d.textContent=n;
+    d.addEventListener('click',()=>{curRound=i;renderBracket();});tc.appendChild(d);
   });
   if(bView==='visual'){renderVisual();return;}
   const G=buildGames();
   const games=Object.values(G).filter(g=>g.round===curRound).sort((a,b)=>a.idx-b.idx);
-  const list=document.getElementById('gameList'); list.innerHTML='';
+  const list=document.getElementById('gameList');list.innerHTML='';
   if(!games.length){list.innerHTML='<div style="color:var(--mut)">No games this round.</div>';return;}
   games.forEach(g=>{
-    const gameId=g.id;
-    const locked=g.t1==='TBD'||g.t2==='TBD';
-    const card=document.createElement('div'); card.className='gcard';
-    const hdr=document.createElement('div'); hdr.className='ghdr';
+    const gid=g.id,locked=g.t1==='TBD'||g.t2==='TBD';
+    const card=document.createElement('div');card.className='gcard';
+    const hdr=document.createElement('div');hdr.className='ghdr';
     hdr.innerHTML=`<span class="gmatch">${g.region}</span><span class="greg">${locked?'TBD':`${g.s1} vs ${g.s2}`}</span>`;
     card.appendChild(hdr);
     if(locked){
-      const lk=document.createElement('div'); lk.className='glocked'; lk.textContent='⏳ Awaiting previous round';
-      card.appendChild(lk);
+      const lk=document.createElement('div');lk.className='glocked';lk.textContent='⏳ Awaiting previous round';card.appendChild(lk);
     } else {
       [['t1','s1'],['t2','s2']].forEach(([tk,sk])=>{
         const team=g[tk],seed=g[sk];
         const row=document.createElement('div');
         row.className='trow'+(g.w===team?' win':g.w?' lose':'');
-        row.innerHTML=`<div class="sbadge">${seed}</div><div class="tname">${team}${scoreTag(team)}</div><div class="otag" style="max-width:140px;text-align:right;">${ownerTag(team)}</div>`;
-        row.addEventListener('click',()=>{if(!g.w||g.cov===null) pickWinner(gameId,team);});
+        row.innerHTML=`<div class="sbadge">${seed}</div><div class="tname">${dn(team)}${scoreTag(team)}</div><div class="otag" style="max-width:140px;text-align:right;">${ownerTag(team)}</div>`;
+        row.addEventListener('click',()=>{if(!g.w||g.cov===null)pickWinner(gid,team);});
         card.appendChild(row);
       });
-      const sr=document.createElement('div'); sr.className='srow';
-      const sll=document.createElement('div'); sll.className='slbl2';
+      const sr=document.createElement('div');sr.className='srow';
+      const sll=document.createElement('div');sll.className='slbl2';
       sll.innerHTML='Spread line <span style="font-size:.7rem;color:var(--mut)">(e.g. Duke -5.5)</span>';
       sr.appendChild(sll);
-      const si=document.createElement('input'); si.className='sinput';
-      si.placeholder='Enter spread line'; si.value=g.sl||'';
-      si.addEventListener('change',()=>setSpreadLine(gameId,si.value.trim()));
+      const si=document.createElement('input');si.className='sinput';si.placeholder='Enter spread line';si.value=g.sl||'';
+      si.addEventListener('change',()=>setSpreadLine(gid,si.value.trim()));
       sr.appendChild(si);
       if(g.w&&g.cov===null){
         const winner=g.w;
-        const ql=document.createElement('div'); ql.className='slbl2';
-        ql.innerHTML=`Did <strong>${winner}</strong> cover?`;
-        sr.appendChild(ql);
-        const sb=document.createElement('div'); sb.className='sbtns';
-        const bY=document.createElement('button'); bY.className='sbtn'; bY.type='button'; bY.textContent='✅ Covered';
-        bY.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();setSpread(gameId,winner,true);});
-        const bN=document.createElement('button'); bN.className='sbtn'; bN.type='button'; bN.textContent="❌ Didn't cover";
-        bN.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();setSpread(gameId,winner,false);});
-        sb.appendChild(bY); sb.appendChild(bN); sr.appendChild(sb);
+        const ql=document.createElement('div');ql.className='slbl2';ql.innerHTML=`Did <strong>${dn(winner)}</strong> cover?`;sr.appendChild(ql);
+        const sb=document.createElement('div');sb.className='sbtns';
+        const bY=document.createElement('button');bY.className='sbtn';bY.type='button';bY.textContent='✅ Covered';
+        bY.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();setSpread(gid,winner,true);});
+        const bN=document.createElement('button');bN.className='sbtn';bN.type='button';bN.textContent="❌ Didn't cover";
+        bN.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();setSpread(gid,winner,false);});
+        sb.appendChild(bY);sb.appendChild(bN);sr.appendChild(sb);
       } else if(g.w){
         const to=S.takeovers[g.w];
         const info=document.createElement('div');
         info.style.cssText='display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:.78rem;color:var(--mut);margin-top:4px;';
-        if(g.sl) info.innerHTML+=`<span style="background:var(--sur2);padding:2px 8px;border-radius:6px">📊 ${g.sl}</span>`;
-        info.innerHTML+=`<span>${g.cov?'✅ Covered':`🔄 Didn't cover${to?' — '+to+' took over':''}`}</span>`;
-        const eb=document.createElement('button'); eb.className='sbtn'; eb.type='button';
-        eb.style.cssText='flex:0;padding:3px 10px;margin-left:auto;'; eb.textContent='Edit';
-        eb.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();editGame(gameId);});
-        info.appendChild(eb); sr.appendChild(info);
+        if(g.sl)info.innerHTML+=`<span style="background:var(--sur2);padding:2px 8px;border-radius:6px">📊 ${g.sl}</span>`;
+        info.innerHTML+=`<span>${g.cov===1||g.cov===true?'✅ Covered':`🔄 Didn't cover${to?' — '+to+' took over':''}`}</span>`;
+        const eb=document.createElement('button');eb.className='sbtn';eb.type='button';
+        eb.style.cssText='flex:0;padding:3px 10px;margin-left:auto;';eb.textContent='Edit';
+        eb.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();editGame(gid);});
+        info.appendChild(eb);sr.appendChild(info);
       }
       card.appendChild(sr);
     }
@@ -654,30 +636,31 @@ function renderBracket(){
   });
 }
 
+// VISUAL
 function renderVisual(){
-  const G=buildGames(),c=document.getElementById('bviz'); c.innerHTML='';
-  const wrap=document.createElement('div'); wrap.className='bwrap'; wrap.style.alignItems='center';
+  const G=buildGames(),c=document.getElementById('bviz');c.innerHTML='';
+  const wrap=document.createElement('div');wrap.className='bwrap';wrap.style.alignItems='center';
   wrap.appendChild(buildSideVis(['South','East'],G,'L'));
   wrap.appendChild(buildCenterVis(G));
   wrap.appendChild(buildSideVis(['West','Midwest'],G,'R'));
   c.appendChild(wrap);
 }
 function buildSideVis(regions,G,side){
-  const w=document.createElement('div'); w.style.display='flex';
+  const w=document.createElement('div');w.style.display='flex';
   (side==='L'?[0,1,2]:[2,1,0]).forEach(r=>{
-    const col=document.createElement('div'); col.style.cssText='display:flex;flex-direction:column;width:128px;padding:0 2px;';
-    const lbl=document.createElement('div'); lbl.style.cssText='font-size:.6rem;font-weight:700;text-transform:uppercase;color:var(--mut);text-align:center;padding:3px 0 5px;';
-    lbl.textContent=ROUND_LABELS[r]; col.appendChild(lbl);
+    const col=document.createElement('div');col.style.cssText='display:flex;flex-direction:column;width:128px;padding:0 2px;';
+    const lbl=document.createElement('div');lbl.style.cssText='font-size:.6rem;font-weight:700;text-transform:uppercase;color:var(--mut);text-align:center;padding:3px 0 5px;';
+    lbl.textContent=ROUND_LABELS[r];col.appendChild(lbl);
     const gs=Object.values(G).filter(g=>regions.includes(g.region)&&g.round===r).sort((a,b)=>regions.indexOf(a.region)-regions.indexOf(b.region)||a.idx-b.idx);
     const sp=[3,52,180];
     gs.forEach(g=>{
-      const gw=document.createElement('div'); gw.style.marginBottom=(r===0?3:sp[r])+'px';
+      const gw=document.createElement('div');gw.style.marginBottom=(r===0?3:sp[r])+'px';
       [[g.t1,g.s1],[g.t2,g.s2]].forEach(([team,seed])=>{
         const isTBD=team==='TBD',isW=g.w===team,isL=g.w&&!isW,isTaken=hasTO(team);
         const el=document.createElement('div');
         el.className='bt'+(isTBD?' tbd':'')+(isW?' win':'')+(isL?' lose':'');
-        el.innerHTML=`<div style="display:flex;align-items:center;gap:4px;"><span class="bseed">${isTBD?'?':seed}</span><span class="bname">${tr(team,15)}</span>${isW&&g.cov===null?'<span class="spill">?</span>':''}</div><div style="display:flex;align-items:center;gap:4px;"><span class="bown">${isTBD?'':currentOwner(team)}</span>${isTaken?'<span class="spill" style="background:rgba(249,115,22,.25);color:var(--acc);">TO</span>':''}</div>`;
-        if(!isTBD&&!isL) el.addEventListener('click',()=>{if(!g.w)pickWinner(g.id,team);else if(isW&&g.cov===null){setBView('list');curRound=g.round;renderBracket();}});
+        el.innerHTML=`<div style="display:flex;align-items:center;gap:4px;"><span class="bseed">${isTBD?'?':seed}</span><span class="bname">${trunc(dn(team),15)}</span>${isW&&g.cov===null?'<span class="spill">?</span>':''}</div><div style="display:flex;align-items:center;gap:4px;"><span class="bown">${isTBD?'':currentOwner(team)}</span>${isTaken?'<span class="spill" style="background:rgba(249,115,22,.25);color:var(--acc);">TO</span>':''}</div>`;
+        if(!isTBD&&!isL)el.addEventListener('click',()=>{if(!g.w)pickWinner(g.id,team);else if(isW&&g.cov===null){setBView('list');curRound=g.round;renderBracket();}});
         gw.appendChild(el);
       });
       col.appendChild(gw);
@@ -687,80 +670,80 @@ function buildSideVis(regions,G,side){
   return w;
 }
 function buildCenterVis(G){
-  const c=document.createElement('div'); c.style.cssText='display:flex;flex-direction:column;align-items:center;min-width:168px;padding:0 4px;';
+  const c=document.createElement('div');c.style.cssText='display:flex;flex-direction:column;align-items:center;min-width:168px;padding:0 4px;';
   [['ff0','South vs East'],['ff1','West vs Midwest'],['ch','🏆 Championship']].forEach(([id,label],gi)=>{
     const g=G[id];
-    const dl=document.createElement('div'); dl.style.cssText='font-size:.65rem;color:var(--gold);text-align:center;margin:'+(gi===0?'0 0 4px':'14px 0 4px')+';font-weight:700;';
-    dl.textContent=label; c.appendChild(dl);
+    const dl=document.createElement('div');dl.style.cssText='font-size:.65rem;color:var(--gold);text-align:center;margin:'+(gi===0?'0 0 4px':'14px 0 4px')+';font-weight:700;';
+    dl.textContent=label;c.appendChild(dl);
     [[g.t1,g.s1],[g.t2,g.s2]].forEach(([team,seed])=>{
       const isTBD=team==='TBD',isW=g.w===team,isL=g.w&&!isW,isTaken=hasTO(team);
       const el=document.createElement('div');
       el.className='bt'+(isTBD?' tbd':'')+(isW?' win':'')+(isL?' lose':'');
       el.style.cssText='min-width:155px;margin-bottom:3px;';
-      el.innerHTML=`<div style="display:flex;align-items:center;gap:4px;"><span class="bseed">${isTBD?'?':seed}</span><span class="bname">${tr(team,15)}</span>${isW&&g.cov===null?'<span class="spill">?</span>':''}</div><div style="display:flex;align-items:center;gap:4px;"><span class="bown">${isTBD?'':currentOwner(team)}</span>${isTaken?'<span class="spill" style="background:rgba(249,115,22,.25);color:var(--acc);">TO</span>':''}</div>`;
-      if(!isTBD&&!isL) el.addEventListener('click',()=>{if(!g.w)pickWinner(id,team);else if(isW&&g.cov===null){setBView('list');curRound=g.round;renderBracket();}});
+      el.innerHTML=`<div style="display:flex;align-items:center;gap:4px;"><span class="bseed">${isTBD?'?':seed}</span><span class="bname">${trunc(dn(team),15)}</span>${isW&&g.cov===null?'<span class="spill">?</span>':''}</div><div style="display:flex;align-items:center;gap:4px;"><span class="bown">${isTBD?'':currentOwner(team)}</span>${isTaken?'<span class="spill" style="background:rgba(249,115,22,.25);color:var(--acc);">TO</span>':''}</div>`;
+      if(!isTBD&&!isL)el.addEventListener('click',()=>{if(!g.w)pickWinner(id,team);else if(isW&&g.cov===null){setBView('list');curRound=g.round;renderBracket();}});
       c.appendChild(el);
     });
   });
   return c;
 }
-function tr(s,n){ return s&&s.length>n?s.slice(0,n)+'…':s||''; }
+function trunc(s,n){return s&&s.length>n?s.slice(0,n)+'…':s||'';}
 
+// ALIVE
 function renderAlive(){
   const G=buildGames();
-  const grid=document.getElementById('aliveGrid'); if(!grid) return;
-  grid.innerHTML=''; let aliveCount=0;
+  const grid=document.getElementById('aliveGrid');if(!grid)return;
+  grid.innerHTML='';let aliveCount=0;
   S.names.forEach((name,i)=>{
     const t=S.teams[i]||{l:'',r:''};
     const myTeams=[t.l,t.r].filter(Boolean);
     let alive=[],gained=[],lost=[];
     myTeams.forEach(tm=>{
       const ov=S.takeovers[tm];
-      if(ov&&ov!==name) lost.push(tm);
-      else if(!isElim(tm,G)) alive.push(tm);
+      if(ov&&ov!==name)lost.push(tm);
+      else if(!isElim(tm,G))alive.push(tm);
     });
     Object.entries(S.takeovers).forEach(([tm,o])=>{if(o===name&&!isElim(tm,G))gained.push(tm);});
-    const totalAlive=alive.length+gained.length, isOut=totalAlive===0;
-    if(!isOut) aliveCount++;
+    const totalAlive=alive.length+gained.length,isOut=totalAlive===0;
+    if(!isOut)aliveCount++;
     const card=document.createElement('div');
     card.style.cssText=`background:var(--sur2);border:1px solid ${isOut?'var(--bdr)':'rgba(34,197,94,.25)'};border-radius:10px;padding:10px 12px;opacity:${isOut?'.45':'1'};`;
-    const header=document.createElement('div'); header.style.cssText='display:flex;align-items:center;gap:6px;margin-bottom:6px;';
+    const header=document.createElement('div');header.style.cssText='display:flex;align-items:center;gap:6px;margin-bottom:6px;';
     header.innerHTML=`<span style="width:8px;height:8px;border-radius:50%;background:${isOut?'var(--red)':'var(--grn)'};flex-shrink:0;display:inline-block;"></span><span style="font-weight:700;font-size:.82rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${name}</span>`;
     card.appendChild(header);
     const allAlive=[...alive,...gained];
     if(allAlive.length){
       allAlive.forEach(tm=>{
         const isTaken=gained.includes(tm);
-        const row=document.createElement('div');
-        row.style.cssText='display:flex;align-items:center;gap:4px;font-size:.72rem;color:var(--mut);margin-bottom:2px;';
-        row.innerHTML=`<span style="color:var(--grn);">▸</span><span style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${tm}</span>${isTaken?'<span style="font-size:.6rem;padding:1px 4px;border-radius:3px;background:rgba(249,115,22,.2);color:var(--acc);">TO</span>':''}`;
+        const row=document.createElement('div');row.style.cssText='display:flex;align-items:center;gap:4px;font-size:.72rem;color:var(--mut);margin-bottom:2px;';
+        row.innerHTML=`<span style="color:var(--grn);">▸</span><span style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${dn(tm)}</span>${isTaken?'<span style="font-size:.6rem;padding:1px 4px;border-radius:3px;background:rgba(249,115,22,.2);color:var(--acc);">TO</span>':''}`;
         card.appendChild(row);
       });
     } else {
-      const out=document.createElement('div'); out.style.cssText='font-size:.72rem;color:var(--red);'; out.textContent='Eliminated';
-      card.appendChild(out);
+      const out=document.createElement('div');out.style.cssText='font-size:.72rem;color:var(--red);';out.textContent='Eliminated';card.appendChild(out);
     }
     grid.appendChild(card);
   });
-  const existing=document.getElementById('aliveSummary'); if(existing) existing.remove();
-  const summary=document.createElement('div'); summary.id='aliveSummary';
+  const existing=document.getElementById('aliveSummary');if(existing)existing.remove();
+  const summary=document.createElement('div');summary.id='aliveSummary';
   summary.style.cssText='font-size:.82rem;color:var(--mut);margin-bottom:10px;';
   summary.innerHTML=`<span style="font-size:1.4rem;font-weight:800;color:var(--grn);">${aliveCount}</span> of ${S.names.length} players still alive`;
   grid.parentElement.insertBefore(summary,grid);
 }
 
+// STANDINGS
 function renderStandings(){
   renderAlive();
-  const G=buildGames(),tbody=document.getElementById('standBody'); tbody.innerHTML='';
+  const G=buildGames(),tbody=document.getElementById('standBody');tbody.innerHTML='';
   const rows=S.names.map((name,i)=>{
     const t=S.teams[i]||{l:'',r:''};
     const myTeams=[t.l,t.r].filter(Boolean);
     let alive=[],elim=[],gained=[],lost=[];
     myTeams.forEach(tm=>{
       const ov=S.takeovers[tm];
-      if(ov&&ov!==name) lost.push(tm);
-      else if(isElim(tm,G)) elim.push(tm);
-      else if(tm) alive.push(tm);
+      if(ov&&ov!==name)lost.push(tm);
+      else if(isElim(tm,G))elim.push(tm);
+      else if(tm)alive.push(tm);
     });
     Object.entries(S.takeovers).forEach(([tm,o])=>{if(o===name){gained.push(tm);if(!isElim(tm,G))alive.push(tm);}});
     return{name,alive,elim,gained,lost,tko:gained.length-lost.length};
@@ -773,7 +756,7 @@ function renderStandings(){
     const tr2=document.createElement('tr');
     tr2.innerHTML=`<td><span class="rbadge ${rc}">${rank+1}</span></td>
     <td><span class="adot ${alive?'da':'dd'}"></span>${r.name}</td>
-    <td style="font-size:.8rem">${r.alive.map(t=>`<span style="color:var(--grn)">${t}</span>`).join(', ')}${r.elim.length?` <span style="color:var(--mut);text-decoration:line-through">${r.elim.join(', ')}</span>`:''}${r.gained.length?` <span class="topill">+${r.gained.join(', ')}</span>`:''}</td>
+    <td style="font-size:.8rem">${r.alive.map(t=>`<span style="color:var(--grn)">${dn(t)}</span>`).join(', ')}${r.elim.length?` <span style="color:var(--mut);text-decoration:line-through">${r.elim.map(dn).join(', ')}</span>`:''}${r.gained.length?` <span class="topill">+${r.gained.map(dn).join(', ')}</span>`:''}</td>
     <td>${alive?'<span style="color:var(--grn);font-weight:600">Alive</span>':'<span style="color:var(--red)">Out</span>'}</td>
     <td>${r.tko>0?`<span class="topill">+${r.tko}</span>`:r.tko<0?`<span style="color:var(--red)">${r.tko}</span>`:'—'}</td>
     <td><div style="font-size:.8rem;font-weight:600">${r.pct}%</div><div class="pbar"><div class="pfill" style="width:${r.pct}%"></div></div></td>
@@ -788,41 +771,18 @@ function setBView(v){
   document.getElementById('visualView').style.display=v==='visual'?'':'none';
   document.getElementById('btnList').classList.toggle('active',v==='list');
   document.getElementById('btnVisual').classList.toggle('active',v==='visual');
-  if(v==='visual') renderVisual();
+  if(v==='visual')renderVisual();
 }
 function showPage(name){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
   document.getElementById('p-'+name).classList.add('active');
   document.getElementById('t-'+name).classList.add('active');
-  if(name==='bracket') renderBracket();
-  else if(name==='roster') renderRoster();
-  else if(name==='standings') renderStandings();
+  if(name==='bracket')renderBracket();
+  else if(name==='roster')renderRoster();
+  else if(name==='standings')renderStandings();
 }
 
-document.getElementById('btnForceFix').addEventListener('click', async ()=>{
-  const btn = document.getElementById('btnForceFix');
-  btn.textContent = '⏳ Fixing...'; btn.disabled = true;
-  try {
-    // Fix local state
-    S.games['e1'] = {w:"St. John's", cov:false, sl:"St. John's -3.5"};
-    S.takeovers["St. John's"] = "Joe H.";
-    // Write entire state to Firebase so it sticks permanently
-    const res = await fetch(FB+'/state.json', {
-      method:'PUT',
-      headers:{'Content-Type':'application/json'},
-      body: JSON.stringify(S)
-    });
-    if(!res.ok) throw new Error('Firebase write failed');
-    btn.textContent = '✅ Fixed!';
-    renderBracket(); renderStandings();
-    setTimeout(()=>{ btn.style.display='none'; }, 3000);
-  } catch(e) {
-    btn.textContent = '❌ Failed — try again';
-    btn.disabled = false;
-    console.error(e);
-  }
-});
 document.getElementById('btnTheme').addEventListener('click',()=>{
   const isMsu=document.body.classList.toggle('msu');
   document.getElementById('btnTheme').textContent=isMsu?'🌑 Dark Mode':'🌿 MSU Mode';
@@ -836,22 +796,22 @@ document.getElementById('btnList').addEventListener('click',()=>setBView('list')
 document.getElementById('btnVisual').addEventListener('click',()=>setBView('visual'));
 document.getElementById('btnRefreshScores').addEventListener('click',fetchScores);
 document.getElementById('btnHatDraw').addEventListener('click',()=>{
-  if(!confirm('Restore all team assignments to the original hat draw?')) return;
-  S.teams=freshTeams(); save(); renderRoster(); renderStandings();
+  if(!confirm('Restore all team assignments to the original hat draw?'))return;
+  S.teams=freshTeams();save();renderRoster();renderStandings();
 });
 document.getElementById('btnReset').addEventListener('click',()=>document.getElementById('resetOverlay').classList.add('open'));
 document.getElementById('btnCancelReset').addEventListener('click',()=>document.getElementById('resetOverlay').classList.remove('open'));
 document.getElementById('btnConfirmReset').addEventListener('click',async()=>{
-  S.games={}; S.takeovers={}; S.teams=freshTeams(); S.names=[...DEFAULT_NAMES];
+  S.games={};S.takeovers={};S.teams=freshTeams();S.names=[...DEFAULT_NAMES];
   document.getElementById('resetOverlay').classList.remove('open');
-  save(); renderRoster(); renderBracket(); renderStandings();
+  save();renderRoster();renderBracket();renderStandings();
 });
 document.getElementById('btnOffline').addEventListener('click',()=>{
-  online=false; lsLoad();
+  online=false;lsLoad();
   document.getElementById('loadScreen').style.display='none';
   document.getElementById('offBadge').style.display='inline';
   document.getElementById('syncChip').textContent='🔴 Offline';
-  renderRoster(); renderBracket(); renderStandings();
+  renderRoster();renderBracket();renderStandings();
 });
 
 async function init(){
@@ -865,29 +825,26 @@ async function init(){
   document.getElementById('loadBar').style.width='20%';
   try{
     const r=await Promise.race([fetch(FB+'/state.json'),new Promise((_,rej)=>setTimeout(()=>rej(new Error('timeout')),6000))]);
-    if(!r.ok) throw new Error();
+    if(!r.ok)throw new Error();
     const d=await r.json();
     online=true;
     document.getElementById('loadMsg').textContent='Loading data...';
     document.getElementById('loadBar').style.width='70%';
     if(d&&typeof d==='object'){
-      S.names     = Array.isArray(d.names)                          ? d.names     : [...DEFAULT_NAMES];
-      S.teams     = Array.isArray(d.teams)                          ? d.teams     : freshTeams();
-      S.games     = (d.games&&typeof d.games==='object')            ? d.games     : {};
-      S.takeovers = (d.takeovers&&typeof d.takeovers==='object')    ? d.takeovers : {};
+      S.names    =Array.isArray(d.names)?d.names:[...DEFAULT_NAMES];
+      S.teams    =Array.isArray(d.teams)?d.teams:freshTeams();
+      S.games    =(d.games&&typeof d.games==='object')?d.games:{};
+      S.takeovers=(d.takeovers&&typeof d.takeovers==='object')?d.takeovers:{};
     }
-  } catch(e){
-    online=false; lsLoad();
+  }catch(e){
+    online=false;lsLoad();
     document.getElementById('offBadge').style.display='inline';
     document.getElementById('syncChip').textContent='🔴 Offline';
   }
-
-
-
   clearTimeout(offlineTimer);
   document.getElementById('loadBar').style.width='100%';
   document.getElementById('loadMsg').textContent='Ready!';
-  renderRoster(); renderBracket(); renderStandings();
+  renderRoster();renderBracket();renderStandings();
   setTimeout(()=>{document.getElementById('loadScreen').style.display='none';},400);
   if(online){
     document.getElementById('liveBadge').style.display='inline';
